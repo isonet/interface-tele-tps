@@ -1,6 +1,11 @@
 $(document).ready(function() {
     "use strict";
 
+    /**
+     * Fonction de redimension de certains éléments
+     * Appelée au chargement de la page et à chaque redimension
+     * de la fenêtre.
+     */
     function resizeElements() {
         var appHeight = $(window).height() - 55;
         $(".main-app").css({
@@ -17,56 +22,36 @@ $(document).ready(function() {
             height: sidebarHeight
         });
     }
+
+    /**
+     *  Appel de la fonction de redimension au chargement de la page
+     */
     resizeElements();
 
+    /**
+     * Liaison de la fonction de redimension à l'évènement de redimension de la fenêtre
+     */
     window.onresize = function() {
         resizeElements();
     };
 
-    var kocurrent = 0;
-    var kostring = [
-        "Why did you even try this?",
-        "All your base are belong to us. Or whatever.",
-        "I'm very sorry, but... You're a nerd.",
-        "The cake is a lie.",
-        "Trapped in a fez factory. Send help.",
-        "Fun fact: This is completely useless.",
-        "You're wasting your time. Stop this.",
-        "Okay, enough. Get back to work.",
-        "Still here? Eh I might as well roll with it.",
-        "",
-        "The previous String was empty.",
-        "I did this on purpose, obviously.",
-        "\u00af\\_(\u30c4)_\x2F\u00af",
-        "Okay seriously, stop.",
-        '...'
-    ];
-
-    var k = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-    var n = 0;
-    $(document).keydown(function (e) {
-        if (e.keyCode === k[n++]) {
-            if (n === k.length) {
-                var op = {
-                    content: kostring[kocurrent],
-                    style: "snackbar",
-                    timeout: 5000
-                };
-                $.snackbar(op);
-                kocurrent = kocurrent < kostring.length-1 ? kocurrent+1 : kostring.length-1;
-                n = 0;
-            }
-        } else {
-            n = 0;
-        }
-    });
-
+    /**
+     * Remise à zéro du contenu du formulaire lors d'un clic sur annuler
+     */
     $("#newTp-BTN-cancel").click(function() {
         $('#newTp-name').val('');
         $('#newTp-desc').val('');
     });
 
+    /**
+     * Booléen représentant la position actualle du panneau de l'interface de conception
+     * @type {boolean}
+     */
     var sidebarIsDisplayed = false;
+    /**
+     * Ouverture ou fermeture du panneau lors d'un clic sur le bouton correspondant
+     * Cette fonction permet également d'échanger l'icône du bouton par une manipulation de ses classes
+     */
     $("#tpCreatorCanvas").find(".btn-fab").click(function() {
         var position = sidebarIsDisplayed ? -330 : -16;
         $("#tpCreatorSideBar").stop().animate({

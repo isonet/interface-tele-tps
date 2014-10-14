@@ -1,6 +1,12 @@
 (function () {
+    /**
+     * Module Angular principal
+     */
     var app = angular.module('tpManager', []);
 
+    /**
+     * Controller retournant le contenu du fichier JSON
+     */
     app.controller('TpDataCtrl', function($scope, $http) {
         $scope.contents = [];
         var http_get = $http.get('../webTP/data/tpList.json');
@@ -9,6 +15,12 @@
         });
     });
 
+    /**
+     * Controller dédié à la création d'un nouveau TP,
+     * Construit un objet avec les informations entrées dans le formulaire
+     * et les push dans le fichier JSON.
+     * Non fonctionnel !
+     */
     app.controller('NewTpController', function($scope, $http) {
         var currentTime = Date.now().toString();
         $scope.tp = {
@@ -18,6 +30,8 @@
             content: ""
         };
 
+        // Fonction appelée lors de l'envoi du formulaire valide
+        // Push le contenu de $scope.tp dans le fichier JSON
         this.addTp = function() {
             $scope.tp.title = $('#newTp-name').val();
             $scope.tp.description = $('#newTp-desc').val();
@@ -44,6 +58,10 @@
         }
     });
 
+    /**
+     * Filtre destiné au champ de recherche
+     * Retourne le contenu filtré à partir du texte recherché (insensible à la casse)
+     */
     app.filter('listFilter', [function() {
         return function(items, searchText) {
             var filtered = [];

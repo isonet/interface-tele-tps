@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="tpManager">
 	<head lang="fr">
+        <!-- TODO Trouver un nom sympa au projet !-->
 		<title>WebTP</title>
         <meta content="text/html" charset="utf-8" http-equiv="content-type" />
         <meta name="description" content="Plateforme de création de TP en ligne" />
@@ -8,7 +9,7 @@
         <meta name="author" content="IUT A Paul Sabatier" />
         <meta name="language" content="fr" />
 
-        <!-- Favicon declare !-->
+        <!-- Déclaration du favicon !-->
         <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
@@ -27,7 +28,7 @@
         <link rel="icon" type="image/x-icon" href="favicon.ico" />
         <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="favicon.ico" /><![endif]-->
 
-        <!-- Stylesheet imports !-->
+        <!-- Importation du CSS !-->
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 		<link href="material/css/ripples.min.css" rel="stylesheet">
 		<link href="material/css/material-wfont.min.css" rel="stylesheet">
@@ -35,9 +36,11 @@
         <link href="css/main.css" rel="stylesheet">
 
 	</head>
-    <!-- Site begin !-->
+
+    <!-- Début du corps du site !-->
 	<body>
-        <!-- Navbar begin !-->
+
+        <!-- Début de la barre de navigation principale !-->
 		<div class="bs-component">
 			<div class="navbar navbar-success">
 				<div class="navbar-header">
@@ -66,6 +69,8 @@
 						</li>
 					</ul>
 					<form class="navbar-form navbar-left">
+                        <!-- Barre de recherche de TP !-->
+                        <!-- TODO Déplacer dans la section 'Mes TP' ? Ou généraliser l'utilisation !-->
 						<input type="text" class="form-control floating-label col-lg-8" id="searchBox" placeholder="Recherche" autocomplete="off" formaction="javascript:void(0)" ng-model="filter.searchValue" ng-init
                                 ="filter.searchValue = ''">
 					</form>
@@ -85,11 +90,12 @@
 				</div>
 			</div>
 		</div>
-        <!-- Navbar end !-->
+        <!-- Fin de la barre de navigation !-->
 
-        <!-- Content block begin !-->
+        <!-- Début du contenu !-->
         <div class="main-body" ng-controller="TpDataCtrl">
 
+            <!-- Début de la liste des TPs !-->
             <div class="col-lg-12" id="tpListPanel" ng-show="true">
                 <div class="bs-component">
                     <div class="list-group">
@@ -98,6 +104,7 @@
                             <div class="panel-heading">Mes TP</div>
                             <div class="panel-body">
 
+                                <!-- Directive d'affichage du chaque contenu du fichier JSON !-->
                                 <div ng-repeat="tp in contents | listFilter:filter.searchValue">
 
                                     <div class="list-group-item">
@@ -120,7 +127,9 @@
                     </div>
                 </div>
             </div>
+            <!-- Fin de la liste des TPS !-->
 
+            <!-- Début du formulaire de création d'un TP !-->
             <div class="col-lg-12" id="tpCreator" ng-show="true">
                 <div class="bs-component">
                     <div class="list-group">
@@ -159,7 +168,9 @@
                     </div>
                 </div>
             </div>
+            <!-- Fin du formulaire !-->
 
+            <!-- Début de l'interface de création de TP !-->
             <div class="col-lg-12" id="tpCreatorCanvas" ng-show="true">
                 <div class="bs-component">
                     <div class="list-group">
@@ -170,8 +181,9 @@
                             </div>
 
                             <div class="panel-body" id="mainCanvas">
+                                <!-- Canvas D3 pour la conception du TP !-->
 
-
+                                <!-- Panneau à droite contenant les différents éléments et les paramètres !-->
                                 <div class="well well-material-lightgreen" id="tpCreatorSideBar">
                                     <ul class="nav nav-tabs btn-material-lightgreen" style="margin-bottom: 15px;">
                                         <li class="active"><a href="#components" data-toggle="tab">Composants</a></li>
@@ -179,7 +191,7 @@
                                     </ul>
                                     <div id="myTabContent" class="tab-content">
                                         <div class="tab-pane fade active in" id="components">
-                                            <p>Ceci contiendra la liste des composants disponibles pour la conception d'un TP. Ce panneau peut être inclus dans le scope de D3 afin de permettre le drag-drop des éléments depuis ce panneau.</p>
+                                            <p>Ceci contiendra la liste des composants disponibles pour la conception d'un TP. Peut être inclus dans le scope de D3 afin de permettre le drag-drop des éléments depuis ce panneau.</p>
                                         </div>
                                         <div class="tab-pane fade" id="settings">
                                             <p>Ceci contiendra les paramètres, soit relatifs au composant sélectionné, soit généraux au TP si aucun élément n'est sélectionné.</p>
@@ -192,11 +204,12 @@
                     </div>
                 </div>
             </div>
+            <!-- Fin de l'interface !-->
 
         </div>
-		<!-- Content block end !-->
+		<!-- Fin du contenu du site !-->
 
-        <!-- Script imports !-->
+        <!-- Importation des scripts !-->
         <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/angular.min.js"></script>
@@ -208,6 +221,6 @@
         <script src="material/js/material.min.js"></script>
         <script src="material/js/snackbar.min.js"></script>
 
-		<!-- Site end !-->
+		<!-- Fin du site !-->
 	</body>
 </html>
