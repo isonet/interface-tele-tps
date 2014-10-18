@@ -17,6 +17,11 @@ a
     outline: none !important;
 }
 
+.list-group-item-text
+{
+    padding-left: 5px;
+}
+
 .main-body
 {
     display: block;
@@ -29,7 +34,7 @@ a
     z-index: 0;
 }
 
-#tpCreatorCanvas .btn-fab
+.btn-fab
 {
     position: absolute;
     right: 30px;
@@ -75,6 +80,24 @@ a
     height: 200px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.list-end
+{
+    opacity: 0.25;
+}
+
+.inline-link
+{
+    color: #333;
+    padding: 5px;
+    display: inline-block;
+}
+
+.inline-link:hover
+{
+    color: #444;
+    text-decoration: none;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track

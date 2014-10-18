@@ -41,7 +41,7 @@
             http_post.success(function(data) {
                 $scope.message = data;
                 var op = {
-                    content: "POST successful!",
+                    content: "TP créé avec succès !",
                     style: "toast",
                     timeout: 5000
                 };
@@ -73,4 +73,26 @@
             return filtered;
         };
     }]);
+
+    app.controller('sectionDisplayController', function($scope) {
+
+        $scope.sections = [
+            true,
+            false,
+            false
+        ];
+
+        $scope.getDisplay = function(i) {
+            return $scope.sections[i];
+        };
+
+        $scope.displaySection = function(i) {
+            $scope.sections[i] = true;
+            for(var j = 0;j < $scope.sections.length; j++) {
+                if(j != i) {
+                    $scope.sections[j] = false;
+                }
+            }
+        };
+    });
 })();

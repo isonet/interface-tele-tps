@@ -33,5 +33,12 @@
       "date": "1413290759064",
       "img": "http://lorempixel.com/56/56/abstract/5",
       "content": ""
+    },
+    {
+        "title": "Autre exemple de TP",
+        "description": "Un autre exemple de TP",
+        "date": "1413659334039",
+        "img": "http://lorempixel.com/56/56/abstract/6",
+        "content": ""
     }
 ]
