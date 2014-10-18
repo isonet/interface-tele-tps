@@ -13,13 +13,20 @@ $(document).ready(function() {
         });
 
         var canvasHeight = appHeight - 90;
-        $("#tpCreatorCanvas").find("#mainCanvas").css({
+        $("#tpCreatorCanvas").find("#conceptorCanvas").css({
             height: canvasHeight
         });
 
         var sidebarHeight = canvasHeight+6;
+        var sidebarTopMargin = -canvasHeight;
         $("#tpCreatorSideBar").css({
-            height: sidebarHeight
+            height: sidebarHeight,
+            marginTop: sidebarTopMargin
+        });
+
+        var paneHeight = sidebarHeight - 85;
+        $("#sidebarTabContents").find(".tab-pane").css({
+            height: paneHeight
         });
     }
 
@@ -48,18 +55,36 @@ $(document).ready(function() {
      * @type {boolean}
      */
     var sidebarIsDisplayed = false;
+
     /**
-     * Ouverture ou fermeture du panneau lors d'un clic sur le bouton correspondant
-     * Cette fonction permet également d'échanger l'icône du bouton par une manipulation de ses classes
+     * Fonction permettant d'ouvrir et fermer le panneau de paramètres de l'interface de conception.
+     * Permet également de changer l'icône du bouton par une manipulation de classes
+     * @param b {boolean}
      */
-    $("#tpCreatorCanvas").find(".btn-fab").click(function() {
-        var position = sidebarIsDisplayed ? -330 : -16;
+    function toggleSidebar(b) {
+        var position = !b ? -330 : -16;
         $("#tpCreatorSideBar").stop().animate({
             marginRight: position+"px"
         },300);
-        $("#tpCreatorCanvas").find(".btn-fab").toggleClass('icon-material-add icon-material-close');
+        if(b != sidebarIsDisplayed) {
+            $("#tpCreatorCanvas").find(".btn-fab").toggleClass('icon-material-add icon-material-close');
+            sidebarIsDisplayed = !sidebarIsDisplayed;
+        }
+    }
 
-        sidebarIsDisplayed = !sidebarIsDisplayed;
+    /**
+     * Liaison de la fonction toggleSidebar() à l'évènement de clic sur le bouton "+"
+     */
+    $("#tpCreatorCanvas").find(".btn-fab").click(function() {
+        toggleSidebar(!sidebarIsDisplayed);
+    });
+
+    /**
+     * Liaison de la fonction toggleSidebar() à l'évènement de clic sur le canvas de l'interface de conception.
+     * Permet de fermer automatiquement le panneau d'édition pour laisser le champ libre.
+     */
+    $("#mainCanvas").click(function() {
+        toggleSidebar(false);
     });
 
 });
