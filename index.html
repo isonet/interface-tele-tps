@@ -110,13 +110,13 @@
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Mes TP
+                                Mes TP <a href="javascript:void(0)" class="btn btn-fab btn-material-orange btn-raised icon-material-create" style="z-index: 50;"></a>
                             </div>
 
                             <div class="panel-body">
 
                                 <!-- Directive d'affichage du chaque contenu du fichier JSON !-->
-                                <div ng-repeat="tp in contents | listFilter:filter.searchValue">
+                                <div ng-repeat="tp in contents | listFilter:filter.searchValue" style="margin-top: 20px;">
 
                                     <div class="list-group-item">
                                         <div class="row-picture">

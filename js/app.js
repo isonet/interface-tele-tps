@@ -41,7 +41,7 @@
             http_post.success(function(data) {
                 $scope.message = data;
                 var op = {
-                    content: "TP créé avec succès !",
+                    content: "TP \""+$scope.tp.title+"\"créé avec succès !",
                     style: "toast",
                     timeout: 5000
                 };
