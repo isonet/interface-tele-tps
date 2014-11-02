@@ -51,7 +51,7 @@ $(document).ready(function() {
     });
 
     /**
-     * Booléen représentant la position actualle du panneau de l'interface de conception
+     * Booléen représentant la position actuelle du panneau de l'interface de conception
      * @type {boolean}
      */
     var sidebarIsDisplayed = false;
@@ -86,5 +86,13 @@ $(document).ready(function() {
     $("#mainCanvas").click(function() {
         toggleSidebar(false);
     });
+
+    /*var tpList = $('#tpListPanel');
+    tpList.find('.panel-heading').click(function() {
+        console.log('liqshfjm');
+        tpList.find('.panel-body').animate({
+            height: '200px'
+        },500);
+    });*/
 
 });

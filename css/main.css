@@ -40,10 +40,20 @@ a
     right: 30px;
 }
 
+#tpListPanel .panel-body
+{
+    /* Transitions */
+}
+
 #conceptorCanvas
 {
     overflow: hidden;
     padding: 0;
+    -webkit-transition: ease 0.5s;
+    -moz-transition: ease 0.5s;
+    -ms-transition: ease 0.5s;
+    -o-transition: ease 0.5s;
+    transition: ease 0.5s;
 }
 
 #mainCanvas
