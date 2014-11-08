@@ -10,31 +10,31 @@
         <meta name="language" content="fr" />
 
         <!-- Déclaration du favicon !-->
-        <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-touch-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-touch-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-touch-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-touch-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-touch-icon-152x152.png">
-        <link rel="icon" type="image/png" href="/favicon/favicon-192x192.png" sizes="196x196">
-        <link rel="icon" type="image/png" href="/favicon/favicon-160x160.png" sizes="160x160">
-        <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
-        <link rel="icon" type="image/png" href="/favicon/favicon-16x16.png" sizes="16x16">
-        <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" sizes="32x32">
+        <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-touch-icon-152x152.png">
+        <link rel="icon" type="image/png" href="assets/favicon/favicon-192x192.png" sizes="196x196">
+        <link rel="icon" type="image/png" href="assets/favicon/favicon-160x160.png" sizes="160x160">
+        <link rel="icon" type="image/png" href="assets/favicon/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="assets/favicon/favicon-16x16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="assets/favicon/favicon-32x32.png" sizes="32x32">
         <meta name="msapplication-TileColor" content="#ffc40d">
         <meta name="msapplication-TileImage" content="/mstile-144x144.png">
-        <link rel="icon" type="image/x-icon" href="favicon/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico" />
         <!--[if IE]>
-        <link rel="shortcut icon" type="image/x-icon" href="favicon/favicon.ico"/><![endif]-->
+        <link rel="shortcut icon" type="image/x-icon" href="assets/favicon/favicon.ico"/><![endif]-->
 
         <!-- Importation du CSS !-->
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-		<link href="material/css/ripples.min.css" rel="stylesheet">
-		<link href="material/css/material-wfont.min.css" rel="stylesheet">
-		<link href="material/css/snackbar.min.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="styles/vendor/bootstrap.min.css">
+		<link href="styles/vendor/ripples.min.css" rel="stylesheet">
+		<link href="styles/vendor/material-wfont.min.css" rel="stylesheet">
+		<link href="styles/vendor/snackbar.min.css" rel="stylesheet">
+        <link href="styles/main.css" rel="stylesheet">
 
 	</head>
 
@@ -50,7 +50,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="http://localhost/projects/webTP/"><img src="favicon/mstile-70x70.png" style="height:40px;width:auto;margin-top: -5px;">&nbsp;Mes Télé-TPs</a>
+					<a class="navbar-brand" href="/"><img src="assets/favicon/mstile-70x70.png" style="height:40px;width:auto;margin-top: -5px;">&nbsp;Mes Télé-TPs</a>
 				</div>
 				<div class="navbar-collapse collapse navbar-responsive-collapse">
 					<ul class="nav navbar-nav">
@@ -111,17 +111,17 @@
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Mes TP <a href="javascript:void(0)" class="btn btn-fab btn-material-orange btn-raised icon-material-create" style="z-index: 50;"></a>
+                                Mes TP <a href="javascript:void(0)" ng-click="displaySection(1)" class="btn btn-fab btn-material-orange btn-raised icon-material-create" style="z-index: 50;"></a>
                             </div>
 
                             <div class="panel-body">
 
-                                <!-- Directive d'affichage du chaque contenu du fichier JSON !-->
-                                <div ng-repeat="tp in contents | listFilter:filter.searchValue" style="margin-top: 20px;">
+                                <!-- Directive d'affichage du chaque contenu du fichier JSON !  | listFilter:filter.searchValue"-->
+                                <div ng-repeat="tp in contents" style="margin-top: 20px;">
 
                                     <div class="list-group-item">
                                         <div class="row-picture">
-                                            <img class="circle" src="{{tp.img}}" alt="icon" draggable="false">
+                                            <img class="circle" ng-src="{{tp.img}}" alt="icon" draggable="false">
                                         </div>
                                         <div class="row-content">
                                             <div class="least-content">{{tp.date | date : 'dd/MM/yyyy HH:mm'}}</div>
@@ -135,7 +135,7 @@
 
                                 </div>
 
-                                <img src="favicon/favicon-32x32-grey.png" class="center-block list-end" draggable="false" />
+                                <img src="assets/favicon/favicon-32x32-grey.png" class="center-block list-end" draggable="false" />
 
                             </div>
                         </div>
@@ -229,16 +229,22 @@
 		<!-- Fin du contenu du site !-->
 
         <!-- Importation des scripts !-->
-        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/angular.min.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-        <script type="text/javascript" src="js/d3.min.js" charset="utf-8"></script>
+        <script type="text/javascript" src="scripts/vendor/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/bootstrap.min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/angular.js"></script>
+        <script type="text/javascript" src="scripts/main.js"></script>
+        <script type="text/javascript" src="scripts/vendor/d3.min.js" charset="utf-8"></script>
 
-        <script src="material/js/ripples.min.js"></script>
-        <script src="material/js/material.min.js"></script>
-        <script src="material/js/snackbar.min.js"></script>
+        <!-- AngularJS Modules (l'ordre est important!) !-->
+        <script type="text/javascript" src="scripts/controllers/controllers.module.js"></script>
+        <script type="text/javascript" src="scripts/filters/filters.module.js"></script>
+
+        <script type="text/javascript" src="scripts/app.js"></script>
+        <!-- Fin AngularJS Modules !-->
+
+        <script src="scripts/vendor/ripples.min.js"></script>
+        <script src="scripts/vendor/material.min.js"></script>
+        <script src="scripts/vendor/snackbar.min.js"></script>
 
 		<!-- Fin du site !-->
 	</body>
