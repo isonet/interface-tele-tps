@@ -1,0 +1,30 @@
+[
+  {
+    "count": 1,
+    "type": "pc",
+    "code": "Objet-1",
+    "name": "PC1",
+    "ip": "192.168.1.2",
+    "netmask" : "255.255.255.0",
+    "gateway" : "192.168.1.1",
+    "connectedTo": ["Objet-2"]
+  },
+  {
+    "count": 1,
+    "type": "switch",
+    "code": "Objet-2",
+    "name": "Switch1",
+    "connectedTo": ["Objet-1", "Objet-3"]
+  },
+  {
+    "count": 1,
+    "type": "pc",
+    "code": "Objet-3",
+    "name": "PC2",
+    "ip": "192.168.1.5",
+    "netmask" : "255.255.255.0",
+    "gateway" : "192.168.1.1",
+    "connectedTo": ["Objet-2"]
+  }
+]
+
