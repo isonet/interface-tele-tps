@@ -106,7 +106,7 @@ function addSwitch() {
         "target": l
     };
     dataset['nodes'].push(newNode);
-    dataset['links'].push(newLinks)
+    dataset['links'].push(newLinks);
 
     update(dataset['nodes'], dataset['links']);
 }
