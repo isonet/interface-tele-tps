@@ -48,6 +48,10 @@ $(document).ready(function (){
     $("#newTp-BTN-cancel").click(function() {
         $('#newTp-name').val('');
         $('#newTp-desc').val('');
+
+        removeAnchor();
+        angular.element("#displayController").scope().displaySection(0);
+        angular.element("#displayController").scope().$digest();
     });
 
     /**
@@ -87,12 +91,65 @@ $(document).ready(function (){
         toggleSidebar(false);
     });
 
-    /*var tpList = $('#tpListPanel');
-    tpList.find('.panel-heading').click(function() {
-        console.log('liqshfjm');
-        tpList.find('.panel-body').animate({
-            height: '200px'
-        },500);
-    });*/
+    /**
+     * Controle de l'affichage des sections en fonction de la navigation
+     * Permet de naviguer le site avec les boutons précédents et suivants
+     */
+    function switchDisplay() {
+        var currentItem = window.location.hash.substring(1);
+        switch (currentItem) {
+            case "list":
+                currentItem = 0;
+                break;
+            case "":
+                currentItem = 0;
+                break;
+            case "new":
+                currentItem = 1;
+                break;
+            case "editor":
+                currentItem = 2;
+                break;
+            default:
+                console.log("Incorrect section ID : \"" + currentItem + "\"");
+        }
+        if (typeof currentItem === "number") {
+            angular.element("#displayController").scope().displaySection(currentItem);
+            angular.element("#displayController").scope().$digest();
+        }
+    }
+
+    /**
+     * Appel de la fonction switchDisplay au chargement de la page
+     * Permet de conserver le même état de la page au rafraichissement
+     */
+    switchDisplay();
+
+    /**
+     * Appel de la fonction switchDisplay à la navigation dans la page
+     */
+    $(window).on('popstate', function () {
+        switchDisplay();
+    });
+
+    function removeAnchor() {
+        window.location.replace("#");
+        if (typeof window.history.replaceState == 'function') {
+            history.replaceState({}, '', window.location.href.slice(0, -1));
+        }
+    }
+
+    /**
+     * Suppression du lien ancre de l'URL lors d'un clic sur le logo de la page
+     * (retour à l'accueil)
+     */
+    $('.navbar').find('.navbar-brand').click(function () {
+        removeAnchor();
+    });
+
+    $("#link_retry").click(function() {
+        angular.element("#tpDataDisplayCtrl").scope().get('data/tpList_.json');
+        angular.element("#tpDataDisplayCtrl").scope().$digest();
+    });
 
 });

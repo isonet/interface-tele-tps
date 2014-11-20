@@ -12,10 +12,25 @@
      */
     app.controller('TpDataCtrl', function ($scope, $http) {
         $scope.contents = [];
-        var http_get = $http.get('data/tpList.json');
-        http_get.success(function (data) {
-            $scope.contents = data;
-        });
+
+        $scope.get = function (url) {
+            console.log("salut");
+            var http_get = $http.get(url);
+            http_get.success(function (data) {
+                $scope.contents = data;
+            });
+            http_get.error(function () {
+                var link = '<a href="javascript:void(0)" style="text-decoration: none; color: #FFC400; padding-left: 10px;">Réessayer</a>';
+                var op = {
+                    content: "Erreur de chargement de la liste des TPs ! "+ link,
+                    style: "snackbar",
+                    timeout: 10000
+                };
+                $.snackbar(op);
+            })
+        };
+
+        $scope.get('data/tpList.json');
     });
 
     /**
@@ -52,7 +67,7 @@
             });
             http_post.error(function (data) {
                 var op = {
-                    content: "POST error : " + JSON.stringify({data: data}),
+                    content: "POST error : " + JSON.stringify(data),
                     style: "toast",
                     timeout: 5000
                 };
@@ -61,6 +76,11 @@
         };
     });
 
+    /**
+     * Controller dédié à la gestion de l'affichage des différentes
+     * sections du site. Apellée au chargement de la page et à la
+     * navigation.
+     */
     app.controller('sectionDisplayController', function ($scope) {
 
         $scope.sections = [
@@ -74,12 +94,12 @@
         };
 
         $scope.displaySection = function (i) {
-            $scope.sections[i] = true;
-            for (var j = 0;j < $scope.sections.length; j++) {
-                if(j != i) {
-                    $scope.sections[j] = false;
-                }
+            for (var j = 0; j < $scope.sections.length; j++) {
+                $scope.sections[j] = false;
             }
+            $scope.sections[i] = true;
         };
+
     });
+
 }());
