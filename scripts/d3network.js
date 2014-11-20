@@ -1,23 +1,27 @@
-var width =  $(document).width(),
-    height = $(document).height();
-var color = d3.scale.category20();
+"use strict;"
 
-var forceStopped = false;
-var dataset = { nodes : undefined, links : undefined};
-
-// https://nyquist212.wordpress.com/2014/03/11/simple-d3-js-force-layout-example-in-less-than-100-lines-of-code/
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .append("g");
+var width, height, svg, forceStopped, dataset;
 
 
+function loadD3() {
 
-    d3.json("nodes.json", function(error, json) {
+    width = $('#mainCanvas').width();
+    height = $('#mainCanvas').height();
+
+    forceStopped = false;
+
+    $('#mainCanvas').empty();
+    dataset = { nodes : undefined, links : undefined};
+    svg = d3.select("#mainCanvas").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g");
+
+
+    d3.json("data/nodes.json", function (error, json) {
         if (error) return console.warn(error);
         var nodes = json;
-        d3.json("links.json", function(error, json) {
+        d3.json("data/links.json", function (error, json) {
             if (error) return console.warn(error);
             var links = json;
             dataset['nodes'] = nodes;
@@ -25,6 +29,8 @@ var svg = d3.select("body").append("svg")
             update(nodes, links, true);
         });
     });
+
+}
 
 function stopForce() {
     forceStopped = true;
@@ -35,8 +41,7 @@ function addRouter() {
     var links;
 
     var l = dataset['nodes'].length;
-    console.log(l);
-    var newRouter = {
+    var newNode = {
         code : "Objet-" + l,
         connectedTo : [],
         gateway : "0.0.0.0",
@@ -50,11 +55,60 @@ function addRouter() {
         "source": l,
         "target": l
     };
-    dataset['nodes'].push(newRouter);
+    dataset['nodes'].push(newNode);
     dataset['links'].push(newLinks)
 
     update(dataset['nodes'], dataset['links']);
+}
 
+function addComputer() {
+    var nodes;
+    var links;
+
+    var l = dataset['nodes'].length;
+    var newNode = {
+        code : "Objet-" + l,
+        connectedTo : [],
+        gateway : "0.0.0.0",
+        ip : "0.0.0.0",
+        name : "Ordninateur",
+        netmask : "0.0.0.0",
+        type : "pc"
+    };
+
+    var newLinks = {
+        "source": l,
+        "target": l
+    };
+    dataset['nodes'].push(newNode);
+    dataset['links'].push(newLinks)
+
+    update(dataset['nodes'], dataset['links']);
+}
+
+function addSwitch() {
+    var nodes;
+    var links;
+
+    var l = dataset['nodes'].length;
+    var newNode = {
+        code : "Objet-" + l,
+        connectedTo : [],
+        gateway : "0.0.0.0",
+        ip : "0.0.0.0",
+        name : "Switch",
+        netmask : "0.0.0.0",
+        type : "switch"
+    };
+
+    var newLinks = {
+        "source": l,
+        "target": l
+    };
+    dataset['nodes'].push(newNode);
+    dataset['links'].push(newLinks)
+
+    update(dataset['nodes'], dataset['links']);
 }
 
 

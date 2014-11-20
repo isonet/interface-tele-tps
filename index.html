@@ -199,7 +199,7 @@
                             <div class="panel-body" id="conceptorCanvas">
                                 <!-- Canvas D3 pour la conception du TP !-->
                                 <div id="mainCanvas">
-
+                                    <a href="javascript:loadD3();">load!</a>
                                 </div>
 
                                 <!-- Panneau à droite contenant les différents éléments et les paramètres !-->
@@ -210,6 +210,10 @@
                                     </ul>
                                     <div id="sidebarTabContents" class="tab-content">
                                         <div class="tab-pane fade active in custom-scrollbar" id="components">
+                                            <p><a href="javascript:loadD3();">load!</a></p>
+                                            <p><a href="javascript:addRouter();">add Router</a></p>
+                                            <p><a href="javascript:addComputer();">add PC</a></p>
+                                            <p><a href="javascript:addSwitch();">add Switch</a></p>
                                             <p>Ceci contiendra la liste des composants disponibles pour la conception d'un TP. Peut être inclus dans le scope de D3 afin de permettre le drag-drop des éléments depuis ce panneau.</p>
                                         </div>
                                         <div class="tab-pane fade custom-scrollbar" id="settings">
@@ -245,6 +249,8 @@
         <script src="scripts/vendor/ripples.min.js"></script>
         <script src="scripts/vendor/material.min.js"></script>
         <script src="scripts/vendor/snackbar.min.js"></script>
+
+        <script src="scripts/d3network.js"></script>
 
 		<!-- Fin du site !-->
 	</body>
