@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr" ng-app="tpManager">
 	<head>
-        <!-- TODO Trouver un nom sympa au projet !-->
+        <!-- TODO Trouver un nom sympa au projet -->
 		<title>Mes Télé-TPs</title>
         <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
         <meta name="description" content="Plateforme de création de TP en ligne" />
@@ -9,38 +9,38 @@
         <meta name="author" content="IUT A Paul Sabatier" />
         <meta name="language" content="fr" />
 
-        <!-- Déclaration du favicon !-->
-        <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-touch-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-touch-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-touch-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-touch-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-touch-icon-152x152.png">
-        <link rel="icon" type="image/png" href="/favicon/favicon-192x192.png" sizes="196x196">
-        <link rel="icon" type="image/png" href="/favicon/favicon-160x160.png" sizes="160x160">
-        <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
-        <link rel="icon" type="image/png" href="/favicon/favicon-16x16.png" sizes="16x16">
-        <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" sizes="32x32">
+        <!-- Déclaration du favicon -->
+        <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="assets/favicon/apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="assets/favicon/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="assets/favicon/apple-touch-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="assets/favicon/apple-touch-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="assets/favicon/apple-touch-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="assets/favicon/apple-touch-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="assets/favicon/apple-touch-icon-152x152.png">
+        <link rel="icon" type="image/png" href="assets/favicon/favicon-192x192.png" sizes="196x196">
+        <link rel="icon" type="image/png" href="assets/favicon/favicon-160x160.png" sizes="160x160">
+        <link rel="icon" type="image/png" href="assets/favicon/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="assets/favicon/favicon-16x16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="assets/favicon/favicon-32x32.png" sizes="32x32">
         <meta name="msapplication-TileColor" content="#ffc40d">
-        <meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png">
-        <link rel="icon" type="image/x-icon" href="favicon/favicon.ico" />
-        <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="favicon/favicon.ico"/><![endif]-->
+        <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+        <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico" />
+        <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="assets/favicon/favicon.ico"/><![endif]-->
 
-        <!-- Importation du CSS !-->
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-		<link href="material/css/ripples.min.css" rel="stylesheet">
-		<link href="material/css/material-wfont.min.css" rel="stylesheet">
-		<link href="material/css/snackbar.min.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
+        <!-- Importation du CSS -->
+		<link rel="stylesheet" type="text/css" href="styles/vendor/bootstrap.min.css">
+		<link href="styles/vendor/ripples.min.css" rel="stylesheet">
+		<link href="styles/vendor/material-wfont.min.css" rel="stylesheet">
+		<link href="styles/vendor/snackbar.min.css" rel="stylesheet">
+        <link href="styles/main.css" rel="stylesheet">
 
 	</head>
 
-    <!-- Début du corps du site !-->
-	<body ng-controller="sectionDisplayController">
+    <!-- Début du corps du site -->
+	<body ng-controller="sectionDisplayController" id="displayController">
 
-        <!-- Début de la barre de navigation principale !-->
+        <!-- Début de la barre de navigation principale -->
 		<div class="bs-component">
 			<div class="navbar navbar-success">
 				<div class="navbar-header">
@@ -49,17 +49,17 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="http://localhost/projects/webTP/"><img src="favicon/mstile-70x70.png" style="height:40px;width:auto;margin-top: -5px;">&nbsp;Mes Télé-TPs</a>
+					<a class="navbar-brand" href="javascript:void(0)"><img src="assets/favicon/mstile-70x70.png" style="height:40px;width:auto;margin-top: -5px;">&nbsp;Mes Télé-TPs</a>
 				</div>
 				<div class="navbar-collapse collapse navbar-responsive-collapse">
 					<ul class="nav navbar-nav">
 						<li>
-                            <a href="javascript:void(0)" ng-click="displaySection(0)">
+                            <a href="#list">
                                 <i class="icon-material-folder icon-material-lightgrey" style="font-size: 75%;"></i>&nbsp;&nbsp;Mes TPs
                             </a>
                         </li>
 						<li>
-                            <a href="javascript:void(0)" ng-click="displaySection(1)">
+                            <a href="#new">
                                 <i class="icon icon-material-add icon-material-lightgrey" style="font-size: 75%;"></i>&nbsp;&nbsp;Nouveau TP
                             </a>
                         </li>
@@ -68,7 +68,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="javascript:void(0)"><i class="icon-material-content-copy icon-material-grey"></i>&nbsp;Copier</a></li>
 								<li><a href="javascript:void(0)"><i class="icon-material-content-cut icon-material-grey" style="font-size: 98%;"></i>Couper</a></li>
-								<li><a href="javascid(0)"><i class="icon-material-content-paste icon-material-grey"></i>&nbsp;Coller</a></li>
+								<li><a href="javascript:void(0)"><i class="icon-material-content-paste icon-material-grey"></i>&nbsp;Coller</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">Dropdown header</li>
 								<li><a href="javascript:void(0)">Separated link</a></li>
@@ -77,10 +77,9 @@
 						</li>
 					</ul>
 					<form class="navbar-form navbar-left">
-                        <!-- Barre de recherche de TP !-->
-                        <!-- TODO Déplacer dans la section 'Mes TP' ? Ou généraliser l'utilisation !-->
-						<input type="text" class="form-control floating-label col-lg-8" id="searchBox" placeholder="Recherche" autocomplete="off" formaction="javascript:void(0)" ng-model="filter.searchValue" ng-init
-                                ="filter.searchValue = ''">
+                        <!-- Barre de recherche de TP -->
+                        <!-- TODO Déplacer dans la section 'Mes TP' ? Ou généraliser l'utilisation -->
+						<input type="text" class="form-control floating-label col-lg-8" id="searchBox" placeholder="Recherche" autocomplete="off" formaction="javascript:void(0)" ng-model="filter.searchValue" ng-init="filter.searchValue = ''">
 					</form>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="javascript:void(0)">Link</a></li>
@@ -98,34 +97,34 @@
 				</div>
 			</div>
 		</div>
-        <!-- Fin de la barre de navigation !-->
+        <!-- Fin de la barre de navigation -->
 
-        <!-- Début du contenu !-->
-        <div class="main-body" ng-controller="TpDataCtrl">
+        <!-- Début du contenu -->
+        <div class="main-body" id="tpDataDisplayCtrl" ng-controller="TpDataCtrl">
 
-            <!-- Début de la liste des TPs !-->
+            <!-- Début de la liste des TPs -->
             <div class="col-lg-12" id="tpListPanel" ng-show="getDisplay(0)">
                 <div class="bs-component">
                     <div class="list-group">
 
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Mes TP <a href="javascript:void(0)" class="btn btn-fab btn-material-orange btn-raised icon-material-create" style="z-index: 50;"></a>
+                                Mes TP <a href="#new" class="btn btn-fab btn-material-orange btn-raised icon-material-create" style="z-index: 50;"></a>
                             </div>
 
                             <div class="panel-body">
 
-                                <!-- Directive d'affichage du chaque contenu du fichier JSON !-->
+                                <!-- Directive d'affichage de la liste des TPs -->
                                 <div ng-repeat="tp in contents | listFilter:filter.searchValue" style="margin-top: 20px;">
 
                                     <div class="list-group-item">
                                         <div class="row-picture">
-                                            <img class="circle" src="{{tp.img}}" alt="icon" draggable="false">
+                                            <img class="circle" ng-src="{{tp.img}}" alt="icon" draggable="false">
                                         </div>
                                         <div class="row-content">
                                             <div class="least-content">{{tp.date | date : 'dd/MM/yyyy HH:mm'}}</div>
                                             <h4 class="list-group-item-heading">
-                                                <a href="javascript:void(0)" class="inline-link withripple" ng-click="displaySection(2)">{{tp.title}}</a>
+                                                <a href="#editor" class="inline-link withripple">{{tp.title}}</a>
                                             </h4>
                                             <p class="list-group-item-text">{{tp.description}}</p>
                                         </div>
@@ -134,7 +133,7 @@
 
                                 </div>
 
-                                <img src="favicon/favicon-32x32-grey.png" class="center-block list-end" draggable="false" />
+                                <img src="assets/favicon/favicon-32x32-grey.png" class="center-block list-end" draggable="false" />
 
                             </div>
                         </div>
@@ -142,9 +141,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Fin de la liste des TPS !-->
+            <!-- Fin de la liste des TPS -->
 
-            <!-- Début du formulaire de création d'un TP !-->
+            <!-- Début du formulaire de création d'un TP -->
             <div class="col-lg-12" id="tpCreator" ng-show="getDisplay(1)">
                 <div class="bs-component">
                     <div class="list-group">
@@ -170,7 +169,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-10 col-lg-offset-2">
-                                                <button class="btn btn-default" id="newTp-BTN-cancel">Annuler</button>
+                                                <button type="reset" class="btn btn-default" id="newTp-BTN-cancel">Annuler</button>
                                                 <button type="submit" class="btn btn-primary" id="newTp-BTN-submit">Valider</button>
                                             </div>
                                         </div>
@@ -183,9 +182,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Fin du formulaire !-->
+            <!-- Fin du formulaire -->
 
-            <!-- Début de l'interface de création de TP !-->
+            <!-- Début de l'interface de création de TP -->
             <div class="col-lg-12" id="tpCreatorCanvas" ng-show="getDisplay(2)">
                 <div class="bs-component">
                     <div class="list-group">
@@ -196,12 +195,12 @@
                             </div>
 
                             <div class="panel-body" id="conceptorCanvas">
-                                <!-- Canvas D3 pour la conception du TP !-->
+                                <!-- Canvas D3 pour la conception du TP -->
                                 <div id="mainCanvas">
 
                                 </div>
 
-                                <!-- Panneau à droite contenant les différents éléments et les paramètres !-->
+                                <!-- Panneau à droite contenant les différents éléments et les paramètres -->
                                 <div class="well well-material-lightgreen" id="tpCreatorSideBar">
                                     <ul class="nav nav-tabs btn-material-lightgreen" style="margin-bottom: 15px;">
                                         <li class="active"><a href="#components" data-toggle="tab">Composants</a></li>
@@ -222,23 +221,29 @@
                     </div>
                 </div>
             </div>
-            <!-- Fin de l'interface !-->
+            <!-- Fin de l'interface -->
 
         </div>
-		<!-- Fin du contenu du site !-->
+		<!-- Fin du contenu du site -->
 
-        <!-- Importation des scripts !-->
-        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/angular.min.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-        <script type="text/javascript" src="js/d3.min.js" charset="utf-8"></script>
+        <!-- Importation des scripts -->
+        <script type="text/javascript" src="scripts/vendor/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/bootstrap.min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/angular.js"></script>
+        <script type="text/javascript" src="scripts/main.js"></script>
+        <script type="text/javascript" src="scripts/vendor/d3.min.js" charset="utf-8"></script>
 
-        <script src="material/js/ripples.min.js"></script>
-        <script src="material/js/material.min.js"></script>
-        <script src="material/js/snackbar.min.js"></script>
+        <!-- AngularJS Modules (l'ordre est important!) -->
+        <script type="text/javascript" src="scripts/controllers/controllers.module.js"></script>
+        <script type="text/javascript" src="scripts/filters/filters.module.js"></script>
 
-		<!-- Fin du site !-->
+        <script type="text/javascript" src="scripts/app.js"></script>
+        <!-- Fin AngularJS Modules -->
+
+        <script src="scripts/vendor/ripples.min.js"></script>
+        <script src="scripts/vendor/material.min.js"></script>
+        <script src="scripts/vendor/snackbar.min.js"></script>
+
+		<!-- Fin du site -->
 	</body>
 </html>
