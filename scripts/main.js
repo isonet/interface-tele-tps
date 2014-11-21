@@ -28,6 +28,8 @@ $(document).ready(function (){
         $("#sidebarTabContents").find(".tab-pane").css({
             height: paneHeight
         });
+
+        resizeD3();
     }
 
     /**
@@ -88,7 +90,7 @@ $(document).ready(function (){
      * Permet de fermer automatiquement le panneau d'édition pour laisser le champ libre.
      */
     $("#mainCanvas").click(function() {
-        toggleSidebar(false);
+        //toggleSidebar(false);
     });
 
     /**

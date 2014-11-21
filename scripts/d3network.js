@@ -1,18 +1,19 @@
-"use strict;"
+"use strict";
 
-var width, height, svg, forceStopped, dataset;
+var width, height, svg, forceStopped, dataset, currentElement, hoverElement, currentD3Element;
 
 
 function loadD3() {
 
-    width = $('#mainCanvas').width();
-    height = $('#mainCanvas').height();
+    width = $('#tpCreatorCanvas').children(":first").width();
+    height = 300;//$('#tpCreatorCanvas').children(":first").height();
 
     forceStopped = false;
 
     $('#mainCanvas').empty();
     dataset = { nodes : undefined, links : undefined};
     svg = d3.select("#mainCanvas").append("svg")
+        .attr('id', 'mainSvg')
         .attr("width", width)
         .attr("height", height)
         .append("g");
@@ -26,15 +27,18 @@ function loadD3() {
             var links = json;
             dataset['nodes'] = nodes;
             dataset['links'] = links;
-            update(nodes, links, true);
+            update();
         });
     });
 
 }
 
-function stopForce() {
-    forceStopped = true;
+function resizeD3() {
+    //$('#mainSvg').width($('#tpCreatorCanvas').children(":first").width());
+    //$('#mainSvg').height($('#tpCreatorCanvas').children(":first").height());
+
 }
+
 
 function addRouter() {
     var nodes;
@@ -43,6 +47,7 @@ function addRouter() {
     var l = dataset['nodes'].length;
     var newNode = {
         code : "Objet-" + l,
+        count : l,
         connectedTo : [],
         gateway : "0.0.0.0",
         ip : "0.0.0.0",
@@ -56,9 +61,9 @@ function addRouter() {
         "target": l
     };
     dataset['nodes'].push(newNode);
-    dataset['links'].push(newLinks)
+    dataset['links'].push(newLinks);
 
-    update(dataset['nodes'], dataset['links']);
+    update();
 }
 
 function addComputer() {
@@ -68,6 +73,7 @@ function addComputer() {
     var l = dataset['nodes'].length;
     var newNode = {
         code : "Objet-" + l,
+        count : l,
         connectedTo : [],
         gateway : "0.0.0.0",
         ip : "0.0.0.0",
@@ -81,9 +87,9 @@ function addComputer() {
         "target": l
     };
     dataset['nodes'].push(newNode);
-    dataset['links'].push(newLinks)
+    dataset['links'].push(newLinks);
 
-    update(dataset['nodes'], dataset['links']);
+    update();
 }
 
 function addSwitch() {
@@ -93,6 +99,7 @@ function addSwitch() {
     var l = dataset['nodes'].length;
     var newNode = {
         code : "Objet-" + l,
+        count : l,
         connectedTo : [],
         gateway : "0.0.0.0",
         ip : "0.0.0.0",
@@ -106,25 +113,46 @@ function addSwitch() {
         "target": l
     };
     dataset['nodes'].push(newNode);
-    dataset['links'].push(newLinks)
+    dataset['links'].push(newLinks);
 
-    update(dataset['nodes'], dataset['links']);
+    update();
 }
 
 
-function update(nodes, links, first) {
+function update() {
+
+    var nodes = dataset['nodes'];
+    var links = dataset['links'];
 
     svg.selectAll("*").remove();
 
     // Establish the dynamic force behavor of the nodes
-    var force = d3.layout.force()
+    var force = self.force = d3.layout.force()
         .nodes(nodes)
         .links(links)
         .size([width,height])
         .linkDistance([250])
         .charge([-1500])
         .gravity(0.3)
+        .on("tick", tick)
         .start();
+
+    var node_drag = d3.behavior.drag()
+        .on("dragstart", function(d, i) { force.stop(); })
+        .on("dragend", function(d, i) {
+            d.fixed = true;
+            tick();
+        })
+        .on("drag", function(d, i) {
+            vis.on("mouseup", null);
+
+            d.px += d3.event.dx;
+            d.py += d3.event.dy;
+            d.x += d3.event.dx;
+            d.y += d3.event.dy;
+
+            tick();
+        });
 
     var edges = svg.selectAll("line")
         .data(links)
@@ -144,7 +172,21 @@ function update(nodes, links, first) {
         .attr('width', 50)
         .attr('height', 50)
         .attr("xlink:href",function(d) { return ("assets/" + d.type + ".png"); })
-        .call(force.drag);
+        .on('mousedown', function(d) { currentD3Element = this; })
+        .on('mousedown', function(d) { vis.on("mouseup", mouseup); })
+        .on("click", function(d) {
+            currentElement = dataset['nodes'][d.count];
+            $('#settings').html(JSON.stringify(currentElement));
+        })
+        .on("mouseenter", function(d) {
+            hoverElement = d;
+        })
+        .on("mouseleave", function(d) {
+            hoverElement = null;
+        })
+        .call(node_drag);
+
+
 
     var labels = elemEnter.append("text")
         .attr("dy", "40")
@@ -154,7 +196,7 @@ function update(nodes, links, first) {
         .attr("text-anchor", "middle")
         .text(function(d) { return d.name; });
 
-    force.on("tick", function() {
+    function tick() {
         edges.attr("x1", function(d) { return d.source.x; })
             .attr("y1", function(d) { return d.source.y; })
             .attr("x2", function(d) { return d.target.x; })
@@ -163,12 +205,6 @@ function update(nodes, links, first) {
         elemEnter.attr("cx", function(d) { return d.x; })
             .attr("cy", function(d) { return d.y; });
 
-        circle.each(function(d) {
-            if(forceStopped) {
-                d.fixed = true;
-            }
-        });
-
         circle.attr("x", function(d) { return d.x - 25; })
             .attr("y", function(d) { return d.y - 25; });
 
@@ -176,8 +212,76 @@ function update(nodes, links, first) {
             return "translate(" + d.x + "," + d.y + ")";
         });
 
-        stopForce();
-    });
+    }
+
+    var line;
+    var toggle = false;
+    var startElement;
+
+    var vis = d3.select("body").select("svg");
+
+    vis.on("mouseup", mouseup);
+
+
+    function mouseup() {
+        var m = d3.mouse(this);
+        line = vis.select('g').append("line")
+            .attr('class', 'tempLine')
+            .attr("x1", m[0])
+            .attr("y1", m[1])
+            .attr("x2", m[0])
+            .attr("y2", m[1])
+            .style("stroke", "#ccc")
+            .style("stroke-width", 1);
+
+        if(toggle) {
+            toggle = false;
+            vis.on("mousemove", null);
+            if(hoverElement !== null && hoverElement !== undefined) {
+                line.attr('class', 'line');
+                var newLink = {
+                    "source": startElement.count,
+                    "target": hoverElement.count
+                };
+                var found = false;
+
+                for(var i = 0; i < dataset['links'].length; i++) {
+                    if ((dataset['links'][i].source.count == newLink.source &&
+                        dataset['links'][i].target.count == newLink.target) ||
+                        (dataset['links'][i].target.count == newLink.source &&
+                        dataset['links'][i].source.count == newLink.target)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found) {
+                    dataset['links'].push(newLink);
+                    update();
+                } else {
+                    vis.select('g').selectAll('.tempLine').remove();
+                    $('.tempLine').remove();
+                }
+            } else {
+                vis.select('g').selectAll('.tempLine').remove();
+                $('.tempLine').remove();
+            }
+        } else {
+            if(hoverElement !== null) {
+                toggle = true;
+                startElement = hoverElement;
+                vis.on("mousemove", mousemove);
+            }
+
+        }
+
+
+    }
+
+    function mousemove() {
+        var m = d3.mouse(this);
+        line.attr("x2", m[0]-1)
+            .attr("y2", m[1]-1);
+    }
 
 
 }

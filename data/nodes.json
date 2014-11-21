@@ -1,6 +1,6 @@
 [
   {
-    "count": 1,
+    "count": 0,
     "type": "pc",
     "code": "Objet-1",
     "name": "PC1",
@@ -17,7 +17,7 @@
     "connectedTo": ["Objet-1", "Objet-3"]
   },
   {
-    "count": 1,
+    "count": 2,
     "type": "pc",
     "code": "Objet-3",
     "name": "PC2",

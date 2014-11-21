@@ -14,7 +14,7 @@
         $scope.contents = [];
 
         $scope.get = function (url) {
-            console.log("salut");
+            loadD3();
             var http_get = $http.get(url);
             http_get.success(function (data) {
                 $scope.contents = data;
