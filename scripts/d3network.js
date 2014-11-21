@@ -5,12 +5,14 @@ var width, height, svg, forceStopped, dataset, currentElement, hoverElement, cur
 
 function loadD3() {
 
-    width = $('#tpCreatorCanvas').children(":first").width();
-    height = 300;//$('#tpCreatorCanvas').children(":first").height();
+    var container = $("#mainCanvas");
+
+    width = container.width();
+    height = container.height();
 
     forceStopped = false;
 
-    $('#mainCanvas').empty();
+    container.empty();
     dataset = { nodes : undefined, links : undefined};
     svg = d3.select("#mainCanvas").append("svg")
         .attr('id', 'mainSvg')
@@ -33,11 +35,15 @@ function loadD3() {
 
 }
 
-function resizeD3() {
-    //$('#mainSvg').width($('#tpCreatorCanvas').children(":first").width());
-    //$('#mainSvg').height($('#tpCreatorCanvas').children(":first").height());
+function resize() {
+    var container = $("#mainCanvas");
+    var x = container.width();
+    var y = container.height();
 
+    d3.select("#mainSvg").attr("width", x).attr("height", y);
 }
+
+d3.select(window).on('resize', resize);
 
 
 function addRouter() {
@@ -77,7 +83,7 @@ function addComputer() {
         connectedTo : [],
         gateway : "0.0.0.0",
         ip : "0.0.0.0",
-        name : "Ordninateur",
+        name : "Ordinateur",
         netmask : "0.0.0.0",
         type : "pc"
     };
