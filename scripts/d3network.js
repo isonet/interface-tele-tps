@@ -1,3 +1,5 @@
+/*  @flow   */
+
 "use strict";
 
 var width, height, svg, forceStopped, dataset, currentElement, hoverElement, currentD3Element;
@@ -11,7 +13,7 @@ function loadD3() {
     forceStopped = false;
 
     $('#mainCanvas').empty();
-    dataset = { nodes : undefined, links : undefined};
+    dataset = { nodes : Object , links : Object };
     svg = d3.select("#mainCanvas").append("svg")
         .attr('id', 'mainSvg')
         .attr("width", width)
@@ -146,12 +148,14 @@ function update() {
         .on("drag", function(d, i) {
             vis.on("mouseup", null);
 
-            d.px += d3.event.dx;
-            d.py += d3.event.dy;
-            d.x += d3.event.dx;
-            d.y += d3.event.dy;
-
-            tick();
+            // Prevent elements from getting outside the svg element
+            if(d3.event.x > 25 && d3.event.x < width - 25 && d3.event.y > 25 && d3.event.y < height - 25) {
+                d.px += d3.event.dx;
+                d.py += d3.event.dy;
+                d.x += d3.event.dx;
+                d.y += d3.event.dy;
+                tick();
+            }
         });
 
     var edges = svg.selectAll("line")
@@ -205,8 +209,9 @@ function update() {
         elemEnter.attr("cx", function(d) { return d.x; })
             .attr("cy", function(d) { return d.y; });
 
-        circle.attr("x", function(d) { return d.x - 25; })
-            .attr("y", function(d) { return d.y - 25; });
+        circle.attr("x", function(d) { return d.x - 25; });
+
+        circle.attr("y", function(d) { return d.y - 25; });
 
         labels.attr("transform", function(d) {
             return "translate(" + d.x + "," + d.y + ")";
