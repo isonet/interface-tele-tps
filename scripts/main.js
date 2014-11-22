@@ -29,7 +29,6 @@ $(document).ready(function (){
             height: paneHeight
         });
 
-        resizeD3();
     }
 
     /**
