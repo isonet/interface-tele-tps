@@ -110,6 +110,11 @@ svg text
     user-select: none;
 }
 
+#settings option
+{
+    color: #000000;
+}
+
 .custom-scrollbar
 {
     padding-right: 5px;
