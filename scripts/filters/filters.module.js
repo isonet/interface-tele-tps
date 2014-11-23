@@ -1,9 +1,5 @@
 (function () {
 
-    /**
-     * Filtres pour Angular
-     */
-
     "use strict";
     var app = angular.module('tpManager.filters', []);
 
@@ -13,13 +9,20 @@
      */
     app.filter('listFilter', [function () {
         return function (items, searchText) {
-            var filtered = [];
+            if(items !== undefined && searchText !== undefined) {
+                var filtered = [];
 
-            searchText = searchText.toLowerCase();
-            angular.forEach(items, function (item) {
-                if (item.title.toLowerCase().indexOf(searchText) >= 0) { filtered.push(item); }
-            });
-            return filtered;
+                searchText = searchText.toLowerCase();
+
+                angular.forEach(items, function (item) {
+                    if (item.title.toLowerCase().indexOf(searchText) >= 0) {
+                        filtered.push(item);
+                    }
+                });
+                return filtered;
+            } else {
+                return items;
+            }
         };
     }]);
 

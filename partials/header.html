@@ -1,0 +1,31 @@
+<div class="bs-component">
+    <div class="navbar navbar-success">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="javascript:void(0)"><img src="assets/favicon/mstile-70x70.png" style="height:40px;width:auto;margin-top: -5px;">&nbsp;Mes Télé-TPs</a>
+        </div>
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#/list">
+                        <i class="icon-material-folder icon-material-lightgrey" style="font-size: 75%;"></i>&nbsp;&nbsp;Mes TPs
+                    </a>
+                </li>
+                <li>
+                    <a href="#/new">
+                        <i class="icon icon-material-add icon-material-lightgrey" style="font-size: 75%;"></i>&nbsp;&nbsp;Nouveau TP
+                    </a>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <!-- Barre de recherche de TP -->
+                <!-- TODO Déplacer dans la section 'Mes TP' ? Ou généraliser l'utilisation -->
+                <input type="text" class="form-control floating-label col-lg-8" id="searchBox" placeholder="Recherche" autocomplete="off" formaction="javascript:void(0)" ng-model="filter.searchValue" ng-init="$parent.filter.searchValue = ''">
+            </form>
+        </div>
+    </div>
+</div>
