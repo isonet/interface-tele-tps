@@ -62,7 +62,6 @@
                                     $scope.cfgNetmask,
                                     $scope.cfgGateway,
                                     $scope.cfgForwarding);
-            $window.ni.update();
             var snack = {
                 content: "Modifications enregistrées",
                 style: "snackbar",
