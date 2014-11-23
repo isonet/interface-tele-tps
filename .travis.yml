@@ -2,9 +2,5 @@ language: node_js
 node_js:
 - '0.10'
 before_script:
-  - "npm install protractor --save-dev"
-  - "npm install mocha expect.js --save-dev"
-  - "npm install express --save"
-  - "./node_modules/protractor/bin/webdriver-manager update --chrome false"
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
