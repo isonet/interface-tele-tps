@@ -111,6 +111,7 @@ NetworkInterface.prototype.downloadImage = function() {
 NetworkInterface.prototype.editSettings = function(name, type, ip, netmask, gateway, forwarding) {
 
     var oldType = this.currentElement.type;
+    var oldName = this.currentElement.name;
 
     this.currentElement.name = name;
     this.currentElement.type = type;
@@ -121,7 +122,7 @@ NetworkInterface.prototype.editSettings = function(name, type, ip, netmask, gate
 
     this.dataset['nodes'][this.currentElement.count] = this.currentElement;
 
-    if(oldType !== this.currentElement.type) {
+    if(oldType !== this.currentElement.type || oldName !== this.currentElement.name) {
         this.update();
     }
 };
