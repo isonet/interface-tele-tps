@@ -1,4 +1,4 @@
-exports.config ={
+exports.config = {
 	specs:['scripts/tests/**/*.js'],
 	framework:'mocha',
 	mochaOpts:{
@@ -7,6 +7,6 @@ exports.config ={
 		enableTimeouts: false
 	},
 	capabilities:{
-    	'browserName':'chrome'
+    	'browserName':'firefox'
 	}
 }
