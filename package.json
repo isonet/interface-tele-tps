@@ -1,7 +1,7 @@
 {
   "name": "interface-tele-tps",
   "version": "0.0.1",
-  "scripts":{ "test":"protractor protractor.config.js" }
+  "scripts": { "test":"protractor protractor.config.js" },
   "repository": {
     "type": "git",
     "url": "git://github.com/Schlipak/interface-tele-tps.git"
