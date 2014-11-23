@@ -6,7 +6,7 @@
 
     angular.module('tpManager', [
         'tpManager.controllers',
-        //'tpManager.directives',
+        'tpManager.directives',
         'tpManager.filters'
         //'tpManager.services'
     ]);

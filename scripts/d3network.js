@@ -1,25 +1,52 @@
 "use strict";
 
-var width, height, svg, forceStopped, dataset, currentElement, hoverElement, currentD3Element;
 
+// TODO Why do I have two currentElement?!
+function NetworkInterface() {
+    this.width;
+    this.height;
+    this.svg;
+    this.forceStopped;
+    this.dataset;
+    this.currentElement;
+    this.hoverElement;
+    this.currentD3Element;
 
-function loadD3() {
+    this.defaultRouter = { connectedTo : [], gateway : "0.0.0.0", ip : "0.0.0.0", name : "Router", netmask : "0.0.0.0",
+        type : "Router", forwarding : true };
+    this.defaultPC = { connectedTo : [], gateway : "0.0.0.0", ip : "0.0.0.0", name : "Ordinateur", netmask : "0.0.0.0",
+        type : "PC" };
+    this.defaultSwitch = { connectedTo : [], gateway : "0.0.0.0", ip : "0.0.0.0", name : "Switch", netmask : "0.0.0.0",
+        type : "Switch" };
+}
+
+NetworkInterface.prototype.load = function() {
+
+    var th = this;
 
     var container = $("#mainCanvas");
 
-    width = container.width();
-    height = container.height();
+    this.width = container.width();
+    this.height = container.height();
 
-    forceStopped = false;
+    this.forceStopped = false;
 
     container.empty();
-    dataset = { nodes : Object, links : Object};
-    svg = d3.select("#mainCanvas").append("svg")
+    this.dataset = { nodes : Object, links : Object};
+    this.svg = d3.select("#mainCanvas").append("svg")
         .attr('id', 'mainSvg')
-        .attr("width", width)
-        .attr("height", height)
+        .attr("width", this.width)
+        .attr("height", this.height)
+        .on('drop', function(d) {
+            var name = d3.event.dataTransfer.getData('name');
+            th.add(name, d3.mouse(this)[0], d3.mouse(this)[1]);
+        })
+        .on('dragover', function(d) { d3.event.preventDefault(); })
         .append("g");
 
+    //$('#mainSvg').attr("xmlns", "http://www.w3.org/2000/svg");
+    $('#mainSvg').attr("xmlns:svg", "http://www.w3.org/2000/svg");
+    $('#mainSvg').attr("xmlns:xlink", "http://www.w3.org/1999/xlink");
 
     d3.json("data/nodes.json", function (error, json) {
         if (error) return console.warn(error);
@@ -27,116 +54,148 @@ function loadD3() {
         d3.json("data/links.json", function (error, json) {
             if (error) return console.warn(error);
             var links = json;
-            dataset['nodes'] = nodes;
-            dataset['links'] = links;
-            update();
+            th.dataset['nodes'] = nodes;
+            th.dataset['links'] = links;
+            th.update();
         });
     });
 
-}
+    $("#svgToPng").attr('height', $("#mainSvg").height());
+    $("#svgToPng").attr('width', $("#mainSvg").width());
 
-function resize() {
+};
+
+NetworkInterface.prototype.resize = function() {
     var container = $("#mainCanvas");
     var x = container.width();
     var y = container.height();
 
     d3.select("#mainSvg").attr("width", x).attr("height", y);
-}
+    //this.update();
+};
 
-d3.select(window).on('resize', resize);
+NetworkInterface.prototype.downloadImage = function() {
+    var html = d3.select("svg")
+        .attr("version", 1.1)
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .node().parentNode.innerHTML;
+
+    var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
+    var img = '<img src="'+imgsrc+'">';
+    d3.select("#svgdataurl").html(img);
 
 
-function addRouter() {
-    var nodes;
-    var links;
+    var canvas = document.querySelector("canvas"),
+        context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
 
-    var l = dataset['nodes'].length;
-    var newNode = {
-        code : "Objet-" + l,
-        count : l,
-        connectedTo : [],
-        gateway : "0.0.0.0",
-        ip : "0.0.0.0",
-        name : "Router",
-        netmask : "0.0.0.0",
-        type : "router"
+    var image = new Image;
+    image.src = imgsrc;
+    image.onload = function() {
+        context.drawImage(image, 0, 0);
+
+        var canvasdata = canvas.toDataURL("image/png");
+
+        var pngimg = '<img src="'+canvasdata+'">';
+        d3.select("#pngdataurl").html(pngimg);
+
+        var a = document.createElement("a");
+        // TODO add name of TP
+        a.download = "topologie.png";
+        a.href = canvasdata;
+        a.click();
     };
+
+};
+
+NetworkInterface.prototype.editSettings = function(name, type, ip, netmask, gateway, forwarding) {
+
+    var oldType = this.currentElement.type;
+
+    this.currentElement.name = name;
+    this.currentElement.type = type;
+    this.currentElement.ip = ip;
+    this.currentElement.netmask = netmask;
+    this.currentElement.gateway = gateway;
+    this.currentElement.forwarding = forwarding;
+
+    this.dataset['nodes'][this.currentElement.count] = this.currentElement;
+
+    if(oldType !== this.currentElement.type) {
+        this.update();
+    }
+};
+
+NetworkInterface.prototype.add = function(type, x, y) {
+    var newNode;
+
+    switch (type) {
+        case "switch":
+            newNode = jQuery.extend({}, this.defaultSwitch);
+            break;
+        case "router":
+            newNode = jQuery.extend({}, this.defaultRouter);
+            break;
+        default:
+            newNode = jQuery.extend({}, this.defaultPC);
+            break;
+    }
+
+    var l = this.dataset['nodes'].length;
+    newNode.code =  "Objet-" + l;
+    newNode.count = l;
+
+    if(x !== undefined && y !== undefined) {
+        newNode.x = x;
+        newNode.y = y;
+        newNode.fixed = true;
+    }
 
     var newLinks = {
         "source": l,
         "target": l
     };
-    dataset['nodes'].push(newNode);
-    dataset['links'].push(newLinks);
 
-    update();
-}
+    this.dataset['nodes'].push(newNode);
+    this.dataset['links'].push(newLinks);
 
-function addComputer() {
-    var nodes;
-    var links;
+    this.update();
+};
 
-    var l = dataset['nodes'].length;
-    var newNode = {
-        code : "Objet-" + l,
-        count : l,
-        connectedTo : [],
-        gateway : "0.0.0.0",
-        ip : "0.0.0.0",
-        name : "Ordinateur",
-        netmask : "0.0.0.0",
-        type : "pc"
-    };
+NetworkInterface.prototype.update = function() {
 
-    var newLinks = {
-        "source": l,
-        "target": l
-    };
-    dataset['nodes'].push(newNode);
-    dataset['links'].push(newLinks);
+    var th = this;
 
-    update();
-}
+    var line;
+    var toggle = false;
+    var startElement;
 
-function addSwitch() {
-    var nodes;
-    var links;
+    var nodes = this.dataset['nodes'];
+    var links = this.dataset['links'];
 
-    var l = dataset['nodes'].length;
-    var newNode = {
-        code : "Objet-" + l,
-        count : l,
-        connectedTo : [],
-        gateway : "0.0.0.0",
-        ip : "0.0.0.0",
-        name : "Switch",
-        netmask : "0.0.0.0",
-        type : "switch"
-    };
+    this.svg.selectAll("*").remove();
 
-    var newLinks = {
-        "source": l,
-        "target": l
-    };
-    dataset['nodes'].push(newNode);
-    dataset['links'].push(newLinks);
-
-    update();
-}
-
-
-function update() {
-
-    var nodes = dataset['nodes'];
-    var links = dataset['links'];
-
-    svg.selectAll("*").remove();
+    var defs = this.svg.append("defs");
+    var filter = defs.append("filter")
+        .attr("id", "dropshadow")
+        .attr("height", "130%");
+    filter.append("feGaussianBlur")
+        .attr("in", "SourceAlpha")
+        .attr("stdDeviation", 3);
+    filter.append("feOffset")
+        .attr("dx", 2)
+        .attr("dy", 2)
+        .attr("result", "offsetblur");
+    var feMerge = filter.append("feMerge");
+    feMerge.append("feMergeNode");
+    feMerge.append("feMergeNode")
+        .attr("in", "SourceGraphic");
 
     // Establish the dynamic force behavor of the nodes
     var force = self.force = d3.layout.force()
         .nodes(nodes)
         .links(links)
-        .size([width,height])
+        .size([this.width, this.height])
         .linkDistance([250])
         .charge([-1500])
         .gravity(0.3)
@@ -153,7 +212,7 @@ function update() {
             vis.on("mouseup", null);
 
             // Prevent elements from getting outside the svg element
-            if(d3.event.x > 25 && d3.event.x < width - 25 && d3.event.y > 25 && d3.event.y < height - 25) {
+            if(d3.event.x > 25 && d3.event.x < th.width - 25 && d3.event.y > 25 && d3.event.y < th.height - 25) {
                 d.px += d3.event.dx;
                 d.py += d3.event.dy;
                 d.x += d3.event.dx;
@@ -162,35 +221,47 @@ function update() {
             }
         });
 
-    var edges = svg.selectAll("line")
+    var edges = this.svg.selectAll("line")
         .data(links)
         .enter()
         .append("line")
         .style("stroke", "#ccc")
         .style("stroke-width", 1);
 
-    var elem = svg.selectAll("g")
+    var elem = this.svg.selectAll("g")
         .data(nodes);
 
     var elemEnter = elem.enter()
         .append("g");
 
     var circle = elemEnter
-        .append("svg:image")
+        .append("image")
         .attr('width', 50)
         .attr('height', 50)
-        .attr("xlink:href",function(d) { return ("assets/" + d.type + ".png"); })
-        .on('mousedown', function(d) { currentD3Element = this; })
-        .on('mousedown', function(d) { vis.on("mouseup", mouseup); })
+        .attr("xlink:href",function(d) { return (window.images[d.type.toLowerCase()]); })
+        .on('mousedown', function(d) {
+            th.currentElement = th.dataset['nodes'][d.count];
+            th.currentD3Element = this;
+            th.svg.selectAll('image').style('filter', '');
+            d3.select(this).style("filter", "url(#dropshadow)");
+        })
         .on("click", function(d) {
-            currentElement = dataset['nodes'][d.count];
-            $('#settings').html(JSON.stringify(currentElement));
+            th.currentElement = th.dataset['nodes'][d.count];
+            vis.on("mouseup", mouseup);
         })
         .on("mouseenter", function(d) {
-            hoverElement = d;
+            th.hoverElement = d;
         })
         .on("mouseleave", function(d) {
-            hoverElement = null;
+            th.hoverElement = null;
+        })
+        .on('contextmenu',function (d,i) {
+            angular.element($('#settingsForm')).scope().updateSettings(d);
+            angular.element($('#settingsForm')).scope().$apply();
+            th.hoverElement = null;
+            d3.event.preventDefault();
+            d3.event.stopPropagation();
+            window.toggleSidebar(true, 'settings');
         })
         .call(node_drag);
 
@@ -222,13 +293,16 @@ function update() {
 
     }
 
-    var line;
-    var toggle = false;
-    var startElement;
+
 
     var vis = d3.select("body").select("svg");
 
     vis.on("mouseup", mouseup);
+    vis.on('contextmenu', function() {
+        th.hoverElement = null;
+        d3.event.preventDefault();
+        window.toggleSidebar(true, 'components');
+    });
 
 
     function mouseup() {
@@ -245,26 +319,26 @@ function update() {
         if(toggle) {
             toggle = false;
             vis.on("mousemove", null);
-            if(hoverElement !== null && hoverElement !== undefined) {
+            if(th.hoverElement !== null && th.hoverElement !== undefined) {
                 line.attr('class', 'line');
                 var newLink = {
                     "source": startElement.count,
-                    "target": hoverElement.count
+                    "target": th.hoverElement.count
                 };
                 var found = false;
 
-                for(var i = 0; i < dataset['links'].length; i++) {
-                    if ((dataset['links'][i].source.count == newLink.source &&
-                        dataset['links'][i].target.count == newLink.target) ||
-                        (dataset['links'][i].target.count == newLink.source &&
-                        dataset['links'][i].source.count == newLink.target)) {
+                for(var i = 0; i < th.dataset['links'].length; i++) {
+                    if ((th.dataset['links'][i].source.count == newLink.source &&
+                        th.dataset['links'][i].target.count == newLink.target) ||
+                        (th.dataset['links'][i].target.count == newLink.source &&
+                        th.dataset['links'][i].source.count == newLink.target)) {
                         found = true;
                         break;
                     }
                 }
                 if(!found) {
-                    dataset['links'].push(newLink);
-                    update();
+                    th.dataset['links'].push(newLink);
+                    th.update();
                 } else {
                     vis.select('g').selectAll('.tempLine').remove();
                     $('.tempLine').remove();
@@ -274,9 +348,9 @@ function update() {
                 $('.tempLine').remove();
             }
         } else {
-            if(hoverElement !== null) {
+            if(th.hoverElement !== null) {
                 toggle = true;
-                startElement = hoverElement;
+                startElement = th.hoverElement;
                 vis.on("mousemove", mousemove);
             }
 
@@ -292,4 +366,4 @@ function update() {
     }
 
 
-}
+};

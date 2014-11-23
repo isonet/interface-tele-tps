@@ -1,5 +1,11 @@
+"use strict";
+
+window.ni = new NetworkInterface();
+d3.select(window).on('resize', ni.resize());
+
 $(document).ready(function (){
-    "use strict";
+
+    //ni.load();
 
     /**
      * Fonction de redimension de certains éléments
@@ -12,7 +18,8 @@ $(document).ready(function (){
             height : appHeight
         });
 
-        var canvasHeight = appHeight - 90;
+        // 75 = footer height
+        var canvasHeight = appHeight - (90 + 75);
         $("#tpCreatorCanvas").find("#conceptorCanvas").css({
             height: canvasHeight
         });
@@ -59,23 +66,28 @@ $(document).ready(function (){
      * Booléen représentant la position actuelle du panneau de l'interface de conception
      * @type {boolean}
      */
-    var sidebarIsDisplayed = false;
+    window.sidebarIsDisplayed = false;
 
     /**
      * Fonction permettant d'ouvrir et fermer le panneau de paramètres de l'interface de conception.
      * Permet également de changer l'icône du bouton par une manipulation de classes
      * @param b {boolean}
      */
-    function toggleSidebar(b) {
+    window.toggleSidebar = function(b, panel) {
         var position = !b ? -330 : -16;
         $("#tpCreatorSideBar").stop().animate({
             marginRight: position+"px"
         },300);
-        if(b != sidebarIsDisplayed) {
+        if(b != window.sidebarIsDisplayed) {
             $("#tpCreatorCanvas").find(".btn-fab").toggleClass('icon-material-add icon-material-close');
-            sidebarIsDisplayed = !sidebarIsDisplayed;
+            window.sidebarIsDisplayed = !window.sidebarIsDisplayed;
         }
-    }
+        if(panel == 'settings') {
+            $("#settings-panel a").tab('show');
+        } else {
+            $("#components-panel a").tab('show');
+        }
+    };
 
     /**
      * Liaison de la fonction toggleSidebar() à l'évènement de clic sur le bouton "+"
@@ -89,7 +101,7 @@ $(document).ready(function (){
      * Permet de fermer automatiquement le panneau d'édition pour laisser le champ libre.
      */
     $("#mainCanvas").click(function() {
-        //toggleSidebar(false);
+        toggleSidebar(false);
     });
 
     /**

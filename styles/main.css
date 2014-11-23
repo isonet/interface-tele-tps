@@ -137,3 +137,45 @@ svg text
     background-color: #63912f;
     border-radius: 2px;
 }
+
+/*    Overwrite Bootstrap     */
+.form-group.has-error2 .control-label, .form-group.has-error input.form-control:not(.empty)~.floating-label {
+    color: #000 !important;
+}
+
+.checkbox > .check:after {
+    display: block;
+    position: absolute;
+    content: "";
+    background-color: rgba(0, 0, 0, 0.84);
+    left: -5px;
+    top: -15px;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    z-index: 1;
+    opacity: 0;
+    margin: 0;
+}
+.checkbox > .check:before {
+    display: block;
+    content: "";
+    border: 2px solid rgba(0, 0, 0, 0.84);
+    height: 20px;
+    width: 20px;
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+}
+
+.checkbox label {
+    cursor: pointer;
+    padding-left: 45px;
+    position: relative;
+}
+.checkbox span {
+    display: block;
+    position: absolute;
+    left: 0px;
+    -webkit-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+}
