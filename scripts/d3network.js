@@ -258,7 +258,6 @@ NetworkInterface.prototype.update = function() {
         .on('contextmenu',function (d,i) {
             angular.element($('#settingsForm')).scope().updateSettings(d);
             angular.element($('#settingsForm')).scope().$apply();
-            th.hoverElement = null;
             d3.event.preventDefault();
             d3.event.stopPropagation();
             window.toggleSidebar(true, 'settings');
@@ -306,56 +305,58 @@ NetworkInterface.prototype.update = function() {
 
 
     function mouseup() {
-        var m = d3.mouse(this);
-        line = vis.select('g').append("line")
-            .attr('class', 'tempLine')
-            .attr("x1", m[0])
-            .attr("y1", m[1])
-            .attr("x2", m[0])
-            .attr("y2", m[1])
-            .style("stroke", "#ccc")
-            .style("stroke-width", 1);
+        // Only create a new edge if left mousebutton is pressed
+        if(d3.event.button === 0) {
+            var m = d3.mouse(this);
+            line = vis.select('g').append("line")
+                .attr('class', 'tempLine')
+                .attr("x1", m[0])
+                .attr("y1", m[1])
+                .attr("x2", m[0])
+                .attr("y2", m[1])
+                .style("stroke", "#ccc")
+                .style("stroke-width", 1);
 
-        if(toggle) {
-            toggle = false;
-            vis.on("mousemove", null);
-            if(th.hoverElement !== null && th.hoverElement !== undefined) {
-                line.attr('class', 'line');
-                var newLink = {
-                    "source": startElement.count,
-                    "target": th.hoverElement.count
-                };
-                var found = false;
+            if (toggle) {
+                toggle = false;
+                vis.on("mousemove", null);
+                if (th.hoverElement !== null && th.hoverElement !== undefined) {
+                    line.attr('class', 'line');
+                    var newLink = {
+                        "source": startElement.count,
+                        "target": th.hoverElement.count
+                    };
+                    var found = false;
 
-                for(var i = 0; i < th.dataset['links'].length; i++) {
-                    if ((th.dataset['links'][i].source.count == newLink.source &&
-                        th.dataset['links'][i].target.count == newLink.target) ||
-                        (th.dataset['links'][i].target.count == newLink.source &&
-                        th.dataset['links'][i].source.count == newLink.target)) {
-                        found = true;
-                        break;
+                    for (var i = 0; i < th.dataset['links'].length; i++) {
+                        if ((th.dataset['links'][i].source.count == newLink.source &&
+                            th.dataset['links'][i].target.count == newLink.target) ||
+                            (th.dataset['links'][i].target.count == newLink.source &&
+                            th.dataset['links'][i].source.count == newLink.target)) {
+                            found = true;
+                            break;
+                        }
                     }
-                }
-                if(!found) {
-                    th.dataset['links'].push(newLink);
-                    th.update();
+                    if (!found) {
+                        th.dataset['links'].push(newLink);
+                        th.update();
+                    } else {
+                        vis.select('g').selectAll('.tempLine').remove();
+                        $('.tempLine').remove();
+                    }
                 } else {
                     vis.select('g').selectAll('.tempLine').remove();
                     $('.tempLine').remove();
                 }
             } else {
-                vis.select('g').selectAll('.tempLine').remove();
-                $('.tempLine').remove();
-            }
-        } else {
-            if(th.hoverElement !== null) {
-                toggle = true;
-                startElement = th.hoverElement;
-                vis.on("mousemove", mousemove);
-            }
+                if (th.hoverElement !== null) {
+                    toggle = true;
+                    startElement = th.hoverElement;
+                    vis.on("mousemove", mousemove);
+                }
 
+            }
         }
-
 
     }
 
