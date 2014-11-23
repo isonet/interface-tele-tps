@@ -216,9 +216,32 @@
                                     <div id="sidebarTabContents" class="tab-content">
                                         <div class="tab-pane fade active in custom-scrollbar" id="components">
                                             <!-- TODO Replace this mess with something from bootstrap/minimal -->
-                                            <img onclick="ni.add('pc')" width="50" src="assets/pc.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'pc'); })(event)">
-                                            <img onclick="ni.add('router')" width="50" src="assets/router.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'router'); })(event)">
-                                            <img onclick="ni.add('switch')" width="50" src="assets/switch.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'switch'); })(event)">
+                                            <div class="list-group">
+                                                <div class="list-group-item">
+                                                    <div class="row-picture">
+                                                        <img class="circle" onclick="ni.add('pc')" src="assets/pc.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'pc'); })(event)">
+                                                    </div>
+                                                    <div class="row-content">
+                                                        <h4 class="list-group-item-heading">Ordinateur</h4>
+                                                    </div>
+                                                </div>
+                                                <div class="list-group-item">
+                                                    <div class="row-picture">
+                                                        <img class="circle" onclick="ni.add('router')" src="assets/router.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'router'); })(event)">
+                                                    </div>
+                                                    <div class="row-content">
+                                                        <h4 class="list-group-item-heading">Router</h4>
+                                                    </div>
+                                                </div>
+                                                <div class="list-group-item">
+                                                    <div class="row-picture">
+                                                        <img class="circle" onclick="ni.add('switch')" src="assets/switch.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'switch'); })(event)">
+                                                    </div>
+                                                    <div class="row-content">
+                                                        <h4 class="list-group-item-heading">Switch</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="tab-pane fade custom-scrollbar" id="settings">
                                             <form class="form-horizontal" id="settingsForm" name="settings">

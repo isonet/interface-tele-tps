@@ -179,3 +179,11 @@ svg text
     -webkit-transition-duration: 0.2s;
     transition-duration: 0.2s;
 }
+
+.list-group .list-group-item .row-action-primary img.circle, .list-group .list-group-item .row-picture img.circle {
+    border-radius: 0 !important;
+}
+.list-group .list-group-item .row-action-primary img, .list-group .list-group-item .row-picture img {
+    background: rgba(0,0,0,0) !important;
+    padding: 1px;
+}
