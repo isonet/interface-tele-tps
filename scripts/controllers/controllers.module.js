@@ -68,13 +68,12 @@
         function($scope, $window) {
             $window.resizeElements();
             ni.resize();
-            console.log("edit");
+            ni.load();
         }]);
 
     app.controller('TpNewCtrl', ['$scope', '$window',
         function($scope, $window) {
             $window.resizeElements();
-            console.log("new");
         }]);
 
     app.controller('TpListCtrl', ['$scope', '$http', '$window',
@@ -100,7 +99,6 @@
             };
 
             $scope.get('data/tpList.json');
-            console.log("list");
         }]);
 
 }());

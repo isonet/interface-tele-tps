@@ -55,7 +55,6 @@ $(document).ready(function (){
      * @param b {boolean}
      */
     window.toggleSidebar = function(b, panel) {
-        console.log(b);
         var position = !b ? -330 : -16;
         $("#tpCreatorSideBar").stop().animate({
             marginRight: position+"px"
