@@ -1,5 +1,7 @@
-Interface de conception pour la plateforme Télé-TPs de l'Université Toulouse III Paul Sabatier
+[![Build Status](https://travis-ci.org/Schlipak/interface-tele-tps.svg)](https://travis-ci.org/Schlipak/interface-tele-tps)
+
+Interface de conception pour la plateforme TÃ©lÃ©-TPs de l'UniversitÃ© Toulouse III Paul Sabatier
 ==================
 
-Ceci est le dépôt du projet d'Interface de conception de TP pour la plateforme Télé-TPs de l'Université Toulouse III Paul Sabatier.
-Il s'agit d'un projet étudiant de deuxième année en IUT Informatique.
+Ceci est le dÃ©pÃ´t du projet d'Interface de conception de TP pour la plateforme TÃ©lÃ©-TPs de l'UniversitÃ© Toulouse III Paul Sabatier.
+Il s'agit d'un projet Ã©tudiant de deuxiÃ¨me annÃ©e en IUT Informatique.
