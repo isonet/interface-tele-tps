@@ -273,7 +273,7 @@ NetworkInterface.prototype.update = function() {
     var elemEnter = elem.enter()
         .append('g');
 
-    var circle = elemEnter
+    var node = elemEnter
         .append('image')
         .attr('width', 50)
         .attr('height', 50)
@@ -318,7 +318,7 @@ NetworkInterface.prototype.update = function() {
              .attr('x2', function(d) { return d.target.x; })
              .attr('y2', function(d) { return d.target.y; });
 
-        circle.attr('x', function(d) { return d.x - 25; })
+        node.attr('x', function(d) { return d.x - 25; })
               .attr('y', function(d) { return d.y - 25; });
 
         labels.attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; });
