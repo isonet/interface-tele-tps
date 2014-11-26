@@ -1,92 +1,98 @@
-"use strict";
+'use strict';
 
-
-// TODO Why do I have two currentElement?!
+/**
+ * Class Constructor
+ */
 function NetworkInterface() {
-    this.width;
-    this.height;
-    this.svg;
-    this.forceStopped;
-    this.dataset;
-    this.currentElement;
-    this.hoverElement;
-    this.currentD3Element;
 
-    this.defaultRouter = { connectedTo : [], gateway : "0.0.0.0", ip : "0.0.0.0", name : "Router", netmask : "0.0.0.0",
-        type : "Router", forwarding : true };
-    this.defaultPC = { connectedTo : [], gateway : "0.0.0.0", ip : "0.0.0.0", name : "Ordinateur", netmask : "0.0.0.0",
-        type : "PC" };
-    this.defaultSwitch = { connectedTo : [], gateway : "0.0.0.0", ip : "0.0.0.0", name : "Switch", netmask : "0.0.0.0",
-        type : "Switch" };
-}
+    this.defaultRouter = {
+        connectedTo: [], gateway: '0.0.0.0', ip: '0.0.0.0', name: 'Router', netmask: '0.0.0.0',
+        type: 'Router', forwarding: true
+    };
+    this.defaultPC = {
+        connectedTo: [], gateway: '0.0.0.0', ip: '0.0.0.0', name: 'Ordinateur', netmask: '0.0.0.0',
+        type: 'PC'
+    };
+    this.defaultSwitch = {
+        connectedTo: [], gateway: '0.0.0.0', ip: '0.0.0.0', name: 'Switch', netmask: '0.0.0.0',
+        type: 'Switch'
+    };
 
-NetworkInterface.prototype.load = function() {
+    this.dataset = { nodes: undefined, links: undefined };
+    this.currentElement = undefined;
+    this.hoverElement = undefined;
 
-    var th = this;
-
-    var container = $("#mainCanvas");
+    var container = $('#mainCanvas');
 
     this.width = container.width();
     this.height = container.height();
 
-    this.forceStopped = false;
-
     container.empty();
-    this.dataset = { nodes : Object, links : Object};
-    this.svg = d3.select("#mainCanvas").append("svg")
+    var th = this;
+
+    this.svg = d3.select('#mainCanvas').append('svg')
         .attr('id', 'mainSvg')
-        .attr("width", this.width)
-        .attr("height", this.height)
-        .on('drop', function(d) {
+        .attr('width', this.width)
+        .attr('height', this.height)
+        .on('drop', function (d) {
             var name = d3.event.dataTransfer.getData('name');
             th.add(name, d3.mouse(this)[0], d3.mouse(this)[1]);
         })
-        .on('dragover', function(d) { d3.event.preventDefault(); })
-        .append("g");
+        .on('dragover', function () {
+            d3.event.preventDefault();
+        })
+        .append('g');
 
-    //$('#mainSvg').attr("xmlns", "http://www.w3.org/2000/svg");
-    $('#mainSvg').attr("xmlns:svg", "http://www.w3.org/2000/svg");
-    $('#mainSvg').attr("xmlns:xlink", "http://www.w3.org/1999/xlink");
+    $('#mainSvg').attr('xmlns:svg', 'http://www.w3.org/2000/svg');
+    $('#mainSvg').attr('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 
-    d3.json("data/nodes.json", function (error, json) {
+    d3.json('data/nodes.json', function (error, json) {
         if (error) return console.warn(error);
         var nodes = json;
-        d3.json("data/links.json", function (error, json) {
+        d3.json('data/links.json', function (error, json) {
             if (error) return console.warn(error);
             var links = json;
-            th.dataset['nodes'] = nodes;
-            th.dataset['links'] = links;
+            th.dataset.nodes = nodes;
+            th.dataset.links = links;
             th.update();
         });
     });
 
-    $("#svgToPng").attr('height', $("#mainSvg").height());
-    $("#svgToPng").attr('width', $("#mainSvg").width());
+    $('#svgToPng').attr('height', this.height);
+    $('#svgToPng').attr('width', this.width);
+}
 
-};
-
+/**
+ * Resizes and adapts the svg object to the parent element
+ */
 NetworkInterface.prototype.resize = function() {
-    var container = $("#mainCanvas");
-    var x = container.width();
-    var y = container.height();
+    var container = $('#mainCanvas');
 
-    d3.select("#mainSvg").attr("width", x).attr("height", y);
-    //this.update();
+    this.height = container.height();
+    this.width = container.width();
+
+    d3.select('#mainSvg').attr('height', this.height).attr('width', this.width);
+    if(this.dataset.node == undefined && this.dataset.links) {
+        this.update();
+    }
 };
 
+/**
+ * Converts the svg to a canvas and generates a png file
+ */
 NetworkInterface.prototype.downloadImage = function() {
-    var html = d3.select("svg")
-        .attr("version", 1.1)
-        .attr("xmlns", "http://www.w3.org/2000/svg")
+    var html = d3.select('svg')
+        .attr('version', 1.1)
+        .attr('xmlns', 'http://www.w3.org/2000/svg')
         .node().parentNode.innerHTML;
 
     var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
     var img = '<img src="'+imgsrc+'">';
-    d3.select("#svgdataurl").html(img);
+    d3.select('#svgdataurl').html(img);
 
 
-    var canvas = document.querySelector("canvas"),
-        context = canvas.getContext("2d");
+    var canvas = document.querySelector('canvas'),
+        context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     var image = new Image;
@@ -94,20 +100,29 @@ NetworkInterface.prototype.downloadImage = function() {
     image.onload = function() {
         context.drawImage(image, 0, 0);
 
-        var canvasdata = canvas.toDataURL("image/png");
+        var canvasdata = canvas.toDataURL('image/png');
 
         var pngimg = '<img src="'+canvasdata+'">';
-        d3.select("#pngdataurl").html(pngimg);
+        d3.select('#pngdataurl').html(pngimg);
 
-        var a = document.createElement("a");
+        var a = document.createElement('a');
         // TODO add name of TP
-        a.download = "topologie.png";
+        a.download = 'topologie.png';
         a.href = canvasdata;
         a.click();
     };
 
 };
 
+/**
+ * Edit Settings of the currentElement
+ * @param name The name
+ * @param type The type (router, switch, pc)
+ * @param ip The ip address (192.168.1.23)
+ * @param netmask The network mask (255.255.255.255)
+ * @param gateway The gatewax (192.168.1.1)
+ * @param forwarding Enables IPv4 Forwarding (true, false)
+ */
 NetworkInterface.prototype.editSettings = function(name, type, ip, netmask, gateway, forwarding) {
 
     var oldType = this.currentElement.type;
@@ -120,21 +135,27 @@ NetworkInterface.prototype.editSettings = function(name, type, ip, netmask, gate
     this.currentElement.gateway = gateway;
     this.currentElement.forwarding = forwarding;
 
-    this.dataset['nodes'][this.currentElement.count] = this.currentElement;
+    this.dataset.nodes[this.currentElement.count] = this.currentElement;
 
     if(oldType !== this.currentElement.type || oldName !== this.currentElement.name) {
         this.update();
     }
 };
 
+/**
+ * Creates a new object
+ * @param type (router, switch, pc)
+ * @param x X - Position
+ * @param y Y - Position
+ */
 NetworkInterface.prototype.add = function(type, x, y) {
     var newNode;
 
     switch (type) {
-        case "switch":
+        case 'switch':
             newNode = jQuery.extend({}, this.defaultSwitch);
             break;
-        case "router":
+        case 'router':
             newNode = jQuery.extend({}, this.defaultRouter);
             break;
         default:
@@ -142,8 +163,8 @@ NetworkInterface.prototype.add = function(type, x, y) {
             break;
     }
 
-    var l = this.dataset['nodes'].length;
-    newNode.code =  "Objet-" + l;
+    var l = this.dataset.nodes.length;
+    newNode.code =  'Objet-' + l;
     newNode.count = l;
 
     if(x !== undefined && y !== undefined) {
@@ -153,44 +174,46 @@ NetworkInterface.prototype.add = function(type, x, y) {
     }
 
     var newLinks = {
-        "source": l,
-        "target": l
+        'source': l,
+        'target': l
     };
 
-    this.dataset['nodes'].push(newNode);
-    this.dataset['links'].push(newLinks);
+    this.dataset.nodes.push(newNode);
+    this.dataset.links.push(newLinks);
 
     this.update();
 };
 
+/**
+ * Updates / Draws the svg with objects from dataset
+ */
 NetworkInterface.prototype.update = function() {
-
     var th = this;
 
     var line;
     var toggle = false;
     var startElement;
 
-    var nodes = this.dataset['nodes'];
-    var links = this.dataset['links'];
+    var nodes = this.dataset.nodes;
+    var links = this.dataset.links;
 
-    this.svg.selectAll("*").remove();
+    this.svg.selectAll('*').remove();
 
-    var defs = this.svg.append("defs");
-    var filter = defs.append("filter")
-        .attr("id", "dropshadow")
-        .attr("height", "130%");
-    filter.append("feGaussianBlur")
-        .attr("in", "SourceAlpha")
-        .attr("stdDeviation", 3);
-    filter.append("feOffset")
-        .attr("dx", 2)
-        .attr("dy", 2)
-        .attr("result", "offsetblur");
-    var feMerge = filter.append("feMerge");
-    feMerge.append("feMergeNode");
-    feMerge.append("feMergeNode")
-        .attr("in", "SourceGraphic");
+    var defs = this.svg.append('defs');
+    var filter = defs.append('filter')
+        .attr('id', 'dropshadow')
+        .attr('height', '130%');
+    filter.append('feGaussianBlur')
+        .attr('in', 'SourceAlpha')
+        .attr('stdDeviation', 3);
+    filter.append('feOffset')
+        .attr('dx', 2)
+        .attr('dy', 2)
+        .attr('result', 'offsetblur');
+    var feMerge = filter.append('feMerge');
+    feMerge.append('feMergeNode');
+    feMerge.append('feMergeNode')
+        .attr('in', 'SourceGraphic');
 
     // Establish the dynamic force behavor of the nodes
     var force = self.force = d3.layout.force()
@@ -200,63 +223,77 @@ NetworkInterface.prototype.update = function() {
         .linkDistance([250])
         .charge([-1500])
         .gravity(0.3)
-        .on("tick", tick)
+        .on('tick', tick)
         .start();
 
     var node_drag = d3.behavior.drag()
-        .on("dragstart", function(d, i) { force.stop(); })
-        .on("dragend", function(d, i) {
+        .on('dragstart', function() { force.stop(); })
+        .on('dragend', function(d) {
             d.fixed = true;
             tick();
         })
-        .on("drag", function(d, i) {
-            vis.on("mouseup", null);
+        .on('drag', function(d) {
+            vis.on('mouseup', null);
 
-            // Prevent elements from getting outside the svg element
-            if(d3.event.x > 25 && d3.event.x < th.width - 25 && d3.event.y > 25 && d3.event.y < th.height - 25) {
+            if (d3.event.x >= th.width) {
+                d.px = th.width;
+                d.x = th.width;
+            } else if (d3.event.x <= 0) {
+                d.px =  0;
+                d.x = 0;
+            } else {
                 d.px += d3.event.dx;
-                d.py += d3.event.dy;
                 d.x += d3.event.dx;
-                d.y += d3.event.dy;
-                tick();
             }
+
+            if (d3.event.y >= th.height) {
+                d.py = th.height;
+                d.y = th.height;
+            } else if (d3.event.y <= 0) {
+                d.py =  0;
+                d.y = 0;
+            } else {
+                d.py += d3.event.dy;
+                d.y += d3.event.dy;
+            }
+
+            tick();
         });
 
-    var edges = this.svg.selectAll("line")
+    var edges = this.svg.selectAll('line')
         .data(links)
         .enter()
-        .append("line")
-        .style("stroke", "#ccc")
-        .style("stroke-width", 1);
+        .append('line')
+        .style('stroke', '#ccc')
+        .style('stroke-width', 1);
 
-    var elem = this.svg.selectAll("g")
+    var elem = this.svg.selectAll('g')
         .data(nodes);
 
     var elemEnter = elem.enter()
-        .append("g");
+        .append('g');
 
     var circle = elemEnter
-        .append("image")
+        .append('image')
         .attr('width', 50)
         .attr('height', 50)
-        .attr("xlink:href",function(d) { return (window.images[d.type.toLowerCase()]); })
+        .attr('xlink:href',function(d) { return (window.images[d.type.toLowerCase()]); })
         .on('mousedown', function(d) {
             th.currentElement = th.dataset['nodes'][d.count];
-            th.currentD3Element = this;
             th.svg.selectAll('image').style('filter', '');
-            d3.select(this).style("filter", "url(#dropshadow)");
+            d3.select(this).style('filter', 'url(#dropshadow)');
         })
-        .on("click", function(d) {
+        .on('click', function(d) {
             th.currentElement = th.dataset['nodes'][d.count];
-            vis.on("mouseup", mouseup);
+            vis.on('mouseup', mouseup);
         })
-        .on("mouseenter", function(d) {
+        .on('mouseenter', function(d) {
             th.hoverElement = d;
         })
-        .on("mouseleave", function(d) {
+        .on('mouseleave', function() {
             th.hoverElement = null;
         })
-        .on('contextmenu',function (d,i) {
+        .on('contextmenu',function (d) {
             angular.element($('#settingsForm')).scope().updateSettings(d);
             angular.element($('#settingsForm')).scope().$apply();
             d3.event.preventDefault();
@@ -267,37 +304,29 @@ NetworkInterface.prototype.update = function() {
 
 
 
-    var labels = elemEnter.append("text")
-        .attr("dy", "40")
-        .attr("fill", "black")
-        .attr("font-family", "sans-serif")
-        .attr("font-size", "14px")
-        .attr("text-anchor", "middle")
+    var labels = elemEnter.append('text')
+        .attr('dy', '40')
+        .attr('fill', 'black')
+        .attr('font-family', 'sans-serif')
+        .attr('font-size', '14px')
+        .attr('text-anchor', 'middle')
         .text(function(d) { return d.name; });
 
     function tick() {
-        edges.attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; });
+        edges.attr('x1', function(d) { return d.source.x; })
+             .attr('y1', function(d) { return d.source.y; })
+             .attr('x2', function(d) { return d.target.x; })
+             .attr('y2', function(d) { return d.target.y; });
 
-        elemEnter.attr("cx", function(d) { return d.x; })
-            .attr("cy", function(d) { return d.y; });
+        circle.attr('x', function(d) { return d.x - 25; })
+              .attr('y', function(d) { return d.y - 25; });
 
-        circle.attr("x", function(d) { return d.x - 25; })
-            .attr("y", function(d) { return d.y - 25; });
-
-        labels.attr("transform", function(d) {
-            return "translate(" + d.x + "," + d.y + ")";
-        });
-
+        labels.attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; });
     }
 
+    var vis = d3.select('body').select('svg');
 
-
-    var vis = d3.select("body").select("svg");
-
-    vis.on("mouseup", mouseup);
+    vis.on('mouseup', mouseup);
     vis.on('contextmenu', function() {
         th.hoverElement = null;
         d3.event.preventDefault();
@@ -309,23 +338,23 @@ NetworkInterface.prototype.update = function() {
         // Only create a new edge if left mousebutton is pressed
         if(d3.event.button === 0) {
             var m = d3.mouse(this);
-            line = vis.select('g').append("line")
+            line = vis.select('g').append('line')
                 .attr('class', 'tempLine')
-                .attr("x1", m[0])
-                .attr("y1", m[1])
-                .attr("x2", m[0])
-                .attr("y2", m[1])
-                .style("stroke", "#ccc")
-                .style("stroke-width", 1);
+                .attr('x1', m[0])
+                .attr('y1', m[1])
+                .attr('x2', m[0])
+                .attr('y2', m[1])
+                .style('stroke', '#ccc')
+                .style('stroke-width', 1);
 
             if (toggle) {
                 toggle = false;
-                vis.on("mousemove", null);
+                vis.on('mousemove', null);
                 if (th.hoverElement !== null && th.hoverElement !== undefined) {
                     line.attr('class', 'line');
                     var newLink = {
-                        "source": startElement.count,
-                        "target": th.hoverElement.count
+                        'source': startElement.count,
+                        'target': th.hoverElement.count
                     };
                     var found = false;
 
@@ -353,7 +382,9 @@ NetworkInterface.prototype.update = function() {
                 if (th.hoverElement !== null) {
                     toggle = true;
                     startElement = th.hoverElement;
-                    vis.on("mousemove", mousemove);
+                    vis.on('mousemove', mousemove);
+                } else {
+                    window.toggleSidebar(false);
                 }
 
             }
@@ -363,8 +394,8 @@ NetworkInterface.prototype.update = function() {
 
     function mousemove() {
         var m = d3.mouse(this);
-        line.attr("x2", m[0]-1)
-            .attr("y2", m[1]-1);
+        line.attr('x2', m[0]-1)
+            .attr('y2', m[1]-1);
     }
 
 
