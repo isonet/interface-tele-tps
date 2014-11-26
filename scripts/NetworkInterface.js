@@ -40,8 +40,8 @@ function NetworkInterface() {
         })
         .on('dragover', function () {
             d3.event.preventDefault();
-        })
-        .append('g');
+        });
+    this.g = this.svg.append('g');
 
     $('#mainSvg').attr('xmlns:svg', 'http://www.w3.org/2000/svg');
     $('#mainSvg').attr('xmlns:xlink', 'http://www.w3.org/1999/xlink');
@@ -197,9 +197,9 @@ NetworkInterface.prototype.update = function() {
     var nodes = this.dataset.nodes;
     var links = this.dataset.links;
 
-    this.svg.selectAll('*').remove();
+    this.g.selectAll('*').remove();
 
-    var defs = this.svg.append('defs');
+    var defs = this.g.append('defs');
     var filter = defs.append('filter')
         .attr('id', 'dropshadow')
         .attr('height', '130%');
@@ -233,7 +233,7 @@ NetworkInterface.prototype.update = function() {
             tick();
         })
         .on('drag', function(d) {
-            vis.on('mouseup', null);
+            th.svg.on('mouseup', null);
 
             if (d3.event.x >= th.width) {
                 d.px = th.width;
@@ -260,14 +260,14 @@ NetworkInterface.prototype.update = function() {
             tick();
         });
 
-    var edges = this.svg.selectAll('line')
+    var edges = this.g.selectAll('line')
         .data(links)
         .enter()
         .append('line')
         .style('stroke', '#ccc')
         .style('stroke-width', 1);
 
-    var elem = this.svg.selectAll('g')
+    var elem = this.g.selectAll('g')
         .data(nodes);
 
     var elemEnter = elem.enter()
@@ -280,12 +280,12 @@ NetworkInterface.prototype.update = function() {
         .attr('xlink:href',function(d) { return (window.images[d.type.toLowerCase()]); })
         .on('mousedown', function(d) {
             th.currentElement = th.dataset['nodes'][d.count];
-            th.svg.selectAll('image').style('filter', '');
+            th.g.selectAll('image').style('filter', '');
             d3.select(this).style('filter', 'url(#dropshadow)');
         })
         .on('click', function(d) {
             th.currentElement = th.dataset['nodes'][d.count];
-            vis.on('mouseup', mouseup);
+            th.svg.on('mouseup', mouseup);
         })
         .on('mouseenter', function(d) {
             th.hoverElement = d;
@@ -324,10 +324,8 @@ NetworkInterface.prototype.update = function() {
         labels.attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; });
     }
 
-    var vis = d3.select('body').select('svg');
-
-    vis.on('mouseup', mouseup);
-    vis.on('contextmenu', function() {
+    th.svg.on('mouseup', mouseup);
+    th.svg.on('contextmenu', function() {
         th.hoverElement = null;
         d3.event.preventDefault();
         window.toggleSidebar(true, 'components');
@@ -338,7 +336,7 @@ NetworkInterface.prototype.update = function() {
         // Only create a new edge if left mousebutton is pressed
         if(d3.event.button === 0) {
             var m = d3.mouse(this);
-            line = vis.select('g').append('line')
+            line = th.g.append('line')
                 .attr('class', 'tempLine')
                 .attr('x1', m[0])
                 .attr('y1', m[1])
@@ -349,7 +347,7 @@ NetworkInterface.prototype.update = function() {
 
             if (toggle) {
                 toggle = false;
-                vis.on('mousemove', null);
+                th.svg.on('mousemove', null);
                 if (th.hoverElement !== null && th.hoverElement !== undefined) {
                     line.attr('class', 'line');
                     var newLink = {
@@ -371,18 +369,18 @@ NetworkInterface.prototype.update = function() {
                         th.dataset['links'].push(newLink);
                         th.update();
                     } else {
-                        vis.select('g').selectAll('.tempLine').remove();
+                        th.g.selectAll('.tempLine').remove();
                         $('.tempLine').remove();
                     }
                 } else {
-                    vis.select('g').selectAll('.tempLine').remove();
+                    th.g.selectAll('.tempLine').remove();
                     $('.tempLine').remove();
                 }
             } else {
                 if (th.hoverElement !== null) {
                     toggle = true;
                     startElement = th.hoverElement;
-                    vis.on('mousemove', mousemove);
+                    th.svg.on('mousemove', mousemove);
                 } else {
                     window.toggleSidebar(false);
                 }
