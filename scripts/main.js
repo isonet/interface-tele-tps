@@ -1,6 +1,6 @@
 "use strict";
 
-window.ni = new NetworkInterface();
+window.ni = undefined;
 
 $(document).ready(function (){
 
@@ -11,25 +11,25 @@ $(document).ready(function (){
      */
     window.resizeElements = function () {
         var appHeight = $(window).height() - 55;
-        $(".main-app").css({
+        $('.main-app').css({
             height : appHeight
         });
 
         // 75 = footer height
         var canvasHeight = appHeight - (90 + 75);
-        $("#tpCreatorCanvas").find("#conceptorCanvas").css({
+        $('#tpCreatorCanvas').find('#conceptorCanvas').css({
             height: canvasHeight
         });
 
         var sidebarHeight = canvasHeight+6;
         var sidebarTopMargin = -canvasHeight;
-        $("#tpCreatorSideBar").css({
+        $('#tpCreatorSideBar').css({
             height: sidebarHeight,
             marginTop: sidebarTopMargin
         });
 
         var paneHeight = sidebarHeight - 85;
-        $("#sidebarTabContents").find(".tab-pane").css({
+        $('#sidebarTabContents').find('.tab-pane').css({
             height: paneHeight
         });
 
@@ -56,24 +56,24 @@ $(document).ready(function (){
      */
     window.toggleSidebar = function(b, panel) {
         var position = !b ? -330 : -16;
-        $("#tpCreatorSideBar").stop().animate({
+        $('#tpCreatorSideBar').stop().animate({
             marginRight: position+"px"
         },300);
         if(b != window.sidebarIsDisplayed) {
-            $("#tpCreatorCanvas").find(".btn-fab").toggleClass('icon-material-add icon-material-close');
+            $('#tpCreatorCanvas').find('.btn-fab').toggleClass('icon-material-add icon-material-close');
             window.sidebarIsDisplayed = !window.sidebarIsDisplayed;
         }
         if(panel == 'settings') {
-            $("#settings-panel a").tab('show');
+            $('#settings-panel a').tab('show');
         } else {
-            $("#components-panel a").tab('show');
+            $('#components-panel a').tab('show');
         }
     };
 
     /**
      * Liaison de la fonction toggleSidebar() à l'évènement de clic sur le bouton "+"
      */
-    $("#tpCreatorCanvas").find(".btn-fab").click(function() {
+    $('#tpCreatorCanvas').find('.btn-fab').click(function() {
         toggleSidebar(!sidebarIsDisplayed);
     });
 
@@ -81,7 +81,7 @@ $(document).ready(function (){
      * Liaison de la fonction toggleSidebar() à l'évènement de clic sur le canvas de l'interface de conception.
      * Permet de fermer automatiquement le panneau d'édition pour laisser le champ libre.
      */
-    $("#mainCanvas").click(function() {
+    $('#mainCanvas').click(function() {
         toggleSidebar(false);
     });
 

@@ -34,6 +34,7 @@ function NetworkInterface() {
         .attr('id', 'mainSvg')
         .attr('width', this.width)
         .attr('height', this.height)
+        .on('resize', console.log('nope'))
         .on('drop', function (d) {
             var name = d3.event.dataTransfer.getData('name');
             th.add(name, d3.mouse(this)[0], d3.mouse(this)[1]);
@@ -196,6 +197,7 @@ NetworkInterface.prototype.update = function() {
 
     this.g.selectAll('*').remove();
 
+    // Filter which is applied to the selected object
     var defs = this.g.append('defs');
     var filter = defs.append('filter')
         .attr('id', 'dropshadow')
@@ -212,7 +214,6 @@ NetworkInterface.prototype.update = function() {
     feMerge.append('feMergeNode')
         .attr('in', 'SourceGraphic');
 
-    // Establish the dynamic force behavor of the nodes
     var force = self.force = d3.layout.force()
         .nodes(this.dataset.nodes)
         .links(this.dataset.links)

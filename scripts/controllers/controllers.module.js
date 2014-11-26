@@ -1,8 +1,8 @@
 (function () {
+    'use strict';
 
     // Controllers pour Angular
 
-    'use strict';
     var app = angular.module('tpManager.controllers', []);
 
     /**
@@ -38,8 +38,8 @@
                                     $scope.cfgGateway,
                                     $scope.cfgForwarding);
             var snack = {
-                content: "Modifications enregistrées",
-                style: "snackbar",
+                content: 'Modifications enregistrées',
+                style: 'snackbar',
                 timeout: 3000
             };
             $.snackbar(snack);
@@ -67,8 +67,12 @@
     app.controller('TpEditCtrl', ['$scope', '$window',
         function($scope, $window) {
             $window.resizeElements();
+            $window.ni = new NetworkInterface();
+            $window.onresize = function() {
+                resizeElements();
+                ni.resize();
+            };
             ni.resize();
-            ni.load();
         }]);
 
     app.controller('TpNewCtrl', ['$scope', '$window',
@@ -90,8 +94,8 @@
                 http_get.error(function () {
                     var link = '<a href="javascript:void(0)" style="text-decoration: none; color: #FFC400; padding-left: 10px;">Réessayer</a>';
                     var op = {
-                        content: "Erreur de chargement de la liste des TPs ! "+ link,
-                        style: "snackbar",
+                        content: 'Erreur de chargement de la liste des TPs ! ' + link,
+                        style: 'snackbar',
                         timeout: 10000
                     };
                     $.snackbar(op);

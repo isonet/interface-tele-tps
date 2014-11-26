@@ -2,7 +2,7 @@
 
     // Controllers pour Angular
 
-    "use strict";
+    'use strict';
     var app = angular.module('tpManager.directives', []);
 
 
