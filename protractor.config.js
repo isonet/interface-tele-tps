@@ -1,5 +1,5 @@
 exports.config = {
-	specs:['scripts/tests/**/*.js'],
+	specs:['scripts/test/**/*.js'],
 	framework:'mocha',
 	mochaOpts:{
 		reporter:'spec',
