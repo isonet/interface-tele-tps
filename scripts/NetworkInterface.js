@@ -194,9 +194,6 @@ NetworkInterface.prototype.update = function() {
     var toggle = false;
     var startElement;
 
-    var nodes = this.dataset.nodes;
-    var links = this.dataset.links;
-
     this.g.selectAll('*').remove();
 
     var defs = this.g.append('defs');
@@ -217,8 +214,8 @@ NetworkInterface.prototype.update = function() {
 
     // Establish the dynamic force behavor of the nodes
     var force = self.force = d3.layout.force()
-        .nodes(nodes)
-        .links(links)
+        .nodes(this.dataset.nodes)
+        .links(this.dataset.links)
         .size([this.width, this.height])
         .linkDistance([250])
         .charge([-1500])
@@ -261,14 +258,14 @@ NetworkInterface.prototype.update = function() {
         });
 
     var edges = this.g.selectAll('line')
-        .data(links)
+        .data(this.dataset.links)
         .enter()
         .append('line')
         .style('stroke', '#ccc')
         .style('stroke-width', 1);
 
     var elem = this.g.selectAll('g')
-        .data(nodes);
+        .data(this.dataset.nodes);
 
     var elemEnter = elem.enter()
         .append('g');
