@@ -12,6 +12,21 @@
         //'tpManager.services'
     ]);
 
+    tpApp.run(['$rootScope', function($rootScope){
+        $rootScope.resize = function($rootScope) {
+            $rootScope.size = $rootScope.size || {};
+            $rootScope.size.appHeight = $(window).height() - 55;
+            $rootScope.size.canvasHeight = $rootScope.size.appHeight  - (90 + 75);   // 75 = footer height
+            $rootScope.size.sidebarHeight = $rootScope.size.canvasHeight + 6;
+            $rootScope.size.sidebarTopMargin = - $rootScope.size.canvasHeight;
+            $rootScope.size.paneHeight = $rootScope.size.sidebarHeight - 85;
+            $rootScope.size.canvasWidth = $('#mainCanvas').width();
+            if($rootScope.ni !== undefined) {
+                $rootScope.ni.resize($rootScope.size.canvasHeight, $rootScope.size.canvasWidth);
+            }
+        }
+    }]);
+
     tpApp.config(['$routeProvider',
         function($routeProvider) {
             $routeProvider.

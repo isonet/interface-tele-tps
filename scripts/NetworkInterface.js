@@ -65,11 +65,10 @@ function NetworkInterface() {
 /**
  * Resizes and adapts the svg object to the parent element
  */
-NetworkInterface.prototype.resize = function() {
-    var container = $('#mainCanvas');
+NetworkInterface.prototype.resize = function(h, w) {
 
-    this.height = container.height();
-    this.width = container.width();
+    this.height = h || $('#mainCanvas').height();
+    this.width = w || $('#mainCanvas').width();
 
     d3.select('#mainSvg').attr('height', this.height).attr('width', this.width);
     if(this.dataset.node == undefined && this.dataset.links) {

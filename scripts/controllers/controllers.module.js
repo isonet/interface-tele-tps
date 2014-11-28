@@ -52,7 +52,13 @@
         $scope.change = function() {
             if($scope.cfgType.toLocaleLowerCase() === 'router') {
                 $('#inputForwarding').prop('disabled', false);
-                $scope.cfgForwarding = false;
+                $scope.cfgForwarding = $scope.cfgForwarding || false;
+            } else if($scope.cfgType.toLocaleLowerCase() === 'switch') {
+                //$('#inputIP').prop('disabled', false);
+                //$('#inputNetmask').prop('disabled', false);
+                //$('#inputGateway').prop('disabled', false);
+                //$scope.cfgIP = 'disabled';
+                console.log('disabled');
             } else {
                 $('#inputForwarding').prop('disabled', true);
                 $scope.cfgForwarding = false;
@@ -92,24 +98,18 @@
         };
     }]);
 
-    app.controller('TpEditCtrl', ['$scope', '$window', function($scope, $window) {
-        $window.resizeElements();
-        $window.ni = new NetworkInterface();
-        $window.onresize = function() {
-            resizeElements();
-            ni.resize();
-        };
-        ni.resize();
+    app.controller('TpEditCtrl', ['$scope', '$window', '$rootScope', function($scope, $window, $rootScope) {
+        $rootScope.ni = new NetworkInterface();
+        $rootScope.resize($rootScope);
     }]);
 
     app.controller('TpNewCtrl', ['$scope', '$window',
         function($scope, $window) {
-            $window.resizeElements();
-        }]);
+
+    }]);
 
     app.controller('TpListCtrl', ['$scope', '$http', '$window',
         function($scope, $http, $window) {
-            $window.resizeElements();
 
             $scope.contents = [];
 
