@@ -34,7 +34,6 @@ function NetworkInterface() {
         .attr('id', 'mainSvg')
         .attr('width', this.width)
         .attr('height', this.height)
-        .on('resize', console.log('nope'))
         .on('drop', function (d) {
             var name = d3.event.dataTransfer.getData('name');
             th.add(name, d3.mouse(this)[0], d3.mouse(this)[1]);
@@ -296,7 +295,7 @@ NetworkInterface.prototype.update = function() {
             angular.element($('#settingsForm')).scope().$apply();
             d3.event.preventDefault();
             d3.event.stopPropagation();
-            window.toggleSidebar(true, 'settings');
+            angular.element($('#settingsForm')).scope().toggleSidebar(true, 'settings');
         })
         .call(node_drag);
 
@@ -326,7 +325,7 @@ NetworkInterface.prototype.update = function() {
     th.svg.on('contextmenu', function() {
         th.hoverElement = null;
         d3.event.preventDefault();
-        window.toggleSidebar(true, 'components');
+        angular.element($('#settingsForm')).scope().toggleSidebar(true, 'components');
     });
 
 
@@ -380,7 +379,7 @@ NetworkInterface.prototype.update = function() {
                     startElement = th.hoverElement;
                     th.svg.on('mousemove', mousemove);
                 } else {
-                    window.toggleSidebar(false);
+                    angular.element($('#settingsForm')).scope().toggleSidebar(false);
                 }
 
             }

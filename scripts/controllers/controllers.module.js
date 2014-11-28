@@ -62,18 +62,45 @@
         $scope.init = function () {
             //
         };
+
+        // TODO Create a function showSidebar, hideSidebar and toggleSidebar
+        /**
+         * Current Sidebar status
+         * @type {boolean}
+         */
+        $scope.sidebarIsDisplayed = false;
+
+        /**
+         * Toggles the Sidebar in the Edit View
+         * @param b {boolean} true -> show panel, false -> hide panel
+         * @param panel {string} ['settings' -> show settings pane, '' -> show components pane]
+         */
+        $scope.toggleSidebar = function(b, panel) {
+            var position = !b ? -330 : -16;
+            $('#tpCreatorSideBar').stop().animate({
+                marginRight: position+"px"
+            },300);
+            if(b != $scope.sidebarIsDisplayed) {
+                $('#tpCreatorCanvas').find('.btn-fab').toggleClass('icon-material-add icon-material-close');
+                $scope.sidebarIsDisplayed = !$scope.sidebarIsDisplayed;
+            }
+            if(panel == 'settings') {
+                $('#settings-panel a').tab('show');
+            } else {
+                $('#components-panel a').tab('show');
+            }
+        };
     }]);
 
-    app.controller('TpEditCtrl', ['$scope', '$window',
-        function($scope, $window) {
-            $window.resizeElements();
-            $window.ni = new NetworkInterface();
-            $window.onresize = function() {
-                resizeElements();
-                ni.resize();
-            };
+    app.controller('TpEditCtrl', ['$scope', '$window', function($scope, $window) {
+        $window.resizeElements();
+        $window.ni = new NetworkInterface();
+        $window.onresize = function() {
+            resizeElements();
             ni.resize();
-        }]);
+        };
+        ni.resize();
+    }]);
 
     app.controller('TpNewCtrl', ['$scope', '$window',
         function($scope, $window) {
