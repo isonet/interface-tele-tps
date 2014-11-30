@@ -80,6 +80,7 @@ NetworkInterface.prototype.resize = function(h, w) {
  * Converts the svg to a canvas and generates a png file
  */
 NetworkInterface.prototype.downloadImage = function() {
+
     var html = d3.select('svg')
         .attr('version', 1.1)
         .attr('xmlns', 'http://www.w3.org/2000/svg')
@@ -90,13 +91,18 @@ NetworkInterface.prototype.downloadImage = function() {
     d3.select('#svgdataurl').html(img);
 
 
-    var canvas = document.querySelector('canvas'),
-        context = canvas.getContext('2d');
+    var canvas = document.querySelector('canvas');
+    canvas.height = this.height;
+    canvas.width = this.width;
+    var context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     var image = new Image;
     image.src = imgsrc;
+    var dlWindow = window.open('');
+    // TODO add name of TP
     image.onload = function() {
+        console.log(image);
         context.drawImage(image, 0, 0);
 
         var canvasdata = canvas.toDataURL('image/png');
@@ -104,11 +110,13 @@ NetworkInterface.prototype.downloadImage = function() {
         var pngimg = '<img src="'+canvasdata+'">';
         d3.select('#pngdataurl').html(pngimg);
 
-        var a = document.createElement('a');
-        // TODO add name of TP
-        a.download = 'topologie.png';
-        a.href = canvasdata;
-        a.click();
+        dlWindow.location = canvasdata;
+
+        // Only works in chrome
+        //var a = document.createElement('a');
+        //a.download = 'topologie.png';
+        //a.href = canvasdata;
+        //a.click();
     };
 
 };
