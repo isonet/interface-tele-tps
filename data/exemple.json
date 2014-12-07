@@ -1,0 +1,65 @@
+{
+    "descriptor" : "MesTeleTps_LearningExperimentDescription",
+    "version" : "1.0",
+    "author" : "Rémi Venant",
+    "experiment" : {
+        "name" : "Mon TP",
+        "description" : "La description de mon experience de TP",
+        "objectives" : "Les objectifs du TPs"
+    },
+    "resources": [
+        {
+            "type":"machine",
+            "function":"router",
+            "id":"router1",
+            "cpu":1,
+            "ram_size":"512M",
+            "free_space_size":"1024M",
+            "network_interfaces":[
+                {
+                    "endpoint":"net1",
+                    "ipv4_configuration":{
+                        "dhcp":false,
+                        "ip":"192.168.0.1",
+                        "network":"192.168.0.255",
+                        "netmask":"255.255.255.0",
+                        "gateway":"192.168.0.254"
+                    }
+                },
+                {
+                    "endpoint":"net2",
+                    "ipv4_configuration":{
+                        "dhcp":false
+                    }
+                }
+            ]
+        },
+        {
+            "type":"machine",
+            "function":"terminal",
+            "id":"machine1",
+            "cpu":1,
+            "ram_size":"512M",
+            "free_space_size":"1024M",
+            "network_interfaces":[
+                {
+                    "endpoint":"net1",
+                    "ipv4_configuration":{
+                        "dhcp":false
+                    }
+                }
+            ],
+            "extra_modules":[
+                "module1", "module2"
+            ]
+        },
+        {
+            "type":"switch",
+            "id":"net1"
+        },
+        {
+            "type":"switch",
+            "id":"net2"
+        }
+    ]
+}

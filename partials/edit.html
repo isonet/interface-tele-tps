@@ -3,10 +3,9 @@
         <div class="list-group">
 
             <div class="panel panel-default">
-                <div class="panel-heading" style="z-index: 10">
-                    Concepteur de TP | {{"&lt;nom du tp&gt;"}}
+                <div class="panel-heading" style="z-index: 10" ng-init="$root.ni.tp.getName()">
+                    Concepteur de TP | {{meta.experiment.name}}
                     <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" class="btn btn-fab btn-material-orange btn-raised icon-material-add" style="z-index: 50;"></a>
-
                 </div>
 
                 <div class="panel-body" id="conceptorCanvas" ng-style="{'height': $root.size.canvasHeight + 'px'}">
@@ -32,7 +31,7 @@
                                 <div class="list-group">
                                     <div class="list-group-item">
                                         <div class="row-picture">
-                                            <img class="circle" onclick="ni.add('pc')" src="assets/pc.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'pc'); })(event)">
+                                            <img class="circle" ng-click="$root.ni.add('terminal')" src="assets/pc.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'terminal'); })(event)">
                                         </div>
                                         <div class="row-content">
                                             <h4 class="list-group-item-heading">Ordinateur</h4>
@@ -40,7 +39,7 @@
                                     </div>
                                     <div class="list-group-item">
                                         <div class="row-picture">
-                                            <img class="circle" onclick="ni.add('router')" src="assets/router.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'router'); })(event)">
+                                            <img class="circle" ng-click="$root.ni.add('router')" src="assets/router.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'router'); })(event)">
                                         </div>
                                         <div class="row-content">
                                             <h4 class="list-group-item-heading">Router</h4>
@@ -48,7 +47,7 @@
                                     </div>
                                     <div class="list-group-item">
                                         <div class="row-picture">
-                                            <img class="circle" onclick="ni.add('switch')" src="assets/switch.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'switch'); })(event)">
+                                            <img class="circle" ng-click="$root.ni.add('switch')" src="assets/switch.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'switch'); })(event)">
                                         </div>
                                         <div class="row-content">
                                             <h4 class="list-group-item-heading">Switch</h4>
@@ -57,49 +56,52 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade custom-scrollbar" id="settings" ng-style="{'height': $root.size.paneHeight + 'px'}">
-                                <form class="form-horizontal" id="settingsForm" name="settings">
+                                <!-- Add ng-pattern validation -->
+                                <form class="form-horizontal" id="settingsForm" novalidate name="settings">
                                     <fieldset>
-                                        <legend>Legend</legend>
+                                        <legend>Configuration</legend>
                                         <div class="form-group">
-                                            <label for="inputName" class="col-lg-4 control-label">Name</label>
+                                            <label class="col-lg-4 control-label">ID</label>
                                             <div class="col-lg-8">
-                                                <input ng-model="cfgName" id="inputName" class="form-control">
-                                            </div>
-                                            <label for="inputType" class="col-lg-4 control-label">Type</label>
-                                            <div class="col-lg-8">
-                                                <select ng-model="cfgType" class="form-control" id="inputType" ng-change="change()">
-                                                    <option>PC</option>
-                                                    <option>Switch</option>
-                                                    <option>Router</option>
-                                                </select>
+                                                <input ng-model="node.id" class="form-control">
                                             </div>
                                         </div>
+                                    </fieldset>
+                                    <fieldset ng-show="node.type == 'machine'">
                                         <legend>Configuration Réseau</legend>
                                         <div class="form-group" bs-has-error>
-                                            <label for="inputIP" class="col-lg-4 control-label">IP</label>
+                                            <label class="col-lg-4 control-label">Interface</label>
                                             <div class="col-lg-8">
-                                                <input ng-model="cfgIP" name="ip" id="inputIP" class="form-control" ng-pattern="/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/">
+                                                <!-- Add option for new interface -->
+                                                <select ng-model="iface" ng-options="iface.endpoint for iface in node.network_interfaces" class="form-control"></select>
                                             </div>
-                                            <label for="inputNetmask" class="col-lg-4 control-label">Masque</label>
+
+                                        </div>
+                                        <div class="form-group" ng-show="iface" bs-has-error>
+                                            <!-- TODO ADD DHCP -->
+                                            <label class="col-lg-4 control-label">IP</label>
                                             <div class="col-lg-8">
-                                                <input ng-model="cfgNetmask" id="inputNetmask" class="form-control" ng-pattern="/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/">
+                                                <input ng-model="iface.ip" class="form-control">
                                             </div>
-                                            <label for="inputGateway" class="col-lg-4 control-label">Passerelle</label>
+                                            <label class="col-lg-4 control-label">Masque</label>
                                             <div class="col-lg-8">
-                                                <input ng-model="cfgGateway" id="inputGateway" class="form-control" ng-pattern="/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/">
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input ng-model="cfgForwarding" id="inputForwarding" type="checkbox"> IP Forwarding
-                                                    </label>
-                                                </div>
+                                                <input ng-model="iface.netmask" class="form-control">
+                                            </div>
+                                            <label class="col-lg-4 control-label">Passerelle</label>
+                                            <div class="col-lg-8">
+                                                <input ng-model="iface.gateway" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="form-group" ng-show="settings.$dirty">
+                                    </fieldset>
+                                    <fieldset>
+                                        <div class="form-group" ng-show="settings.$dirty" ng-hide="settings.$clean">
                                             <div class="col-lg-12">
-                                                <button ng-click="reset()" class="btn btn-default">Cancel</button>
+                                                <button ng-click="resetForm()" class="btn btn-default">Cancel</button>
                                                 <button ng-click="submit()" class="btn btn-primary">Save</button>
                                             </div>
                                         </div>
+                                        <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#delete-dialog" class="btn btn-default btn-fab btn-raised icon-material-delete" style="z-index: 50;"></a>
+
                                     </fieldset>
                                 </form>
                             </div>
@@ -109,8 +111,9 @@
 
                 <!-- TODO Change button size -->
                 <div class="panel-footer">
-                    <a href="javascript:void(0)" class="btn btn-flat btn-primary btn-xs" style="z-index: 50;">Download Config</a>
+                    <a href="javascript:void(0)" ng-click="$root.ni.downloadConfig()" class="btn btn-flat btn-primary btn-xs" style="z-index: 50;">Download Config</a>
                     <a href="javascript:void(0)" ng-click="$root.ni.downloadImage()" class="btn btn-flat btn-primary btn-xs" style="z-index: 50;">Download Image</a>
+                    <a href="javascript:void(0)" ng-click="$root.ni.downloadSvg()" class="btn btn-flat btn-primary btn-xs" style="z-index: 50;">Download Svg</a>
                 </div>
             </div>
 

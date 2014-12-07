@@ -8,35 +8,21 @@
     /**
      * Controller pour les settings
      */
-    app.controller('SettingsController', ['$scope', '$window', function($scope, $window) {
+    app.controller('SettingsController', ['$scope', '$rootScope', function($scope, $rootScope) {
 
-        var _data;
+        $scope.backup = undefined;
 
-        $scope.updateSettings = function(d) {
-            _data = d;
-            if(d !== undefined) {
-                $scope.cfgName = d.name;
-                $scope.cfgType = d.type;
-                $scope.cfgIP = d.ip;
-                $scope.cfgNetmask = d.netmask;
-                $scope.cfgGateway = d.gateway;
-                if(d.type.toLowerCase() === 'router') {
-                    $('#inputForwarding').prop('disabled', false);
-                    $scope.cfgForwarding = d.forwarding;
-                } else {
-                    $('#inputForwarding').prop('disabled', true);
-                    $scope.cfgForwarding = false;
-                }
-            }
-        };
+        $scope.types = [ "Switch", "Router", "Terminal" ];
+
+        var oldId;
 
         $scope.submit = function() {
-            $window.ni.editSettings($scope.cfgName,
-                                    $scope.cfgType,
-                                    $scope.cfgIP,
-                                    $scope.cfgNetmask,
-                                    $scope.cfgGateway,
-                                    $scope.cfgForwarding);
+
+            // TODO If id changed we need a redraw
+            oldId = $scope.node;
+            for(var k in $scope.node) $scope.backup[k] = $scope.node[k];
+
+            $scope.resetForm();
             var snack = {
                 content: 'Modifications enregistrées',
                 style: 'snackbar',
@@ -46,27 +32,24 @@
         };
 
         $scope.reset = function() {
-            $scope.updateSettings(_data);
+            $scope.backup = $rootScope.ni.getCurrentNode();
+            $scope.node = angular.copy($scope.backup);
+            $rootScope.nodeId = $scope.node.getId();
+            $scope.iface = $scope.node.network_interfaces[0];
         };
 
-        $scope.change = function() {
-            if($scope.cfgType.toLocaleLowerCase() === 'router') {
-                $('#inputForwarding').prop('disabled', false);
-                $scope.cfgForwarding = $scope.cfgForwarding || false;
-            } else if($scope.cfgType.toLocaleLowerCase() === 'switch') {
-                //$('#inputIP').prop('disabled', false);
-                //$('#inputNetmask').prop('disabled', false);
-                //$('#inputGateway').prop('disabled', false);
-                //$scope.cfgIP = 'disabled';
-                console.log('disabled');
-            } else {
-                $('#inputForwarding').prop('disabled', true);
-                $scope.cfgForwarding = false;
+        $scope.resetForm = function() {
+            $scope.node = angular.copy($scope.backup);
+            oldId = oldId || $scope.node.id;
+            if(oldId !== $scope.node.id) {
+                $rootScope.ni.update();
             }
+            $scope.iface = $scope.node.network_interfaces[0];
         };
 
-        $scope.init = function () {
-            //
+        $rootScope.deleteNode = function() {
+            $rootScope.ni.tp.deleteNodeById($rootScope.nodeId);
+            $rootScope.ni.update();
         };
 
         // TODO Create a function showSidebar, hideSidebar and toggleSidebar
