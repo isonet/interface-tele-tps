@@ -45,6 +45,7 @@
                 $rootScope.ni.update();
             }
             $scope.iface = $scope.node.network_interfaces[0];
+            $scope.settings.$setPristine();
         };
 
         // TODO Create a function showSidebar, hideSidebar and toggleSidebar
