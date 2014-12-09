@@ -55,6 +55,14 @@ TP.prototype.deleteNodeById = function(id) {
     }
 };
 
+TP.prototype.resetFixed = function() {
+    for(var i = 0; i < this.resources.length; i++) {
+        if (this.resources[i].fixed !== undefined) {
+            delete this.resources[i].fixed;
+        }
+    }
+};
+
 TP.prototype.getLinks = function() {
     var links = [];
     for(var i = 0; i < this.resources.length; i++){

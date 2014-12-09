@@ -57,6 +57,7 @@ NetworkInterface.prototype.resize = function(h, w) {
     d3.select('#mainSvg').attr('height', this.height).attr('width', this.width);
 
     if(this.tp !== undefined) {
+        this.tp.resetFixed();
         this.update();
     }
 };
