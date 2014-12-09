@@ -218,6 +218,10 @@ NetworkInterface.prototype.update = function() {
             th.currentElement = th.tp.getResourceByIndex(d.index);
             th.g.selectAll('image').style('filter', '');
             d3.select(this).style('filter', 'url(#dropshadow)');
+            th.g.selectAll('image').sort(function (a, b) {
+                if(a.id != d.id) return -1;
+                else return 1;
+            });
         })
         .on('click', function(d) {
             th.currentElement = th.tp.getResourceByIndex(d.index);
