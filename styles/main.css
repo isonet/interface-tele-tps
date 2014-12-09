@@ -143,6 +143,15 @@ svg text
     border-radius: 2px;
 }
 
+.panel-footer > a {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+#meta-dialog, #removal-dialog {
+    top: 25%;
+}
+
 /*    Overwrite Bootstrap     */
 .form-group.has-error2 .control-label, .form-group.has-error input.form-control:not(.empty)~.floating-label {
     color: #000 !important;
@@ -192,3 +201,4 @@ svg text
     background: rgba(0,0,0,0) !important;
     padding: 1px;
 }
+
