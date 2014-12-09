@@ -91,6 +91,7 @@ TP.prototype.toJson = function() {
         delete r.py;
         delete r.index;
         delete r.weight;
+        delete r.fixed;
     }
     return JSON.stringify(d, null, 2);
 };

@@ -9,7 +9,7 @@
     /**
      * Controller pour les settings
      */
-    app.controller('SettingsController', ['$scope', '$rootScope', '$compile', function($scope, $rootScope, $compile) {
+    app.controller('SettingsController', ['$scope', '$rootScope', function($scope, $rootScope) {
 
         $scope.backup = undefined;
 

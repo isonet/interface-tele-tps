@@ -3,12 +3,12 @@
     /**
      * Module Angular principal
      */
-
     var tpApp = angular.module('tpManager', [
         'ngRoute',
         'tpManager.controllers',
         'tpManager.directives',
-        'tpManager.filters'
+        'tpManager.filters',
+        'frapontillo.bootstrap-switch'
         //'tpManager.services'
     ]);
 

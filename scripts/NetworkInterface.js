@@ -22,6 +22,7 @@ function NetworkInterface() {
         .attr('width', this.width)
         .attr('height', this.height)
         .on('drop', function () {
+            d3.event.preventDefault();
             var name = d3.event.dataTransfer.getData('name');
             th.add(name, d3.mouse(this)[0], d3.mouse(this)[1]);
         })

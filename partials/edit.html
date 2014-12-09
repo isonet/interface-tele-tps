@@ -76,7 +76,15 @@
                                             </div>
 
                                         </div>
-                                        <div class="form-group" ng-show="iface" bs-has-error>
+                                        <div class="form-group" ng-show="iface" ng-hide="iface.dhcp == undefined">
+
+                                            <label class="col-lg-4 control-label">DHCP</label>
+                                            <div class="col-lg-8">
+                                                <input bs-switch ng-model="iface.dhcp" type="checkbox" switch-size="mini"> {{iface.dhcp}}
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group" ng-show="iface">
                                             <!-- TODO ADD DHCP -->
                                             <label class="col-lg-4 control-label">IP</label>
                                             <div class="col-lg-8">
@@ -93,7 +101,7 @@
                                         </div>
                                     </fieldset>
                                     <fieldset>
-                                        <div class="form-group" ng-show="settings.$dirty" ng-hide="settings.$clean">
+                                        <div class="form-group" ng-hide="settings.$pristine">
                                             <div class="col-lg-12">
                                                 <button ng-click="resetForm()" class="btn btn-default">Cancel</button>
                                                 <button ng-click="submit()" class="btn btn-primary">Save</button>
