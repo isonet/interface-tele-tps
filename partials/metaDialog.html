@@ -1,0 +1,47 @@
+<div id="meta-dialog" class="modal fade" tabindex="-1" ng-controller="MetaDialogController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Paramètres</h4>
+            </div>
+            <div class="modal-body">
+                <!-- TODO add form for meta settings -->
+                <form class="form-horizontal" id="metaForm" novalidate name="meta">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Nom</label>
+                            <div class="col-lg-8">
+                                <input ng-model="meta.experiment.name" class="form-control">
+                            </div>
+                            <label class="col-lg-4 control-label">Description</label>
+                            <div class="col-lg-8">
+                                <input ng-model="meta.experiment.description" class="form-control">
+                            </div>
+                            <label class="col-lg-4 control-label">Objectif</label>
+                            <div class="col-lg-8">
+                                <input ng-model="meta.experiment.objectives" class="form-control">
+                            </div>
+                            <label class="col-lg-4 control-label">Auteur</label>
+                            <div class="col-lg-8">
+                                <input ng-model="meta.author" class="form-control">
+                            </div>
+                            <label class="col-lg-4 control-label">Version</label>
+                            <div class="col-lg-8">
+                                <input ng-model="meta.version" class="form-control">
+                            </div>
+                            <label class="col-lg-4 control-label">Descriptor</label>
+                            <div class="col-lg-8">
+                                <input ng-model="meta.descriptor" class="form-control">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button ng-click="submit()" class="btn btn-flat btn-success" data-dismiss="modal">Enregistrer</button>
+                <button ng-click="resetForm()" class="btn btn-flat btn-primary" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,10 +5,11 @@
 
     var app = angular.module('tpManager.controllers', []);
 
+    // TODO Refactor into other file
     /**
      * Controller pour les settings
      */
-    app.controller('SettingsController', ['$scope', '$rootScope', function($scope, $rootScope) {
+    app.controller('SettingsController', ['$scope', '$rootScope', '$compile', function($scope, $rootScope, $compile) {
 
         $scope.backup = undefined;
 
@@ -18,7 +19,6 @@
 
         $scope.submit = function() {
 
-            // TODO If id changed we need a redraw
             oldId = $scope.node;
             for(var k in $scope.node) $scope.backup[k] = $scope.node[k];
 
@@ -34,7 +34,7 @@
         $scope.reset = function() {
             $scope.backup = $rootScope.ni.getCurrentNode();
             $scope.node = angular.copy($scope.backup);
-            $rootScope.nodeId = $scope.node.getId();
+            $rootScope.updateRemovalDialogController($scope.node.getId());
             $scope.iface = $scope.node.network_interfaces[0];
         };
 
@@ -45,11 +45,6 @@
                 $rootScope.ni.update();
             }
             $scope.iface = $scope.node.network_interfaces[0];
-        };
-
-        $rootScope.deleteNode = function() {
-            $rootScope.ni.tp.deleteNodeById($rootScope.nodeId);
-            $rootScope.ni.update();
         };
 
         // TODO Create a function showSidebar, hideSidebar and toggleSidebar
@@ -79,6 +74,56 @@
                 $('#components-panel a').tab('show');
             }
         };
+    }]);
+
+
+
+    app.controller('MetaDialogController', ['$scope', '$rootScope', function($scope, $rootScope) {
+
+        $scope.backup = undefined;
+
+        $scope.submit = function() {
+
+            for(var k in $scope.meta) $scope.backup[k] = $scope.meta[k];
+
+            $scope.resetForm();
+            var snack = {
+                content: 'Modifications enregistrées',
+                style: 'snackbar',
+                timeout: 3000
+            };
+            $.snackbar(snack);
+        };
+
+
+        $scope.reset = function() {
+
+            $scope.backup = $rootScope.ni.tp.getMeta();
+            $scope.meta = angular.copy($scope.backup);
+        };
+
+        $scope.resetForm = function() {
+            $scope.meta = angular.copy($scope.backup);
+        };
+
+        $rootScope.loadMetaDialogController = function() {
+            $scope.reset();
+        };
+
+    }]);
+
+    app.controller('RemovalDialogController', ['$scope', '$rootScope', function($scope, $rootScope) {
+
+        $scope.id = '';
+
+        $rootScope.updateRemovalDialogController = function(id) {
+            $scope.id = id;
+        };
+
+        $scope.deleteNode = function() {
+            $rootScope.ni.tp.deleteNodeById($scope.id);
+            $rootScope.ni.update();
+        }
     }]);
 
     app.controller('TpEditCtrl', ['$scope', '$window', '$rootScope', function($scope, $window, $rootScope) {

@@ -1,10 +1,9 @@
 <div class="col-lg-12" id="tpCreatorCanvas" ng-controller="SettingsController">
     <div class="bs-component">
         <div class="list-group">
-
             <div class="panel panel-default">
                 <div class="panel-heading" style="z-index: 10" ng-init="$root.ni.tp.getName()">
-                    Concepteur de TP | {{meta.experiment.name}}
+                    Concepteur de TP | {{meta.experiment.name}} <span ng-click="$root.loadMetaDialogController()" class="icon-material-create" style="cursor:pointer;" data-toggle="modal" data-target="#meta-dialog"></span>
                     <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" class="btn btn-fab btn-material-orange btn-raised icon-material-add" style="z-index: 50;"></a>
                 </div>
 
@@ -57,7 +56,7 @@
                             </div>
                             <div class="tab-pane fade custom-scrollbar" id="settings" ng-style="{'height': $root.size.paneHeight + 'px'}">
                                 <!-- Add ng-pattern validation -->
-                                <form class="form-horizontal" id="settingsForm" novalidate name="settings">
+                                <form class="form-horizontal" id="settingsForm" novalidate name="settings" ng-show="node">
                                     <fieldset>
                                         <legend>Configuration</legend>
                                         <div class="form-group">
@@ -100,7 +99,7 @@
                                                 <button ng-click="submit()" class="btn btn-primary">Save</button>
                                             </div>
                                         </div>
-                                        <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#delete-dialog" class="btn btn-default btn-fab btn-raised icon-material-delete" style="z-index: 50;"></a>
+                                        <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#removal-dialog" class="btn btn-default btn-fab icon-material-delete" style="z-index: 50;"></a>
 
                                     </fieldset>
                                 </form>
@@ -110,10 +109,10 @@
                 </div>
 
                 <!-- TODO Change button size -->
-                <div class="panel-footer">
-                    <a href="javascript:void(0)" ng-click="$root.ni.downloadConfig()" class="btn btn-flat btn-primary btn-xs" style="z-index: 50;">Download Config</a>
-                    <a href="javascript:void(0)" ng-click="$root.ni.downloadImage()" class="btn btn-flat btn-primary btn-xs" style="z-index: 50;">Download Image</a>
-                    <a href="javascript:void(0)" ng-click="$root.ni.downloadSvg()" class="btn btn-flat btn-primary btn-xs" style="z-index: 50;">Download Svg</a>
+                <div class="panel-footer clearfix">
+                    <a href="javascript:void(0)" ng-click="$root.ni.downloadConfig()" class="btn btn-flat btn-primary btn-xs pull-right" style="z-index: 50;">Download Config</a>
+                    <a href="javascript:void(0)" ng-click="$root.ni.downloadImage()" class="btn btn-flat btn-primary btn-xs pull-right" style="z-index: 50;">Download Image</a>
+                    <a href="javascript:void(0)" ng-click="$root.ni.downloadSvg()" class="btn btn-flat btn-primary btn-xs pull-right" style="z-index: 50;">Download Svg</a>
                 </div>
             </div>
 

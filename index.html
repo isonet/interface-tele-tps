@@ -39,42 +39,8 @@
 
     <!-- Début du corps du site -->
 	<body id="displayController" responsive>
-
-        <!-- Refactor into another partial -->
-        <div id="delete-dialog" class="modal fade" tabindex="-1" style="top: 25%; z-index: 1041;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Supprimer</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Êtes vous sur de vouloir supprimer <i>{{$root.nodeId}}</i> ?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button ng-click="$root.deleteNode()" class="btn btn-flat btn-warning" data-dismiss="modal">Oui</button>
-                        <button class="btn btn-flat btn-primary" data-dismiss="modal">Non</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="settings-dialog" class="modal fade" tabindex="-1" style="top: 25%; z-index: 1041;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Paramètres</h4>
-                    </div>
-                    <div class="modal-body">
-                        <!-- TODO add form for meta settings -->
-                    </div>
-                    <div class="modal-footer">
-                        <button ng-click="$root.deleteNode()" class="btn btn-flat btn-warning" data-dismiss="modal">Oui</button>
-                        <button class="btn btn-flat btn-primary" data-dismiss="modal">Non</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <ng-include src='"partials/metaDialog.html"'></ng-include>
+        <ng-include src='"partials/removalDialog.html"'></ng-include>
 
         <!-- Début de la barre de navigation principale -->
         <ng-include src='"partials/header.html"'></ng-include>
