@@ -21,7 +21,7 @@ function NetworkInterface() {
         .attr('id', 'mainSvg')
         .attr('width', this.width)
         .attr('height', this.height)
-        .on('drop', function (d) {
+        .on('drop', function () {
             var name = d3.event.dataTransfer.getData('name');
             th.add(name, d3.mouse(this)[0], d3.mouse(this)[1]);
         })
@@ -30,8 +30,8 @@ function NetworkInterface() {
         });
     this.g = this.svg.append('g');
 
-    $('#mainSvg').attr('xmlns:svg', 'http://www.w3.org/2000/svg');
-    $('#mainSvg').attr('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+    var jMainSvg = $('#mainSvg').attr('xmlns:svg', 'http://www.w3.org/2000/svg');
+    jMainSvg.attr('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 
     d3.json('data/exemple.json', function (error, json) {
         if (error) return console.warn(error);
@@ -39,8 +39,8 @@ function NetworkInterface() {
         th.update();
     });
 
-    $('#svgToPng').attr('height', this.height);
-    $('#svgToPng').attr('width', this.width);
+    var svgToPng = $('#svgToPng').attr('height', this.height);
+    svgToPng.attr('width', this.width);
 }
 
 /**
@@ -48,8 +48,10 @@ function NetworkInterface() {
  */
 NetworkInterface.prototype.resize = function(h, w) {
 
-    this.height = h || $('#mainCanvas').height();
-    this.width = w || $('#mainCanvas').width();
+    var jMainCanvas = $('#mainCanvas');
+
+    this.height = h || jMainCanvas.height();
+    this.width = w || jMainCanvas.width();
 
     d3.select('#mainSvg').attr('height', this.height).attr('width', this.width);
 
@@ -110,38 +112,18 @@ NetworkInterface.prototype.downloadConfig = function() {
 
 /**
  * Creates a new object
- * @param {string} type - (router, switch, pc)
+ * @param {string} t - (router, switch, pc)
  * @param {number} [x] - X Position
  * @param {number} [y] - Y Position
  */
-NetworkInterface.prototype.add = function(type, x, y) {
-    var func, name;
+NetworkInterface.prototype.add = function(t, x, y) {
 
-    // TODO Refactor : Add new constructor to Resource which only takes a common type like terminal, switch or router
-    // TODO and generates a name.
-    switch (type) {
-        case 'switch':
-            func = undefined;
-            name = type + (this.tp.getResourceSize() + 1);
-            break;
-        case 'router':
-            type = 'machine';
-            func = 'router';
-            name = func + (this.tp.getResourceSize() + 1);
-            break;
-        default:
-            type = 'machine';
-            func = 'terminal';
-            name = func + (this.tp.getResourceSize() + 1);
-            break;
-    }
-
-    var res = new Resource(type, name, func);
+    var type = Resource.typeBuilder(t, this.tp.getResourceSize());
+    var res = new Resource(type.type, type.name, type.func);
 
     if(x !== undefined && y !== undefined) {
         res.setPosition(x, y);
     }
-
     this.tp.addResource(res);
     this.update();
 };
@@ -194,29 +176,22 @@ NetworkInterface.prototype.update = function() {
         })
         .on('drag', function(d) {
             th.svg.on('mouseup', null);
-            // TODO Refactor d.px = d.x !!
             if (d3.event.x >= th.width) {
-                d.px = th.width;
                 d.x = th.width;
             } else if (d3.event.x <= 0) {
-                d.px =  0;
                 d.x = 0;
             } else {
-                d.px += d3.event.dx;
                 d.x += d3.event.dx;
             }
-
             if (d3.event.y >= th.height) {
-                d.py = th.height;
                 d.y = th.height;
             } else if (d3.event.y <= 0) {
-                d.py =  0;
                 d.y = 0;
             } else {
-                d.py += d3.event.dy;
                 d.y += d3.event.dy;
             }
-
+            d.px = d.x;
+            d.py = d.y;
             tick();
         });
 
@@ -253,12 +228,13 @@ NetworkInterface.prototype.update = function() {
         .on('mouseleave', function() {
             th.hoverElement = null;
         })
-        .on('contextmenu',function (d) {
+        .on('contextmenu',function () {
             d3.event.preventDefault();
             d3.event.stopPropagation();
-            angular.element($('#tpCreatorCanvas')).scope().toggleSidebar(true, 'settings');
-            angular.element($('#tpCreatorCanvas')).scope().reset();
-            angular.element($('#tpCreatorCanvas')).scope().$apply();
+            var jTpCreatorCanvas = $('#tpCreatorCanvas');
+            angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, 'settings');
+            angular.element(jTpCreatorCanvas).scope().reset();
+            angular.element(jTpCreatorCanvas).scope().$apply();
         })
         .call(node_drag);
 

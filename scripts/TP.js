@@ -70,13 +70,6 @@ TP.prototype.getResourceSize = function() {
     return this.resources.length;
 };
 
-
-
-/**
- *
- *
- * @param {Resource} res
- */
 TP.prototype.addResource = function(res) {
 
     this.resources.push(res);
@@ -84,10 +77,6 @@ TP.prototype.addResource = function(res) {
 
 TP.prototype.getResourceByIndex = function (index) {
     return this.resources[index];
-};
-
-TP.prototype.setResourceByIndex = function (index, res) {
-    this.resources[index] = res;
 };
 
 TP.prototype.toJson = function() {

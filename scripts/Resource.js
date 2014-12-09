@@ -31,6 +31,24 @@ function Resource(type, id, func, cpu, ram_size, free_space_size, iface) {
     }
 }
 
+// Static Method
+Resource.typeBuilder = function (type, resourceSize) {
+    var r = { "type" : type, "func" : undefined, "name" : type + (resourceSize + 1) };
+    switch (type) {
+        case 'router':
+            r.type = 'machine';
+            r.func = 'router';
+            r.name = r.func + (resourceSize + 1);
+            break;
+        default:
+            r.type = 'machine';
+            r.func = 'terminal';
+            r.name = r.func + (resourceSize + 1);
+            break;
+    }
+    return r;
+};
+
 Resource.prototype.getInterfaces = function() {
     return this.network_interfaces;
 };
