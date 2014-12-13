@@ -38,12 +38,8 @@
                     templateUrl: 'partials/new.html',
                     controller: 'TpNewCtrl'
                 }).
-                when('/list', {
-                    templateUrl: 'partials/list.html',
-                    controller: 'TpListCtrl'
-                }).
                 otherwise({
-                    redirectTo: '/list'
+                    redirectTo: '/new'
                 });
         }]);
 

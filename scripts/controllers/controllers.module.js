@@ -137,28 +137,4 @@
 
     }]);
 
-    app.controller('TpListCtrl', ['$scope', '$http', '$window',
-        function($scope, $http, $window) {
-
-            $scope.contents = [];
-
-            $scope.get = function (url) {
-                var http_get = $http.get(url);
-                http_get.success(function (data) {
-                    $scope.contents = data;
-                });
-                http_get.error(function () {
-                    var link = '<a href="javascript:void(0)" style="text-decoration: none; color: #FFC400; padding-left: 10px;">Réessayer</a>';
-                    var op = {
-                        content: 'Erreur de chargement de la liste des TPs ! ' + link,
-                        style: 'snackbar',
-                        timeout: 10000
-                    };
-                    $.snackbar(op);
-                })
-            };
-
-            $scope.get('data/tpList.json');
-        }]);
-
 }());
