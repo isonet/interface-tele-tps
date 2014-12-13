@@ -5,7 +5,9 @@
     "experiment" : {
         "name" : "Mon TP",
         "description" : "La description de mon experience de TP",
-        "objectives" : "Les objectifs du TPs"
+        "objectives" : "Les objectifs du TPs",
+        "starting_date" : "201501100000",
+        "ending_date" : "201501200000",
     },
     "resources": [
         {

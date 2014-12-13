@@ -38,11 +38,6 @@ function NetworkInterface(newMeta) {
     var jMainSvg = $('#mainSvg').attr('xmlns:svg', 'http://www.w3.org/2000/svg');
     jMainSvg.attr('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 
-    //d3.json('data/exemple.json', function (error, json) {
-    //    if (error) return console.warn(error);
-    //    th.tp = new TP(json);
-    //    th.update();
-    //});
     th.tp = new TP(newMeta);
 
     var svgToPng = $('#svgToPng').attr('height', this.height);
