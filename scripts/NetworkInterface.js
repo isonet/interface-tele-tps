@@ -23,16 +23,6 @@ function NetworkInterface(newMeta) {
         .attr('id', 'mainSvg')
         .attr('width', this.width)
         .attr('height', this.height)
-        .on('drop', function () {
-            d3.event.preventDefault();
-            var name = d3.event.dataTransfer.getData('name');
-            if(name.length > 0) {
-                th.add(name, d3.mouse(this)[0], d3.mouse(this)[1]);
-            }
-        })
-        .on('dragover', function () {
-            d3.event.preventDefault();
-        });
     this.g = this.svg.append('g');
 
     var jMainSvg = $('#mainSvg').attr('xmlns:svg', 'http://www.w3.org/2000/svg');
@@ -114,18 +104,12 @@ NetworkInterface.prototype.downloadConfig = function() {
 
 /**
  * Creates a new object
- * @param {string} t - (router, switch, pc)
- * @param {number} [x] - X Position
- * @param {number} [y] - Y Position
+ * @param {string} t - Type
+ * @param {string} n - Name
+ * @param {string} f - Function
  */
-NetworkInterface.prototype.add = function(t, x, y) {
-
-    var type = Resource.typeBuilder(t, this.tp.getResourceSize());
-    var res = new Resource(type.type, type.name, type.func);
-
-    if(x !== undefined && y !== undefined) {
-        res.setPosition(x, y);
-    }
+NetworkInterface.prototype.add = function(t, n, f) {
+    var res = new Resource(t,  n + (this.tp.getResourceSize() + 1), f);
     this.tp.addResource(res);
     this.update();
 };

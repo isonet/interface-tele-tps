@@ -28,28 +28,12 @@
                             <div class="tab-pane fade active in custom-scrollbar" id="components" ng-style="{'height': $root.size.paneHeight + 'px'}">
                                 <!-- TODO Replace this mess with something from bootstrap/minimal -->
                                 <div class="list-group">
-                                    <div class="list-group-item">
+                                    <div class="list-group-item" ng-repeat="no in networkObjectList">
                                         <div class="row-picture">
-                                            <img class="circle" ng-click="$root.ni.add('terminal')" src="assets/pc.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'terminal'); })(event)">
+                                            <img class="circle" ng-click="$root.ni.add(no.type, no.name, no.function)" ng-src="{{no.image}}">
                                         </div>
                                         <div class="row-content">
-                                            <h4 class="list-group-item-heading">Ordinateur</h4>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="row-picture">
-                                            <img class="circle" ng-click="$root.ni.add('router')" src="assets/router.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'router'); })(event)">
-                                        </div>
-                                        <div class="row-content">
-                                            <h4 class="list-group-item-heading">Router</h4>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="row-picture">
-                                            <img class="circle" ng-click="$root.ni.add('switch')" src="assets/switch.png" draggable="true" ondragstart="(function(ev){ ev.dataTransfer.setData('name', 'switch'); })(event)">
-                                        </div>
-                                        <div class="row-content">
-                                            <h4 class="list-group-item-heading">Switch</h4>
+                                            <h4 class="list-group-item-heading">{{no.name}}</h4>
                                         </div>
                                     </div>
                                 </div>

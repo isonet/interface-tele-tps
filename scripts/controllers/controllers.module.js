@@ -18,9 +18,12 @@
         $rootScope.ni = new NetworkInterface($rootScope.meta);
         $rootScope.resize($rootScope);
 
-        $scope.backup = undefined;
+        $.getJSON('config.json', function(data) {
+            $scope.networkObjectList = data;
+            $scope.$apply();
+        });
 
-        $scope.types = [ "Switch", "Router", "Terminal" ];
+        $scope.backup = undefined;
 
         var oldId;
 

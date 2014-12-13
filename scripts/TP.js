@@ -94,6 +94,9 @@ TP.prototype.toJson = function() {
         delete r.index;
         delete r.weight;
         delete r.fixed;
+        if(r.type === 'switch') {
+            delete r.function;
+        }
     }
     return JSON.stringify(d, null, 2);
 };
