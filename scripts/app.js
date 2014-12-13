@@ -6,8 +6,8 @@
     var tpApp = angular.module('tpManager', [
         'ngRoute',
         'tpManager.controllers',
-        'tpManager.directives',
-        'tpManager.filters'
+        'tpManager.directives'
+        //'tpManager.filters'
         //'tpManager.services'
     ]);
 
