@@ -276,8 +276,9 @@ NetworkInterface.prototype.update = function() {
 
     function mouseup() {
         if(((new Date).getTime() - th.timeSinceLastClick) <= 250) {
+            th.svg.on('mousemove', null);
             d3.event.preventDefault();
-            d3.event.stopPropagation();
+            //d3.event.stopPropagation();
             toggle = false;
             th.g.selectAll('.tempLine').remove();
             $('.tempLine').remove();
