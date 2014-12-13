@@ -309,14 +309,17 @@ NetworkInterface.prototype.update = function() {
                     if (th.hoverElement !== null && th.hoverElement !== undefined) {
                         line.attr('class', 'line');
                         try {
-                            // TODO Refactor, it's ugly as hell
                             var startpoint = startElement;
                             var endpoint = th.hoverElement;
-                            if (startpoint.getType() === 'switch') {
-                                startpoint = th.hoverElement;
-                                endpoint = startElement;
+                            if (startpoint.getType() !== 'switch') {
+                                startpoint.addInterface(new Interface(endpoint.getId(), true));
                             }
-                            startpoint.addInterface(new Interface(endpoint.getId(), true));
+                            if (endpoint.getType() !== 'switch') {
+                                endpoint.addInterface(new Interface(startpoint.getId(), true));
+                            }
+                            var jTpCreatorCanvas = $('#tpCreatorCanvas');
+                            angular.element(jTpCreatorCanvas).scope().reset();
+                            angular.element(jTpCreatorCanvas).scope().$apply();
                             th.update();
                         } catch (ex) {
                             th.g.selectAll('.tempLine').remove();
