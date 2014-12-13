@@ -10,7 +10,7 @@
  * @param {number} [cpu] - Number of processors
  * @param {string} [ram_size] - Amount of virtual memory
  * @param {string} [free_space_size] - Free disk space
- * @param {Interface} [network_interfaces] - Array of Network Interfaces
+ * @param {Array} [iface] - Array of Network Interfaces
  */
 function Resource(type, id, func, cpu, ram_size, free_space_size, iface) {
     if(type === undefined || id === undefined) {

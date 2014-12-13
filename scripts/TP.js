@@ -15,8 +15,9 @@ function TP(json) {
         var r = json['resources'][i];
         this.resources.push(new Resource(r.type, r.id, r.function, r.cpu, r.ram_size, r.free_space_size, r.network_interfaces));
     }
-    angular.element($('#tpCreatorCanvas')).scope().meta = this.meta;
-    angular.element($('#tpCreatorCanvas')).scope().$apply();
+    var tpCreatorCanvas = $('#tpCreatorCanvas');
+    angular.element(tpCreatorCanvas).scope().meta = this.meta;
+    angular.element(tpCreatorCanvas).scope().$apply();
 }
 
 TP.prototype.getMeta = function() {

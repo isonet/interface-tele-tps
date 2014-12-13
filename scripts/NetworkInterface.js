@@ -14,6 +14,8 @@ function NetworkInterface() {
     this.height = container.height();
     this.tp = undefined;
 
+    this.timeSinceLastClick = 1000;
+
     container.empty();
     var th = this;
 
@@ -273,48 +275,58 @@ NetworkInterface.prototype.update = function() {
 
 
     function mouseup() {
-        // Only create a new edge if left mousebutton is pressed
-        if(d3.event.button === 0) {
-            var m = d3.mouse(this);
-            line = th.g.append('line')
-                .attr('class', 'tempLine')
-                .attr('x1', m[0])
-                .attr('y1', m[1])
-                .attr('x2', m[0])
-                .attr('y2', m[1])
-                .style('stroke', '#0f9d58')
-                .style('stroke-width', 1);
+        if(((new Date).getTime() - th.timeSinceLastClick) <= 250) {
+            th.g.selectAll('.tempLine').remove();
+            $('.tempLine').remove();
+            var jTpCreatorCanvas = $('#tpCreatorCanvas');
+            angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, 'settings');
+            angular.element(jTpCreatorCanvas).scope().reset();
+            angular.element(jTpCreatorCanvas).scope().$apply();
+        } else {
+            th.timeSinceLastClick = (new Date).getTime();
+            // Only create a new edge if left mousebutton is pressed
+            if (d3.event.button === 0) {
+                var m = d3.mouse(this);
+                line = th.g.append('line')
+                    .attr('class', 'tempLine')
+                    .attr('x1', m[0])
+                    .attr('y1', m[1])
+                    .attr('x2', m[0])
+                    .attr('y2', m[1])
+                    .style('stroke', '#0f9d58')
+                    .style('stroke-width', 1);
 
-            if (toggle) {
-                toggle = false;
-                th.svg.on('mousemove', null);
-                if (th.hoverElement !== null && th.hoverElement !== undefined) {
-                    line.attr('class', 'line');
-                    try {
-                        // TODO Refactor, it's ugly as hell
-                        var startpoint = startElement;
-                        var endpoint = th.hoverElement;
-                        if(startpoint.getType() === 'switch') {
-                            startpoint = th.hoverElement;
-                            endpoint = startElement;
+                if (toggle) {
+                    toggle = false;
+                    th.svg.on('mousemove', null);
+                    if (th.hoverElement !== null && th.hoverElement !== undefined) {
+                        line.attr('class', 'line');
+                        try {
+                            // TODO Refactor, it's ugly as hell
+                            var startpoint = startElement;
+                            var endpoint = th.hoverElement;
+                            if (startpoint.getType() === 'switch') {
+                                startpoint = th.hoverElement;
+                                endpoint = startElement;
+                            }
+                            startpoint.addInterface(new Interface(endpoint.getId(), true));
+                            th.update();
+                        } catch (ex) {
+                            th.g.selectAll('.tempLine').remove();
+                            $('.tempLine').remove();
                         }
-                        startpoint.addInterface(new Interface(endpoint.getId(), true));
-                        th.update();
-                    } catch(ex) {
+                    } else {
                         th.g.selectAll('.tempLine').remove();
                         $('.tempLine').remove();
                     }
                 } else {
-                    th.g.selectAll('.tempLine').remove();
-                    $('.tempLine').remove();
-                }
-            } else {
-                if (th.hoverElement !== null) {
-                    toggle = true;
-                    startElement = th.hoverElement;
-                    th.svg.on('mousemove', mousemove);
-                } else {
-                    angular.element($('#settingsForm')).scope().toggleSidebar(false);
+                    if (th.hoverElement !== null) {
+                        toggle = true;
+                        startElement = th.hoverElement;
+                        th.svg.on('mousemove', mousemove);
+                    } else {
+                        angular.element($('#settingsForm')).scope().toggleSidebar(false);
+                    }
                 }
             }
         }
