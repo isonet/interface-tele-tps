@@ -276,6 +276,7 @@ NetworkInterface.prototype.update = function() {
 
     function mouseup() {
         if(((new Date).getTime() - th.timeSinceLastClick) <= 250) {
+            toggle = false;
             th.g.selectAll('.tempLine').remove();
             $('.tempLine').remove();
             var jTpCreatorCanvas = $('#tpCreatorCanvas');
