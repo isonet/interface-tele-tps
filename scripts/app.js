@@ -7,8 +7,7 @@
         'ngRoute',
         'tpManager.controllers',
         'tpManager.directives',
-        'tpManager.filters',
-        'frapontillo.bootstrap-switch'
+        'tpManager.filters'
         //'tpManager.services'
     ]);
 

@@ -79,12 +79,12 @@
                                         <div class="form-group" ng-show="iface" ng-hide="iface.dhcp == undefined">
 
                                             <label class="col-lg-4 control-label">DHCP</label>
-                                            <div class="col-lg-8">
-                                                <input bs-switch ng-model="iface.dhcp" type="checkbox" switch-size="mini"> {{iface.dhcp}}
+                                            <div class="col-lg-8" style="line-height: 27px;">
+                                                <input ng-model="iface.dhcp" type="checkbox">
                                             </div>
 
                                         </div>
-                                        <div class="form-group" ng-show="iface">
+                                        <div class="form-group" ng-show="iface.dhcp  == false" ng-hide="iface.dhcp == undefined">
                                             <!-- TODO ADD DHCP -->
                                             <label class="col-lg-4 control-label">IP</label>
                                             <div class="col-lg-8">
