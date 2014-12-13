@@ -40,7 +40,7 @@ Resource.typeBuilder = function (type, resourceSize) {
             r.func = 'router';
             r.name = r.func + (resourceSize + 1);
             break;
-        default:
+        case 'terminal':
             r.type = 'machine';
             r.func = 'terminal';
             r.name = r.func + (resourceSize + 1);

@@ -2,8 +2,8 @@
     <div class="bs-component">
         <div class="list-group">
             <div class="panel panel-default">
-                <div class="panel-heading" style="z-index: 10" ng-init="$root.ni.tp.getName()">
-                    Concepteur de TP | {{meta.experiment.name}} <span ng-click="$root.loadMetaDialogController()" class="icon-material-create" style="cursor:pointer;" data-toggle="modal" data-target="#meta-dialog"></span>
+                <div class="panel-heading" style="z-index: 10">
+                    Concepteur de TP | {{$root.meta.experiment.name}} <span ng-click="$root.loadMetaDialogController()" class="icon-material-create" style="cursor:pointer;" data-toggle="modal" data-target="#meta-dialog"></span>
                     <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" class="btn btn-fab btn-material-orange btn-raised icon-material-add" style="z-index: 50;"></a>
                 </div>
 
@@ -84,7 +84,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="form-group" ng-show="iface.dhcp  == false" ng-hide="iface.dhcp == undefined">
+                                        <div class="form-group" ng-show="iface.dhcp  == false" ng-hide="iface.dhcp !== false">
                                             <!-- TODO ADD DHCP -->
                                             <label class="col-lg-4 control-label">IP</label>
                                             <div class="col-lg-8">

@@ -6,7 +6,8 @@
     var tpApp = angular.module('tpManager', [
         'ngRoute',
         'tpManager.controllers',
-        'tpManager.directives'
+        'tpManager.directives',
+        'ngStorage'
         //'tpManager.filters'
         //'tpManager.services'
     ]);
@@ -30,12 +31,10 @@
         function($routeProvider) {
             $routeProvider.
                 when('/edit', {
-                    templateUrl: 'partials/edit.html',
-                    controller: 'TpEditCtrl'
+                    templateUrl: 'partials/edit.html'
                 }).
                 when('/new', {
-                    templateUrl: 'partials/new.html',
-                    controller: 'TpNewCtrl'
+                    templateUrl: 'partials/new.html'
                 }).
                 otherwise({
                     redirectTo: '/new'

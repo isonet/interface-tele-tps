@@ -9,7 +9,14 @@
     /**
      * Controller pour les settings
      */
-    app.controller('SettingsController', ['$scope', '$rootScope', function($scope, $rootScope) {
+    app.controller('SettingsController', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
+
+        if($rootScope.meta === undefined) {
+            $location.path('/new');
+        }
+
+        $rootScope.ni = new NetworkInterface($rootScope.meta);
+        $rootScope.resize($rootScope);
 
         $scope.backup = undefined;
 
@@ -55,6 +62,8 @@
          */
         $scope.sidebarIsDisplayed = false;
 
+
+
         /**
          * Toggles the Sidebar in the Edit View
          * @param b {boolean} true -> show panel, false -> hide panel
@@ -75,6 +84,7 @@
                 $('#components-panel a').tab('show');
             }
         };
+        $scope.toggleSidebar(true, '');
     }]);
 
 
@@ -99,7 +109,7 @@
 
         $scope.reset = function() {
 
-            $scope.backup = $rootScope.ni.tp.getMeta();
+            $scope.backup = $rootScope.meta;
             $scope.meta = angular.copy($scope.backup);
         };
 
@@ -127,13 +137,18 @@
         }
     }]);
 
-    app.controller('TpEditCtrl', ['$scope', '$window', '$rootScope', function($scope, $window, $rootScope) {
-        $rootScope.ni = new NetworkInterface();
-        $rootScope.resize($rootScope);
-    }]);
+    app.controller('NewTpController', ['$scope', '$rootScope', '$location', '$sessionStorage', function($scope, $rootScope, $location, $sessionStorage) {
 
-    app.controller('TpNewCtrl', ['$scope', '$window',
-        function($scope, $window) {
+        $rootScope.meta = $sessionStorage;
+
+        $scope.submit = function() {
+            $rootScope.meta = $scope.meta;
+            $location.path('/edit');
+        };
+
+        $scope.resetForm = function() {
+            $scope.meta = undefined
+        };
 
     }]);
 

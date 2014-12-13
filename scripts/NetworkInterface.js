@@ -3,7 +3,7 @@
 /**
  * Class Constructor
  */
-function NetworkInterface() {
+function NetworkInterface(newMeta) {
 
     this.currentElement = undefined;
     this.hoverElement = undefined;
@@ -38,11 +38,12 @@ function NetworkInterface() {
     var jMainSvg = $('#mainSvg').attr('xmlns:svg', 'http://www.w3.org/2000/svg');
     jMainSvg.attr('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 
-    d3.json('data/exemple.json', function (error, json) {
-        if (error) return console.warn(error);
-        th.tp = new TP(json);
-        th.update();
-    });
+    //d3.json('data/exemple.json', function (error, json) {
+    //    if (error) return console.warn(error);
+    //    th.tp = new TP(json);
+    //    th.update();
+    //});
+    th.tp = new TP(newMeta);
 
     var svgToPng = $('#svgToPng').attr('height', this.height);
     svgToPng.attr('width', this.width);
@@ -113,7 +114,7 @@ NetworkInterface.prototype.downloadSvg = function() {
 
 NetworkInterface.prototype.downloadConfig = function() {
     var blob = new Blob([this.tp.toJson()], {type: 'text/json;charset=utf-8'});
-    saveAs(blob, this.tp.getMeta()['experiment']['name'] + '.json');
+    saveAs(blob, this.tp.getName() + '.json');
 };
 
 /**

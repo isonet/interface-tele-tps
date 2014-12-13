@@ -7,17 +7,9 @@
  * @param {Object} json
  * @constructor
  */
-function TP(json) {
-    this.meta = angular.copy(json);
-    delete this.meta['resources'];
+function TP(newMeta) {
+    this.meta = newMeta;
     this.resources = [];
-    for(var i = 0; i < json['resources'].length; i++) {
-        var r = json['resources'][i];
-        this.resources.push(new Resource(r.type, r.id, r.function, r.cpu, r.ram_size, r.free_space_size, r.network_interfaces));
-    }
-    var tpCreatorCanvas = $('#tpCreatorCanvas');
-    angular.element(tpCreatorCanvas).scope().meta = this.meta;
-    angular.element(tpCreatorCanvas).scope().$apply();
 }
 
 TP.prototype.getMeta = function() {
@@ -25,8 +17,7 @@ TP.prototype.getMeta = function() {
 };
 
 TP.prototype.getName = function() {
-    console.log('name');
-    return this.meta['experiment']['name'];
+    return this.meta.experiment.name;
 };
 
 TP.prototype.getNodes = function() {
@@ -91,6 +82,8 @@ TP.prototype.getResourceByIndex = function (index) {
 TP.prototype.toJson = function() {
 
     var d = angular.copy(this.meta);
+    d.descriptor = 'MesTeleTps_LearningExperimentDescription';
+    d.version = "1.0";
     d.resources = angular.copy(this.resources);
     for(var res in d.resources) {
         var r = d.resources[res];
