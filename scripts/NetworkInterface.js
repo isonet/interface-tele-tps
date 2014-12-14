@@ -273,11 +273,11 @@ NetworkInterface.prototype.update = function() {
             var jTpCreatorCanvas = $('#tpCreatorCanvas');
             if (th.hoverElement !== null) {
                 angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, 'settings');
+                angular.element(jTpCreatorCanvas).scope().reset();
+                angular.element(jTpCreatorCanvas).scope().$apply();
             } else {
                 angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, '');
             }
-            angular.element(jTpCreatorCanvas).scope().reset();
-            angular.element(jTpCreatorCanvas).scope().$apply();
         } else {
             th.timeSinceLastClick = (new Date).getTime();
             // Only create a new edge if left mousebutton is pressed
