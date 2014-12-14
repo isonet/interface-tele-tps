@@ -114,8 +114,8 @@ NetworkInterface.prototype.downloadConfig = function() {
  * @param {string} n - Name
  * @param {string} f - Function
  */
-NetworkInterface.prototype.add = function(t, n, f) {
-    var res = new Resource(t,  n + (this.tp.getResourceSize() + 1), f);
+NetworkInterface.prototype.add = function(t, n, f, i) {
+    var res = new Resource(t,  n + (this.tp.getResourceSize() + 1), f, i);
     this.tp.addResource(res);
     this.update();
 };
@@ -204,7 +204,9 @@ NetworkInterface.prototype.update = function() {
         .append('image')
         .attr('width', 50)
         .attr('height', 50)
-        .attr('xlink:href',function(d) { return th.networkObjectList[d.getNetworkObjectIndex()].image; })
+        .attr('xlink:href',function(d) {
+            return th.networkObjectList[d.getNetworkObjectIndex()].image;
+        })
         .on('mousedown', function(d) {
             th.currentElement = th.tp.getResourceByIndex(d.index);
             th.g.selectAll('image').style('filter', '');

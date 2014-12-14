@@ -18,7 +18,7 @@ function Resource(type, id, func, index, cpu, ram_size, free_space_size, iface) 
     this.type = type;
     this.function = func;
     this.id = id;
-    this.index = index;
+    this.networkObjectIndex = index;
     this.cpu = cpu;
     this.ram_size = ram_size;
     this.free_space_size = free_space_size;
@@ -59,7 +59,7 @@ Resource.prototype.getType = function() {
 };
 
 Resource.prototype.getNetworkObjectIndex = function() {
-    return this.index;
+    return this.networkObjectIndex;
 };
 
 /**

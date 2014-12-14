@@ -94,6 +94,7 @@ TP.prototype.toJson = function() {
         delete r.index;
         delete r.weight;
         delete r.fixed;
+        delete r.networkObjectIndex;
         if(r.type === 'switch') {
             delete r.function;
         }
