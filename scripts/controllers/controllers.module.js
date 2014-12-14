@@ -19,6 +19,9 @@
         $rootScope.resize($rootScope);
 
         $.getJSON('config.json', function(data) {
+            for(var i = 0; i < data.length; i++) {
+                data[i].index = i;
+            }
             $scope.networkObjectList = data;
             $scope.$apply();
         });
@@ -150,7 +153,10 @@
         };
 
         $scope.resetForm = function() {
-            $scope.meta = undefined
+            $scope.meta = undefined;
+            $rootScope.meta = undefined;
+            delete $sessionStorage.experiment;
+            delete $sessionStorage.author;
         };
 
     }]);

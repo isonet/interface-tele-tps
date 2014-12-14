@@ -8,6 +8,8 @@ function NetworkInterface(newMeta) {
     this.currentElement = undefined;
     this.hoverElement = undefined;
 
+
+
     var container = $('#mainCanvas');
 
     this.width = container.width();
@@ -19,10 +21,14 @@ function NetworkInterface(newMeta) {
     container.empty();
     var th = this;
 
+    $.getJSON('config.json', function(data) {
+        th.networkObjectList = data;
+    });
+
     this.svg = d3.select('#mainCanvas').append('svg')
         .attr('id', 'mainSvg')
         .attr('width', this.width)
-        .attr('height', this.height)
+        .attr('height', this.height);
     this.g = this.svg.append('g');
 
     var jMainSvg = $('#mainSvg').attr('xmlns:svg', 'http://www.w3.org/2000/svg');
@@ -198,7 +204,7 @@ NetworkInterface.prototype.update = function() {
         .append('image')
         .attr('width', 50)
         .attr('height', 50)
-        .attr('xlink:href',function(d) { return d.getImageUrl(); })
+        .attr('xlink:href',function(d) { return th.networkObjectList[d.getNetworkObjectIndex()].image; })
         .on('mousedown', function(d) {
             th.currentElement = th.tp.getResourceByIndex(d.index);
             th.g.selectAll('image').style('filter', '');
@@ -265,7 +271,11 @@ NetworkInterface.prototype.update = function() {
             th.g.selectAll('.tempLine').remove();
             $('.tempLine').remove();
             var jTpCreatorCanvas = $('#tpCreatorCanvas');
-            angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, 'settings');
+            if (th.hoverElement !== null) {
+                angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, 'settings');
+            } else {
+                angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, '');
+            }
             angular.element(jTpCreatorCanvas).scope().reset();
             angular.element(jTpCreatorCanvas).scope().$apply();
         } else {

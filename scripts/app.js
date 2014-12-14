@@ -24,7 +24,7 @@
             if($rootScope.ni !== undefined) {
                 $rootScope.ni.resize($rootScope.size.canvasHeight, $rootScope.size.canvasWidth);
             }
-        }
+        };
     }]);
 
     tpApp.config(['$routeProvider',

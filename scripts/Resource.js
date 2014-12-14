@@ -1,24 +1,24 @@
 'use strict';
 
-// TODO Make type and func an enum
-// TODO Verify that id is unique
 /**
  *
  * @param {string} type -
  * @param {string} id - Unique Id
  * @param {string} [func] -
+ * @param {number} [index] -
  * @param {number} [cpu] - Number of processors
  * @param {string} [ram_size] - Amount of virtual memory
  * @param {string} [free_space_size] - Free disk space
  * @param {Array} [iface] - Array of Network Interfaces
  */
-function Resource(type, id, func, cpu, ram_size, free_space_size, iface) {
+function Resource(type, id, func, index, cpu, ram_size, free_space_size, iface) {
     if(type === undefined || id === undefined) {
         throw { name: 'ArgumentError', message: 'Type and id are required!' };
     }
     this.type = type;
     this.function = func;
     this.id = id;
+    this.index = index;
     this.cpu = cpu;
     this.ram_size = ram_size;
     this.free_space_size = free_space_size;
@@ -58,12 +58,8 @@ Resource.prototype.getType = function() {
     return this.type;
 };
 
-Resource.prototype.getImageUrl = function() {
-    if (this.type === 'machine') {
-        return window.images[this.function];
-    } else {
-        return window.images[this.type];
-    }
+Resource.prototype.getNetworkObjectIndex = function() {
+    return this.index;
 };
 
 /**

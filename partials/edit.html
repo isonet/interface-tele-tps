@@ -30,7 +30,7 @@
                                 <div class="list-group">
                                     <div class="list-group-item" ng-repeat="no in networkObjectList">
                                         <div class="row-picture">
-                                            <img class="circle" ng-click="$root.ni.add(no.type, no.name, no.function)" ng-src="{{no.image}}">
+                                            <img class="circle" ng-click="$root.ni.add(no.type, no.name, no.function, no.index);" ng-src="{{no.image}}">
                                         </div>
                                         <div class="row-content">
                                             <h4 class="list-group-item-heading">{{no.name}}</h4>
