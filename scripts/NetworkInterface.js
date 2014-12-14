@@ -271,13 +271,14 @@ NetworkInterface.prototype.update = function() {
             th.g.selectAll('.tempLine').remove();
             $('.tempLine').remove();
             var jTpCreatorCanvas = $('#tpCreatorCanvas');
-            if (th.hoverElement !== null) {
-                angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, 'settings');
-                angular.element(jTpCreatorCanvas).scope().reset();
-                angular.element(jTpCreatorCanvas).scope().$apply();
-            } else {
-                angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, '');
-            }
+            // Can't be used because when you click onmouseout happens...
+            //if (th.hoverElement !== null) {
+            angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, 'settings');
+            angular.element(jTpCreatorCanvas).scope().reset();
+            angular.element(jTpCreatorCanvas).scope().$apply();
+            // } else {
+            //     angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, '');
+            // }
         } else {
             th.timeSinceLastClick = (new Date).getTime();
             // Only create a new edge if left mousebutton is pressed
