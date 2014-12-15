@@ -160,3 +160,28 @@ svg text
     padding: 1px;
 }
 
+#sidebarTabContents input, #sidebarTabContents select
+{
+    background-color: rgba(255,255,255,0.2);
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 2px;
+    margin: 1px 0 1px 0;
+}
+
+#sidebarTabContents input
+{
+    padding: 0 3px 0 3px;
+}
+
+#sidebarTabContents select
+{
+    box-sizing: content-box;
+    -ms-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+}
+
+#sidebarTabContents input[type=checkbox]
+{
+    margin-top: 11px;
+}
