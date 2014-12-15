@@ -26,7 +26,6 @@
                         </ul>
                         <div id="sidebarTabContents" class="tab-content">
                             <div class="tab-pane fade active in custom-scrollbar" id="components" ng-style="{'height': $root.size.paneHeight + 'px'}">
-                                <!-- TODO Replace this mess with something from bootstrap/minimal -->
                                 <div class="list-group">
                                     <div class="list-group-item" ng-repeat="no in networkObjectList">
                                         <div class="row-picture">
@@ -78,7 +77,6 @@
 
                                         </div>
                                         <div class="form-group" ng-show="iface.dhcp  == false" ng-hide="iface.dhcp !== false">
-                                            <!-- TODO ADD DHCP -->
                                             <label class="col-lg-4 control-label">IP</label>
                                             <div class="col-lg-8">
                                                 <input ng-model="iface.ip" class="form-control">
@@ -108,8 +106,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- TODO Change button size -->
                 <div class="panel-footer clearfix">
                     <a href="javascript:void(0)" ng-click="$root.ni.downloadConfig()" class="btn btn-flat btn-primary btn-xs pull-right" style="z-index: 50;">Download Config</a>
                     <a href="javascript:void(0)" ng-click="$root.ni.downloadImage()" class="btn btn-flat btn-primary btn-xs pull-right" style="z-index: 50;">Download Image</a>

@@ -68,7 +68,6 @@ Resource.prototype.getNetworkObjectIndex = function() {
  * @param {number} y - Y Position
  */
 Resource.prototype.setPosition = function(x, y) {
-    // TODO Remove x and y when converting to json
     this.x = x;
     this.y = y;
     this.fixed = true;
@@ -79,7 +78,6 @@ Resource.prototype.setPosition = function(x, y) {
  * @param {Interface} iface -
  */
 Resource.prototype.addInterface = function(iface) {
-    // TODO Only allow for switch to other node
     // TODO check if interface (endpoint) already exists
     if(iface === undefined) {
         throw { name: 'ArgumentError', message: 'Iface is required!' };

@@ -5,7 +5,6 @@
 
     var app = angular.module('tpManager.controllers', []);
 
-    // TODO Refactor into other file
     /**
      * Controller pour les settings
      */
@@ -19,10 +18,10 @@
         $rootScope.resize($rootScope);
 
         $.getJSON('config.json', function(data) {
-            for(var i = 0; i < data.length; i++) {
-                data[i].index = i;
+            for(var i = 0; i < data.networkObjectList.length; i++) {
+                data.networkObjectList[i].index = i;
             }
-            $scope.networkObjectList = data;
+            $scope.networkObjectList = data.networkObjectList;
             $scope.$apply();
         });
 

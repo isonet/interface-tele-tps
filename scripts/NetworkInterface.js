@@ -22,7 +22,8 @@ function NetworkInterface(newMeta) {
     var th = this;
 
     $.getJSON('config.json', function(data) {
-        th.networkObjectList = data;
+        th.networkObjectList = data.networkObjectList;
+        th.softwareList = data.softwareList;
     });
 
     this.svg = d3.select('#mainCanvas').append('svg')
@@ -121,6 +122,8 @@ NetworkInterface.prototype.downloadConfig = function() {
     saveAs(blob, this.tp.getName() + '.json');
 };
 
+// TODO WRITE CLASS AROUND CONFIG FILE AND ONLY USE THE INDEX TO ADD A NEW ELEMENT
+
 /**
  * Creates a new object
  * @param {string} t - Type
@@ -135,7 +138,6 @@ NetworkInterface.prototype.add = function(t, n, f, i, x, y) {
     if(x !== undefined && y !== undefined) {
         res.setPosition(x, y);
     }
-
     this.tp.addResource(res);
     this.update();
 };
@@ -152,7 +154,6 @@ NetworkInterface.prototype.update = function() {
 
     this.g.selectAll('*').remove();
 
-    // TODO Integrate into html directly
     // Filter which is applied to the selected object
     var defs = this.g.append('defs');
     var filter = defs.append('filter')
