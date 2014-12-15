@@ -30,7 +30,16 @@
                                 <div class="list-group">
                                     <div class="list-group-item" ng-repeat="no in networkObjectList">
                                         <div class="row-picture">
-                                            <img class="circle" ng-click="$root.ni.add(no.type, no.name, no.function, no.index);" ng-src="{{no.image}}">
+                                            <img class="circle" data-type="{{no.type}}" data-function="{{no.function}}"
+                                                 data-index="{{no.index}}" data-name="{{no.name}}"
+                                                 ondragstart="(function(ev, th){
+                                                     ev.dataTransfer.setData('type', th.getAttribute('data-type'));
+                                                     ev.dataTransfer.setData('function', th.getAttribute('data-function'));
+                                                     ev.dataTransfer.setData('name', th.getAttribute('data-name'));
+                                                     ev.dataTransfer.setData('index', th.getAttribute('data-index'));
+                                                 })(event, this)"
+                                                 draggable="true"
+                                                 ng-click="$root.ni.add(no.type, no.name, no.function, no.index);" ng-src="{{no.image}}">
                                         </div>
                                         <div class="row-content">
                                             <h4 class="list-group-item-heading">{{no.name}}</h4>

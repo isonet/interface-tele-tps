@@ -28,7 +28,20 @@ function NetworkInterface(newMeta) {
     this.svg = d3.select('#mainCanvas').append('svg')
         .attr('id', 'mainSvg')
         .attr('width', this.width)
-        .attr('height', this.height);
+        .attr('height', this.height)
+        .on('drop', function () {
+            d3.event.preventDefault();
+            var type = d3.event.dataTransfer.getData('type');
+            var func = d3.event.dataTransfer.getData('function');
+            var index = d3.event.dataTransfer.getData('index');
+            var name = d3.event.dataTransfer.getData('name');
+            if(type.length > 0) {
+                th.add(type, name, func, index, d3.mouse(this)[0], d3.mouse(this)[1]);
+            }
+        })
+         .on('dragover', function () {
+                   d3.event.preventDefault();
+                });
     this.g = this.svg.append('g');
 
     var jMainSvg = $('#mainSvg').attr('xmlns:svg', 'http://www.w3.org/2000/svg');
@@ -113,9 +126,16 @@ NetworkInterface.prototype.downloadConfig = function() {
  * @param {string} t - Type
  * @param {string} n - Name
  * @param {string} f - Function
+ * @param {number} [x] - X Position
+ * @param {number} [y] - Y Position
  */
-NetworkInterface.prototype.add = function(t, n, f, i) {
+NetworkInterface.prototype.add = function(t, n, f, i, x, y) {
     var res = new Resource(t,  n + (this.tp.getResourceSize() + 1), f, i);
+
+    if(x !== undefined && y !== undefined) {
+        res.setPosition(x, y);
+    }
+
     this.tp.addResource(res);
     this.update();
 };
