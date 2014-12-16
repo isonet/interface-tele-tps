@@ -1,12 +1,13 @@
+/**
+ * Contains all angularjs controllers
+ */
 (function () {
     'use strict';
-
-    // Controllers pour Angular
 
     var app = angular.module('tpManager.controllers', []);
 
     /**
-     * Controller pour les settings
+     * Controller for the editing page
      */
     app.controller('SettingsController', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
 
@@ -22,6 +23,7 @@
                 data.networkObjectList[i].index = i;
             }
             $scope.networkObjectList = data.networkObjectList;
+            $scope.softwareList = data.softwareList;
             $scope.$apply();
         });
 
@@ -93,7 +95,9 @@
     }]);
 
 
-
+    /**
+     * Controller for the meta dialog (TP name, description, etc)
+     */
     app.controller('MetaDialogController', ['$scope', '$rootScope', function($scope, $rootScope) {
 
         $scope.backup = undefined;
@@ -128,6 +132,9 @@
 
     }]);
 
+    /**
+     * Controller for the removal dialog (remove elements)
+     */
     app.controller('RemovalDialogController', ['$scope', '$rootScope', function($scope, $rootScope) {
 
         $scope.id = '';
@@ -142,6 +149,9 @@
         }
     }]);
 
+    /**
+     * Controller for the new TP page
+     */
     app.controller('NewTpController', ['$scope', '$rootScope', '$location', '$sessionStorage', function($scope, $rootScope, $location, $sessionStorage) {
 
         $rootScope.meta = $sessionStorage;

@@ -56,6 +56,8 @@ function NetworkInterface(newMeta) {
 
 /**
  * Resizes and adapts the svg object to the parent element
+ * @param [h] - height
+ * @param [w] - width
  */
 NetworkInterface.prototype.resize = function(h, w) {
 
@@ -72,12 +74,16 @@ NetworkInterface.prototype.resize = function(h, w) {
     }
 };
 
+/**
+ * Returns the currently selected element
+ * @returns {undefined|*}
+ */
 NetworkInterface.prototype.getCurrentNode = function() {
     return this.currentElement;
 };
 
 /**
- * Converts the svg to a canvas and generates a png file
+ * Converts the svg to a canvas and starts the download of a png file
  */
 NetworkInterface.prototype.downloadImage = function() {
 
@@ -107,6 +113,9 @@ NetworkInterface.prototype.downloadImage = function() {
     };
 };
 
+/**
+ * Converts the svg to a canvas and starts the download of a svg file
+ */
 NetworkInterface.prototype.downloadSvg = function() {
 
     var html = d3.select('svg')
@@ -117,6 +126,9 @@ NetworkInterface.prototype.downloadSvg = function() {
     saveAs(blob, this.tp.getMeta()['experiment']['name'] + '.svg');
 };
 
+/**
+ * Generated and downloads the config file
+ */
 NetworkInterface.prototype.downloadConfig = function() {
     var blob = new Blob([this.tp.toJson()], {type: 'text/json;charset=utf-8'});
     saveAs(blob, this.tp.getName() + '.json');
@@ -143,7 +155,7 @@ NetworkInterface.prototype.add = function(t, n, f, i, x, y) {
 };
 
 /**
- * Updates / Draws the svg with objects from dataset
+ * Updates / Draws the svg
  */
 NetworkInterface.prototype.update = function() {
     var th = this;

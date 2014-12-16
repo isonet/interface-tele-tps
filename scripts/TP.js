@@ -2,8 +2,8 @@
 
 
 /**
- * Constructor
- * @param {Object} json
+ * Class constructor
+ * @param newMeta - Contains the meta data like name and description
  * @constructor
  */
 function TP(newMeta) {
@@ -31,7 +31,14 @@ TP.prototype.getResourceById = function(id) {
     }
 };
 
-// Array Remove - By John Resig (MIT Licensed)
+/**
+ * Function to remove an element from an array
+ * Array Remove - By John Resig (MIT Licensed) - adapted to be static
+ * @param {Array} arr - Array
+ * @param {number} from - starting index
+ * @param {number} [to] - ending index
+ * @returns {number} -
+ */
 function removeFromArray(arr, from, to) {
     var rest = arr.slice((to || from) + 1 || arr.length);
     arr.length = from < 0 ? arr.length + from : from;
@@ -96,6 +103,9 @@ TP.prototype.toJson = function() {
         delete r.networkObjectIndex;
         if(r.type === 'switch') {
             delete r.function;
+        }
+        if(r.function !== 'terminal') {
+            delete r.extra_modules;
         }
     }
     return JSON.stringify(d, null, 2);

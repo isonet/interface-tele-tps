@@ -1,7 +1,7 @@
 (function () {
 
     /**
-     * Module Angular principal
+     * Initializing Angular
      */
     var tpApp = angular.module('tpManager', [
         'ngRoute',
@@ -12,7 +12,15 @@
         //'tpManager.services'
     ]);
 
+    /**
+     * Function which is run on the first start of angular
+     */
     tpApp.run(['$rootScope', function($rootScope){
+
+        /**
+         * Declaration of a global resizing function
+         * @param $rootScope
+         */
         $rootScope.resize = function($rootScope) {
             $rootScope.size = $rootScope.size || {};
             $rootScope.size.appHeight = $(window).height() - 55;
@@ -27,6 +35,9 @@
         };
     }]);
 
+    /**
+     * Decides which template to load depending on the address
+     */
     tpApp.config(['$routeProvider',
         function($routeProvider) {
             $routeProvider.
