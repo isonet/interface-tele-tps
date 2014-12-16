@@ -37,7 +37,7 @@ function NetworkInterface(newMeta) {
             var index = d3.event.dataTransfer.getData('index');
             var name = d3.event.dataTransfer.getData('name');
             if(type.length > 0) {
-                th.add(type, name, func, index, d3.mouse(this)[0], d3.mouse(this)[1]);
+                th.add(type, name, func, parseInt(index), d3.mouse(this)[0], d3.mouse(this)[1]);
             }
         })
          .on('dragover', function () {
@@ -141,6 +141,7 @@ NetworkInterface.prototype.downloadConfig = function() {
  * @param {string} t - Type
  * @param {string} n - Name
  * @param {string} f - Function
+ * @param {number} i - index
  * @param {number} [x] - X Position
  * @param {number} [y] - Y Position
  */
@@ -298,6 +299,7 @@ NetworkInterface.prototype.update = function() {
 
 
     function mouseup() {
+        var jTpCreatorCanvas = $('#tpCreatorCanvas');
         if(((new Date).getTime() - th.timeSinceLastClick) <= 250) {
             th.svg.on('mousemove', null);
             d3.event.preventDefault();
@@ -305,15 +307,9 @@ NetworkInterface.prototype.update = function() {
             toggle = false;
             th.g.selectAll('.tempLine').remove();
             $('.tempLine').remove();
-            var jTpCreatorCanvas = $('#tpCreatorCanvas');
-            // Can't be used because when you click onmouseout happens...
-            //if (th.hoverElement !== null) {
             angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, 'settings');
             angular.element(jTpCreatorCanvas).scope().reset();
             angular.element(jTpCreatorCanvas).scope().$apply();
-            // } else {
-            //     angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, '');
-            // }
         } else {
             th.timeSinceLastClick = (new Date).getTime();
             // Only create a new edge if left mousebutton is pressed
@@ -342,7 +338,6 @@ NetworkInterface.prototype.update = function() {
                             if (endpoint.getType() !== 'switch') {
                                 endpoint.addInterface(new Interface(startpoint.getId(), true));
                             }
-                            var jTpCreatorCanvas = $('#tpCreatorCanvas');
                             angular.element(jTpCreatorCanvas).scope().reset();
                             angular.element(jTpCreatorCanvas).scope().$apply();
                             th.update();
