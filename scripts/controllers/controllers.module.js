@@ -162,8 +162,18 @@
      */
     app.controller('NewTpController', ['$scope', '$rootScope', '$location', '$sessionStorage', function($scope, $rootScope, $location, $sessionStorage) {
 
-        /** @type {MetaData} **/
-        $rootScope.meta = $sessionStorage;
+        try {
+            sessionStorage.setItem('throw', 'Exception');
+
+            /** @type {MetaData} **/
+            $rootScope.meta = $sessionStorage;
+
+            sessionStorage.removeItem('throw');
+        } catch (err) {
+            $rootScope.meta = undefined;
+        }
+
+
 
         $scope.submit = function() {
             /** @type {MetaData} **/
