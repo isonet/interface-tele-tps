@@ -207,7 +207,9 @@ NetworkInterface.prototype.update = function() {
 
     // Define drag behaviour
     var node_drag = d3.behavior.drag()
-        .on('dragstart', function() { force.stop(); })
+        .on('dragstart', function() {
+            d.fixed = true;
+        })
         .on('dragend', function(d) {
             d.fixed = true;
             tick();
