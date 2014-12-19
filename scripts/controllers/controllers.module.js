@@ -15,20 +15,25 @@
             $location.path('/new');
         }
 
+        /** @type {NetworkInterface} **/
         $rootScope.ni = new NetworkInterface($rootScope.meta);
+
         $rootScope.resize($rootScope);
 
         $.getJSON('config.json', function(data) {
             for(var i = 0; i < data.networkObjectList.length; i++) {
                 data.networkObjectList[i].index = i;
             }
+            /** @type {NetworkObject[]} **/
             $scope.networkObjectList = data.networkObjectList;
+            /** @type {string[]} **/
             $scope.softwareList = data.softwareList;
             $scope.$apply();
         });
 
         $scope.backup = undefined;
 
+        /** @type {string} **/
         var oldId;
 
         $scope.submit = function() {
@@ -49,6 +54,7 @@
             $scope.backup = $rootScope.ni.getCurrentNode();
             $scope.node = angular.copy($scope.backup);
             $rootScope.updateRemovalDialogController($scope.node.getId());
+            /** @type {Interface} **/
             $scope.iface = $scope.node.network_interfaces[0];
         };
 
@@ -58,6 +64,7 @@
             if(oldId !== $scope.node.id) {
                 $rootScope.ni.update();
             }
+            /** @type {Interface} **/
             $scope.iface = $scope.node.network_interfaces[0];
             $scope.settings.$setPristine();
         };
@@ -137,6 +144,7 @@
      */
     app.controller('RemovalDialogController', ['$scope', '$rootScope', function($scope, $rootScope) {
 
+        /** @type {string} **/
         $scope.id = '';
 
         $rootScope.updateRemovalDialogController = function(id) {
@@ -154,18 +162,20 @@
      */
     app.controller('NewTpController', ['$scope', '$rootScope', '$location', '$sessionStorage', function($scope, $rootScope, $location, $sessionStorage) {
 
+        /** @type {MetaData} **/
         $rootScope.meta = $sessionStorage;
 
         $scope.submit = function() {
+            /** @type {MetaData} **/
             $rootScope.meta = $scope.meta;
             $location.path('/edit');
         };
 
         $scope.resetForm = function() {
+            /** @type {MetaData} **/
             $scope.meta = undefined;
-            $rootScope.meta = undefined;
-            delete $sessionStorage.experiment;
-            delete $sessionStorage.author;
+            delete $rootScope.meta.experiment;
+            delete $rootScope.meta.author;
         };
 
     }]);

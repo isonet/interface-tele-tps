@@ -1,28 +1,42 @@
 'use strict';
 
 /**
- * Class Constructor
+ @typedef {Object} NetworkObject
+ @property {string} name - Name
+ @property {string} type - Type
+ @property {string} function - Function
+ @property {string} image - Image as html img src compatible base64
+ */
+
+/**
+ * Network Meta
+ * @param {MetaData} newMeta
+ * @constructor
  */
 function NetworkInterface(newMeta) {
 
     this.currentElement = undefined;
     this.hoverElement = undefined;
 
-
-
     var container = $('#mainCanvas');
 
+    /** @type {number} **/
     this.width = container.width();
+    /** @type {number} **/
     this.height = container.height();
+    /** @type {TP} **/
     this.tp = undefined;
-
+    /** @type {number} **/
     this.timeSinceLastClick = 1000;
 
-    container.empty();
     var th = this;
 
+    container.empty();
+
     $.getJSON('config.json', function(data) {
+        /** @type {NetworkObject} **/
         th.networkObjectList = data.networkObjectList;
+        /** @type {string[]} **/
         th.softwareList = data.softwareList;
     });
 
@@ -30,34 +44,29 @@ function NetworkInterface(newMeta) {
         .attr('id', 'mainSvg')
         .attr('width', this.width)
         .attr('height', this.height)
+        .on('dragover', function () { d3.event.preventDefault(); })
         .on('drop', function () {
             d3.event.preventDefault();
             var type = d3.event.dataTransfer.getData('type');
             var func = d3.event.dataTransfer.getData('function');
             var index = d3.event.dataTransfer.getData('index');
             var name = d3.event.dataTransfer.getData('name');
-            if(type.length > 0) {
-                th.add(type, name, func, parseInt(index), d3.mouse(this)[0], d3.mouse(this)[1]);
-            }
-        })
-         .on('dragover', function () {
-                   d3.event.preventDefault();
-                });
+            if(type.length > 0) { th.add(type, name, func, parseInt(index), d3.mouse(this)[0], d3.mouse(this)[1]); }
+        });
+
+    // Create main svg group
     this.g = this.svg.append('g');
 
     var jMainSvg = $('#mainSvg').attr('xmlns:svg', 'http://www.w3.org/2000/svg');
     jMainSvg.attr('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 
     th.tp = new TP(newMeta);
-
-    var svgToPng = $('#svgToPng').attr('height', this.height);
-    svgToPng.attr('width', this.width);
 }
 
 /**
  * Resizes and adapts the svg object to the parent element
- * @param [h] - height
- * @param [w] - width
+ * @param {number} [h] - height
+ * @param {number} [w] - width
  */
 NetworkInterface.prototype.resize = function(h, w) {
 
@@ -146,7 +155,7 @@ NetworkInterface.prototype.downloadConfig = function() {
  * @param {number} [y] - Y Position
  */
 NetworkInterface.prototype.add = function(t, n, f, i, x, y) {
-    var res = new Resource(t,  n + (this.tp.getResourceSize() + 1), f, i);
+    var res = new Resource(t,  n + (this.tp.getResourceSize() + 1), false,  f, i);
 
     if(x !== undefined && y !== undefined) {
         res.setPosition(x, y);
@@ -165,9 +174,10 @@ NetworkInterface.prototype.update = function() {
     var toggle = false;
     var startElement;
 
+    // Delete all elements on the svg
     this.g.selectAll('*').remove();
 
-    // Filter which is applied to the selected object
+    // Filter definition which is applied to the selected object
     var defs = this.g.append('defs');
     var filter = defs.append('filter')
         .attr('id', 'dropshadow')
@@ -184,6 +194,7 @@ NetworkInterface.prototype.update = function() {
     feMerge.append('feMergeNode')
         .attr('in', 'SourceGraphic');
 
+    // Initialize force layout
     var force = self.force = d3.layout.force()
         .nodes(this.tp.getNodes())
         .links(this.tp.getLinks())
@@ -194,6 +205,7 @@ NetworkInterface.prototype.update = function() {
         .on('tick', tick)
         .start();
 
+    // Define drag behaviour
     var node_drag = d3.behavior.drag()
         .on('dragstart', function() { force.stop(); })
         .on('dragend', function(d) {
@@ -221,6 +233,7 @@ NetworkInterface.prototype.update = function() {
             tick();
         });
 
+    // Draw all the connections
     var edges = this.g.selectAll('line')
         .data(this.tp.getLinks())
         .enter()
@@ -228,13 +241,14 @@ NetworkInterface.prototype.update = function() {
         .style('stroke', '#999')
         .style('stroke-width', 1);
 
+    // One group per node
     var elem = this.g.selectAll('g')
-        .data(this.tp.getNodes());
-
-    var elemEnter = elem.enter()
+        .data(this.tp.getNodes())
+        .enter()
         .append('g');
 
-    var node = elemEnter
+    // Add one image per node
+    var node = elem
         .append('image')
         .attr('width', 50)
         .attr('height', 50)
@@ -270,7 +284,8 @@ NetworkInterface.prototype.update = function() {
         })
         .call(node_drag);
 
-    var labels = elemEnter.append('text')
+    // Add one laber per node
+    var labels = elem.append('text')
         .attr('dy', '40')
         .attr('fill', 'black')
         .attr('font-family', 'sans-serif')
@@ -278,6 +293,8 @@ NetworkInterface.prototype.update = function() {
         .attr('text-anchor', 'middle')
         .text(function(d) { return d.id; });
 
+    // Draw function for the force layout
+    // Only executed on elements with d.fixed = false
     function tick() {
         edges.attr('x1', function(d) { return d.source.x; })
              .attr('y1', function(d) { return d.source.y; })
@@ -290,7 +307,9 @@ NetworkInterface.prototype.update = function() {
         labels.attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; });
     }
 
+    // Define mouseup event for the svg
     th.svg.on('mouseup', mouseup);
+    // Define contextmenu event for the svg
     th.svg.on('contextmenu', function() {
         th.hoverElement = null;
         d3.event.preventDefault();
@@ -301,6 +320,7 @@ NetworkInterface.prototype.update = function() {
     function mouseup() {
         var jTpCreatorCanvas = $('#tpCreatorCanvas');
         if(((new Date).getTime() - th.timeSinceLastClick) <= 250) {
+            // Doubleclick event
             th.svg.on('mousemove', null);
             d3.event.preventDefault();
             //d3.event.stopPropagation();
@@ -314,6 +334,7 @@ NetworkInterface.prototype.update = function() {
             th.timeSinceLastClick = (new Date).getTime();
             // Only create a new edge if left mousebutton is pressed
             if (d3.event.button === 0) {
+                // Leftclick event
                 var m = d3.mouse(this);
                 line = th.g.append('line')
                     .attr('class', 'tempLine')

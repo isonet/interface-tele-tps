@@ -1,0 +1,37 @@
+{
+    "descriptor" => String constante pour identifier le JSON, toujours égale à "MesTeleTps_LearningExperimentDescription" OBLIGATOIRE
+    "version" => String de version du JSON de description d'une experience (dans notre cas : "1.0"), OBLIGATOIRE
+    "author" => String du nom de l'enseignant (Prénom Nom), OBLIGATOIRE
+    "experiment" : { => Descriptions du TP OBLIGATOIRE
+        "name" => Nom du TP (String) OBLIGATOIRE
+        "description" => description pour les étudiants (String) OBLIGATOIRE
+        "objectives" => objectifs du TP (String) OBLIGATOIRE
+        "starting_date" => Date de début du TP (String, format YYYYMMDDHHmm (AnéeMoisJourHeuresMinutes)) OBLIGATOIRE
+        "ending_date" => Date de fin du TP (String, format YYYYMMDDHHmm (AnéeMoisJourHeuresMinutes)) OBLIGATOIRE
+    },
+    "resources": [ => Ressources pour le TPs (dans notre cas : machine routeur, machine terminal, switch) OBLIGATOIRE
+        {
+            "type" => type principal de la ressource (dans notre cas : machine ou switch) (String) OBLIGATOIRE
+            "function" => sous-type de la ressource (String) (OBLIGATOIRE quand type = machine, pour distinguer routeur et terminal, INTERDIT quand type = switch)
+            "id" => identifiant de la ressource (nom unique parmi les ressources du TP, quelque soit leur type) (String) OBLIGATOIRE
+            "cpu" => Nombre de cpu (Integer) OPTIONNEL quand type = machine, INTERDIT quand type = switch
+            "ram_size" => Quantité de mémoire vive avec unité (String) OPTIONNEL quand type = machine, INTERDIT quand type = switch
+            "free_space_size" => Quantité de mémoire sur disque dur libre disponible avec unité (String) OPTIONNEL QUAND type = machine, INTERDIT quand type = switch
+            "network_interfaces":[ => Interfaces réseau OPTIONNEL quand function = terminal, OBLIGATOIRE quand function = router, INTERDIT quand type = switch
+                {
+                    "endpoint" => Identifiant du switch relié OPTIONNEL
+                    "ipv4_configuration":{ => Configuration ipv4 OPTIONNEL
+                        "dhcp" => indicateur si la configuration est effectuée par DHCP (boolean) OBLIGATOIRE
+                        "ip" => champ IP OPTIONNEL
+                        "network" => champ IP OPTIONNEL
+                        "netmask" => champ IP OPTIONNEL
+                        "gateway" => champ IP OPTIONNEL
+                    }
+                },
+            ],
+            "extra_modules":[ => Modules à installer supplémentaire OPTIONNELS quand type = machine && function = terminal, INTERDIT sinon
+                "module1", "module2" => Noms des modules, à partir d'une liste fournie
+            ]
+        }
+    ]
+}

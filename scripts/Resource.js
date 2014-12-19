@@ -2,26 +2,46 @@
 
 /**
  *
- * @param {string} type -
- * @param {string} id - Unique Id
- * @param {string} [func] -
+ * @property {string} type - Main type of the resource
+ * @property {string} function - Subtype of the resource
+ * @property {string} id - Unique resource identifier
+ * @property {number} cpu - Number of CPUs (optional)
+ * @property {string} ram_size - Virtual memory size (optional)
+ * @property {string} free_space_size - Free hard drive space (optional)
+ * @property {Interface[]} network_interfaces - List of network interfaces (optional)
+ * @property {boolean} softwareCompliant - If true, modules from extra_modules can be installed
+ * @property {string[]} extra_modules - List of software modules, only allowed if softwareCompliant (optional)
+
+ * @param {string} type - Main type of the resource
+ * @param {string} id - Unique resource identifier
+ * @param {boolean} softwareCompliant - If true, modules from extra_modules can be installed
+ * @param {string} [func] - Subtype of the resource (function)
  * @param {number} [index] -
- * @param {number} [cpu] - Number of processors
- * @param {string} [ram_size] - Amount of virtual memory
- * @param {string} [free_space_size] - Free disk space
- * @param {Array} [iface] - Array of Network Interfaces
+ * @param {number} [cpu] - Number of CPUs
+ * @param {string} [ram_size] - Virtual memory size
+ * @param {string} [free_space_size] - Free hard drive space
+ * @param {Interface[]} [iface] - List of network interfaces
+ *
+ * @constructor
  */
-function Resource(type, id, func, index, cpu, ram_size, free_space_size, iface) {
-    if(type === undefined || id === undefined) {
-        throw { name: 'ArgumentError', message: 'Type and id are required!' };
-    }
+function Resource(type, id, softwareCompliant, func, index, cpu, ram_size, free_space_size, iface) {
+    /** @type {string} **/
     this.type = type;
+    /** @type {string} **/
     this.function = func;
+    /** @type {string} **/
     this.id = id;
+    /** @type {number} **/
     this.networkObjectIndex = index;
+    /** @type {boolean} **/
+    this.softwareCompliant = softwareCompliant;
+    /** @type {number} **/
     this.cpu = cpu;
+    /** @type {string} **/
     this.ram_size = ram_size;
+    /** @type {string} **/
     this.free_space_size = free_space_size;
+    /** @type {Interface[]} **/
     this.network_interfaces = [];
     if(iface !== undefined && iface.hasOwnProperty('length')) {
         for(var i = 0; i < iface.length; i++) {
@@ -30,10 +50,6 @@ function Resource(type, id, func, index, cpu, ram_size, free_space_size, iface) 
         }
     }
 }
-
-Resource.prototype.getInterfaces = function() {
-    return this.network_interfaces;
-};
 
 // Array Remove - By John Resig (MIT Licensed)
 function removeFromArray(arr, from, to) {
