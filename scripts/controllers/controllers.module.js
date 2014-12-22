@@ -69,36 +69,59 @@
             $scope.settings.$setPristine();
         };
 
-        // TODO Create a function showSidebar, hideSidebar and toggleSidebar
+        /**
+         * Enum for the active sidebar tab
+         * @readonly
+         * @enum {string}
+         */
+        $scope.TAB = {
+            NEW : 'new',
+            SETTINGS: 'settings'
+        };
+
         /**
          * Current Sidebar status
          * @type {boolean}
          */
         $scope.sidebarIsDisplayed = false;
 
-
+        /**
+         * Hides the sidebar in the edit view
+         */
+        $scope.hideSidebar = function() {
+            $scope.toggleSidebar(false, $scope.TAB.NEW);
+        };
 
         /**
-         * Toggles the Sidebar in the Edit View
-         * @param b {boolean} true -> show panel, false -> hide panel
-         * @param panel {string} ['settings' -> show settings pane, '' -> show components pane]
+         * Show the sidebar in the edit view
+         * @param {TAB} tab
          */
-        $scope.toggleSidebar = function(b, panel) {
-            var position = !b ? -330 : -16;
-            $('#tpCreatorSideBar').stop().animate({
-                marginRight: position+"px"
-            },300);
+        $scope.showSidebar = function(tab) {
+            $scope.toggleSidebar(true, tab);
+        };
+
+        /**
+         * Toggles the Sidebar in the edit view
+         * @param {boolean} state -
+         * @param {TAB} tab -
+         */
+        $scope.toggleSidebar = function(state, tab) {
+            var position = !state ? -330 : -16;
+            $('#tpCreatorSideBar').stop().animate({ marginRight: position + 'px' }, 300);
             if(b != $scope.sidebarIsDisplayed) {
+                // Change the image of the button
                 $('#tpCreatorCanvas').find('.btn-fab').toggleClass('icon-material-add icon-material-close');
                 $scope.sidebarIsDisplayed = !$scope.sidebarIsDisplayed;
             }
-            if(panel == 'settings') {
+            if(tab == $scope.TAB.SETTINGS) {
                 $('#settings-panel a').tab('show');
-            } else {
+            } else if (tab == $scope.TAB.NEW) {
                 $('#components-panel a').tab('show');
             }
         };
-        $scope.toggleSidebar(true, '');
+
+        // Display the sidebar when the edit view has loaded
+        $scope.showSidebar($scope.TAB.NEW);
     }]);
 
 

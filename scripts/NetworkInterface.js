@@ -279,10 +279,10 @@ NetworkInterface.prototype.update = function() {
         .on('contextmenu',function () {
             d3.event.preventDefault();
             d3.event.stopPropagation();
-            var jTpCreatorCanvas = $('#tpCreatorCanvas');
-            angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, 'settings');
-            angular.element(jTpCreatorCanvas).scope().reset();
-            angular.element(jTpCreatorCanvas).scope().$apply();
+            var tpCreatorCanvasScope = angular.element($('#tpCreatorCanvas')).scope();
+            tpCreatorCanvasScope.showSidebar(tpCreatorCanvasScope.TAB.SETTINGS);
+            tpCreatorCanvasScope.reset();
+            tpCreatorCanvasScope.$apply();
         })
         .call(node_drag);
 
@@ -315,12 +315,13 @@ NetworkInterface.prototype.update = function() {
     th.svg.on('contextmenu', function() {
         th.hoverElement = null;
         d3.event.preventDefault();
-        angular.element($('#settingsForm')).scope().toggleSidebar(true, 'components');
+        var settingsFormScope = angular.element($('#settingsForm')).scope();
+        settingsFormScope.showSidebar(settingsFormScope.TAB.NEW);
     });
 
 
     function mouseup() {
-        var jTpCreatorCanvas = $('#tpCreatorCanvas');
+        var tpCreatorCanvasScope = $('#tpCreatorCanvas');
         if(((new Date).getTime() - th.timeSinceLastClick) <= 250) {
             // Doubleclick event
             th.svg.on('mousemove', null);
@@ -329,9 +330,9 @@ NetworkInterface.prototype.update = function() {
             toggle = false;
             th.g.selectAll('.tempLine').remove();
             $('.tempLine').remove();
-            angular.element(jTpCreatorCanvas).scope().toggleSidebar(true, 'settings');
-            angular.element(jTpCreatorCanvas).scope().reset();
-            angular.element(jTpCreatorCanvas).scope().$apply();
+            angular.element(tpCreatorCanvasScope).showSidebar(tpCreatorCanvasScope.TAB.SETTINGS);
+            angular.element(tpCreatorCanvasScope).reset();
+            angular.element(tpCreatorCanvasScope).$apply();
         } else {
             th.timeSinceLastClick = (new Date).getTime();
             // Only create a new edge if left mousebutton is pressed
@@ -361,8 +362,8 @@ NetworkInterface.prototype.update = function() {
                             if (endpoint.getType() !== 'switch') {
                                 endpoint.addInterface(new Interface(startpoint.getId(), true));
                             }
-                            angular.element(jTpCreatorCanvas).scope().reset();
-                            angular.element(jTpCreatorCanvas).scope().$apply();
+                            angular.element(tpCreatorCanvasScope).reset();
+                            angular.element(tpCreatorCanvasScope).$apply();
                             th.update();
                         } catch (ex) {
                             th.g.selectAll('.tempLine').remove();
@@ -378,7 +379,8 @@ NetworkInterface.prototype.update = function() {
                         startElement = th.hoverElement;
                         th.svg.on('mousemove', mousemove);
                     } else {
-                        angular.element($('#settingsForm')).scope().toggleSidebar(false);
+                        var settingsFormScope = angular.element($('#settingsForm')).scope();
+                        settingsFormScope.hideSidebar();
                     }
                 }
             }

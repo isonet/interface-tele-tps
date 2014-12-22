@@ -4,7 +4,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading" style="z-index: 10">
                     Concepteur de TP | {{$root.meta.experiment.name}} <span ng-click="$root.loadMetaDialogController()" class="icon-material-create" style="cursor:pointer;" data-toggle="modal" data-target="#meta-dialog"></span>
-                    <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" class="btn btn-fab btn-material-orange btn-raised icon-material-add" style="z-index: 50;"></a>
+                    <a ng-click="toggleSidebar(!sidebarIsDisplayed, TAB.NEW)" class="btn btn-fab btn-material-orange btn-raised icon-material-add" style="z-index: 50;"></a>
                 </div>
 
                 <div class="panel-body" id="conceptorCanvas" ng-style="{'height': $root.size.canvasHeight + 'px'}">
