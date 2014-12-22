@@ -108,7 +108,7 @@
         $scope.toggleSidebar = function(state, tab) {
             var position = !state ? -330 : -16;
             $('#tpCreatorSideBar').stop().animate({ marginRight: position + 'px' }, 300);
-            if(b != $scope.sidebarIsDisplayed) {
+            if(state != $scope.sidebarIsDisplayed) {
                 // Change the image of the button
                 $('#tpCreatorCanvas').find('.btn-fab').toggleClass('icon-material-add icon-material-close');
                 $scope.sidebarIsDisplayed = !$scope.sidebarIsDisplayed;
