@@ -356,18 +356,18 @@ NetworkInterface.prototype.update = function() {
                             var startpoint = startElement;
                             var endpoint = th.hoverElement;
 
-                            // TODO Check if it's the same element
-
-                            if (startpoint.getType() !== 'switch') {
-                                startpoint.addInterface(new Interface(endpoint.getId(), true));
+                            if (startpoint.getId() !== endpoint.getId()) {
+                                if (startpoint.getType() !== 'switch') {
+                                    startpoint.addInterface(new Interface(endpoint.getId(), true));
+                                }
+                                if (endpoint.getType() !== 'switch') {
+                                    endpoint.addInterface(new Interface(startpoint.getId(), true));
+                                }
+                                // Update the sidebar
+                                angular.element(tpCreatorCanvasScope).scope().reset();
+                                angular.element(tpCreatorCanvasScope).scope().$apply();
+                                th.update();
                             }
-                            if (endpoint.getType() !== 'switch') {
-                                endpoint.addInterface(new Interface(startpoint.getId(), true));
-                            }
-                            // Update the sidebar
-                            angular.element(tpCreatorCanvasScope).scope().reset();
-                            angular.element(tpCreatorCanvasScope).scope().$apply();
-                            th.update();
                         } catch (ex) {
                             th.g.selectAll('.tempLine').remove();
                             $('.tempLine').remove();
