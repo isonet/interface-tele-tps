@@ -207,7 +207,7 @@ NetworkInterface.prototype.update = function() {
 
     // Define drag behaviour
     var node_drag = d3.behavior.drag()
-        .on('dragstart', function() {
+        .on('dragstart', function(d) {
             d.fixed = true;
         })
         .on('dragend', function(d) {
@@ -250,8 +250,7 @@ NetworkInterface.prototype.update = function() {
         .append('g');
 
     // Add one image per node
-    var node = elem
-        .append('image')
+    var node = elem.append('image')
         .attr('width', 50)
         .attr('height', 50)
         .attr('xlink:href',function(d) {
@@ -330,9 +329,9 @@ NetworkInterface.prototype.update = function() {
             toggle = false;
             th.g.selectAll('.tempLine').remove();
             $('.tempLine').remove();
-            angular.element(tpCreatorCanvasScope).showSidebar(tpCreatorCanvasScope.TAB.SETTINGS);
-            angular.element(tpCreatorCanvasScope).reset();
-            angular.element(tpCreatorCanvasScope).$apply();
+            angular.element(tpCreatorCanvasScope).scope().showSidebar(tpCreatorCanvasScope.scope().TAB.SETTINGS);
+            angular.element(tpCreatorCanvasScope).scope().reset();
+            angular.element(tpCreatorCanvasScope).scope().$apply();
         } else {
             th.timeSinceLastClick = (new Date).getTime();
             // Only create a new edge if left mousebutton is pressed
@@ -356,14 +355,18 @@ NetworkInterface.prototype.update = function() {
                         try {
                             var startpoint = startElement;
                             var endpoint = th.hoverElement;
+
+                            // TODO Check if it's the same element
+
                             if (startpoint.getType() !== 'switch') {
                                 startpoint.addInterface(new Interface(endpoint.getId(), true));
                             }
                             if (endpoint.getType() !== 'switch') {
                                 endpoint.addInterface(new Interface(startpoint.getId(), true));
                             }
-                            angular.element(tpCreatorCanvasScope).reset();
-                            angular.element(tpCreatorCanvasScope).$apply();
+                            // Update the sidebar
+                            angular.element(tpCreatorCanvasScope).scope().reset();
+                            angular.element(tpCreatorCanvasScope).scope().$apply();
                             th.update();
                         } catch (ex) {
                             th.g.selectAll('.tempLine').remove();
