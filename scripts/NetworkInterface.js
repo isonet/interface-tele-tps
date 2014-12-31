@@ -47,11 +47,8 @@ function NetworkInterface(newMeta) {
         .on('dragover', function () { d3.event.preventDefault(); })
         .on('drop', function () {
             d3.event.preventDefault();
-            var type = d3.event.dataTransfer.getData('type');
-            var func = d3.event.dataTransfer.getData('function');
             var index = d3.event.dataTransfer.getData('index');
-            var name = d3.event.dataTransfer.getData('name');
-            if(type.length > 0) { th.add(type, name, func, parseInt(index), d3.mouse(this)[0], d3.mouse(this)[1]); }
+            if(index >= 0) { th.add(parseInt(index), d3.mouse(this)[0], d3.mouse(this)[1]); }
         });
 
     // Create main svg group
@@ -147,15 +144,14 @@ NetworkInterface.prototype.downloadConfig = function() {
 
 /**
  * Creates a new object
- * @param {string} t - Type
- * @param {string} n - Name
- * @param {string} f - Function
  * @param {number} i - index
  * @param {number} [x] - X Position
  * @param {number} [y] - Y Position
  */
-NetworkInterface.prototype.add = function(t, n, f, i, x, y) {
-    var res = new Resource(t,  n + (this.tp.getResourceSize() + 1), false,  f, i);
+NetworkInterface.prototype.add = function(i, x, y) {
+    var no = this.networkObjectList[i];
+    var softwareCompliant = no.softwareCompliant || false;
+    var res = new Resource(no.type,  no.name + (this.tp.getResourceSize() + 1), softwareCompliant, no.function, i);
 
     if(x !== undefined && y !== undefined) {
         res.setPosition(x, y);

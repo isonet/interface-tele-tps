@@ -29,16 +29,9 @@
                                 <div class="list-group">
                                     <div class="list-group-item" ng-repeat="no in networkObjectList">
                                         <div class="row-picture">
-                                            <img class="circle" data-type="{{no.type}}" data-function="{{no.function}}"
-                                                 data-index="{{no.index}}" data-name="{{no.name}}"
-                                                 ondragstart="(function(ev, th){
-                                                     ev.dataTransfer.setData('type', th.getAttribute('data-type'));
-                                                     ev.dataTransfer.setData('function', th.getAttribute('data-function'));
-                                                     ev.dataTransfer.setData('name', th.getAttribute('data-name'));
-                                                     ev.dataTransfer.setData('index', th.getAttribute('data-index'));
-                                                 })(event, this)"
-                                                 draggable="true"
-                                                 ng-click="$root.ni.add(no.type, no.name, no.function, no.index);" ng-src="{{no.image}}">
+                                            <img class="circle" data-index="{{no.index}}" draggable="true"
+                                                 ondragstart="(function(ev, th){ ev.dataTransfer.setData('index', th.getAttribute('data-index')); })(event, this)"
+                                                 ng-click="$root.ni.add(no.index);" ng-src="{{no.image}}">
                                         </div>
                                         <div class="row-content">
                                             <h4 class="list-group-item-heading">{{no.name}}</h4>
@@ -55,6 +48,12 @@
                                             <label class="col-lg-4 control-label">ID</label>
                                             <div class="col-lg-8">
                                                 <input ng-model="node.id" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="node.softwareCompliant">
+                                            <label class="col-lg-4 control-label">Logiciels</label>
+                                            <div class="col-lg-8">
+                                                <select multiple ng-model="node.extra_modules" ng-options="software for software in softwareList" class="form-control"></select>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -84,12 +83,6 @@
                                             <label class="col-lg-4 control-label">Passerelle</label>
                                             <div class="col-lg-8">
                                                 <input ng-model="iface.gateway" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="form-group" ng-show="node.function == 'terminal'">
-                                            <label class="col-lg-4 control-label">Logiciels</label>
-                                            <div class="col-lg-8">
-                                                <select multiple ng-model="node.extra_modules" ng-options="software for software in softwareList" class="form-control"></select>
                                             </div>
                                         </div>
                                     </fieldset>
