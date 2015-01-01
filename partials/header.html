@@ -12,10 +12,19 @@
             <ul class="nav navbar-nav">
                 <li>
                     <a href="#/new">
-                        <i class="icon icon-material-add icon-material-lightgrey" style="font-size: 75%;"></i>&nbsp;&nbsp;Nouveau TP
+                        <i class="icon icon-material-add icon-material-lightgrey" style="font-size: 75%;"></i>&nbsp;&nbsp;{{'_HEADER_TEXT_NEW_' | i18n}}
                     </a>
                 </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right" ng-controller="ChangeLanguageController">
+                <li class="dropdown">
+                    <a href class="dropdown-toggle" data-toggle="dropdown">{{'_HEADER_TEXT_LANGUAGE_' | i18n}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="l in availableLanguages"><a href ng-click="selectLanguage(l.code)">{{l.name | i18n}}</a></li>
+                    </ul>
+                </li>
+        </ul>
         </div>
+
     </div>
 </div>

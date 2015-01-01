@@ -213,4 +213,20 @@
 
     }]);
 
+    app.controller('ChangeLanguageController', ['$scope', 'localization', '$filter', function($scope, localisation, $filter) {
+
+        $scope.availableLanguages = [
+            { name: '_HEADER_TEXT_LANGUAGE_ENGLISH_',  code: 'en' },
+            { name: '_HEADER_TEXT_LANGUAGE_FRENCH_', code: 'fr' },
+            { name: '_HEADER_TEXT_LANGUAGE_GERMAN_', code: 'de' }
+        ];
+
+        $scope.selectLanguage = function(code) {
+            localisation.changeLanguage(code);
+        };
+
+        $scope.selectLanguage('fr');
+
+    }]);
+
 }());

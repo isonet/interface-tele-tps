@@ -3,14 +3,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Supprimer</h4>
+                <h4 class="modal-title">{{'_REMOVAL_TEXT_TITLE_' | i18n}}</h4>
             </div>
             <div class="modal-body">
-                <p>Êtes vous sur de vouloir supprimer <i>{{id}}</i> ?</p>
+                <p>{{'_REMOVAL_TEXT_BODY_A_' | i18n}}&nbsp;<i>{{id}}</i>&nbsp;{{'_REMOVAL_TEXT_BODY_B_' | i18n}}</p>
             </div>
             <div class="modal-footer">
-                <button ng-click="deleteNode()" class="btn btn-flat btn-warning" data-dismiss="modal">Oui</button>
-                <button class="btn btn-flat btn-primary" data-dismiss="modal">Non</button>
+                <button ng-click="deleteNode()" class="btn btn-flat btn-warning" data-dismiss="modal">{{'_REMOVAL_BUTTON_SUBMIT_' | i18n}}</button>
+                <button class="btn btn-flat btn-primary" data-dismiss="modal">{{'_REMOVAL_BUTTON_CANCEL_' | i18n}}</button>
             </div>
         </div>
     </div>

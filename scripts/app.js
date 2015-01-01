@@ -5,10 +5,12 @@
      */
     var tpApp = angular.module('tpManager', [
         'ngRoute',
+        'ngResource',
+        'teleTPsLocalization',
         'tpManager.controllers',
         'tpManager.directives',
+        'tpManager.filters',
         'ngStorage'
-        //'tpManager.filters'
         //'tpManager.services'
     ]);
 

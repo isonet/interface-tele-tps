@@ -1,0 +1,190 @@
+[
+    {
+        "key" : "__LICENCE_CONTENT__",
+        "value" : "Reserved. Never use this key"
+    },
+    {
+        "key" : "_EDIT_TEXT_TITLE_",
+        "value" : "Concepteur de TP"
+    },
+    {
+        "key" : "_EDIT_TEXT_COMPONENTS_",
+        "value" : "Composants"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_",
+        "value" : "Paramètres"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_CONFIGURATION",
+        "value" : "Configuration"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_ID",
+        "value" : "ID"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_SOFTWARE",
+        "value" : "Logiciels"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_NETWORKCONFIGURATION",
+        "value" : "Configuration Réseau"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_INTERFACE",
+        "value" : "Interface"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_DHCP",
+        "value" : "DHCP"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_IP",
+        "value" : "IP"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_SUBNETMASK",
+        "value" : "Masque"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_GATEWAY",
+        "value" : "Passerelle"
+    },
+    {
+        "key" : "_EDIT_BUTTON_SETTINGS_SUBMIT_",
+        "value" : "Sauver"
+    },
+    {
+        "key" : "_EDIT_BUTTON_SETTINGS_CANCEL_",
+        "value" : "Annuler"
+    },
+    {
+        "key" : "_EDIT_BUTTON_DOWNLOAD_CONFIG",
+        "value" : "Télécharger config"
+    },
+    {
+        "key" : "_EDIT_BUTTON_DOWNLOAD_IMAGE",
+        "value" : "Télécharger image"
+    },
+    {
+        "key" : "_EDIT_BUTTON_DOWNLOAD_SVG",
+        "value" : "Télécharger svg"
+    },
+    {
+        "key" : "_HEADER_TEXT_LANGUAGE_",
+        "value" : "Langue"
+    },
+    {
+        "key" : "_HEADER_TEXT_NEW_",
+        "value" : "Nouveau TP"
+    },
+    {
+        "key" : "_HEADER_TEXT_LANGUAGE_ENGLISH_",
+        "value" : "Anglais"
+    },
+    {
+        "key" : "_HEADER_TEXT_LANGUAGE_FRENCH_",
+        "value" : "Français"
+    },
+    {
+        "key" : "_HEADER_TEXT_LANGUAGE_GERMAN_",
+        "value" : "Allemand"
+    },
+    {
+        "key" : "_NEW_TEXT_TITLE_",
+        "value" : "Créer un TP"
+    },
+    {
+        "key" : "_NEW_FORM_TITLE_",
+        "value" : "Nouveau TP"
+    },
+    {
+        "key" : "_NEW_FORM_NAME_",
+        "value" : "Nom"
+    },
+    {
+        "key" : "_NEW_FORM_DESCRIPTION_",
+        "value" : "Description"
+    },
+    {
+        "key" : "_NEW_FORM_OBJECTIVE_",
+        "value" : "Objectif"
+    },
+    {
+        "key" : "_NEW_FORM_AUTHOR_",
+        "value" : "Auteur"
+    },
+    {
+        "key" : "_NEW_FORM_STARTDATE_",
+        "value" : "Date début"
+    },
+    {
+        "key" : "_NEW_FORM_ENDDATE_",
+        "value" : "Date fin"
+    },
+    {
+        "key" : "_NEW_BUTTON_SUBMIT_",
+        "value" : "Créer le TP"
+    },
+    {
+        "key" : "_NEW_BUTTON_CANCEL_",
+        "value" : "Annuler"
+    },
+    {
+        "key" : "_META_TEXT_TITLE_",
+        "value" : "Paramètres"
+    },
+    {
+        "key" : "_META_FORM_NAME_",
+        "value" : "Nom"
+    },
+    {
+        "key" : "_META_FORM_DESCRIPTION_",
+        "value" : "Description"
+    },
+    {
+        "key" : "_META_FORM_OBJECTIVE_",
+        "value" : "Objectif"
+    },
+    {
+        "key" : "_META_FORM_AUTHOR_",
+        "value" : "Auteur"
+    },
+    {
+        "key" : "_META_FORM_STARTDATE_",
+        "value" : "Date début"
+    },
+    {
+        "key" : "_META_FORM_ENDDATE_",
+        "value" : "Date fin"
+    },
+    {
+        "key" : "_META_BUTTON_SUBMIT_",
+        "value" : "Enregistrer"
+    },
+    {
+        "key" : "_META_BUTTON_CANCEL_",
+        "value" : "Annuler"
+    },
+    {
+        "key" : "_REMOVAL_TEXT_TITLE_",
+        "value" : "Supprimer"
+    },
+    {
+        "key" : "_REMOVAL_TEXT_BODY_A_",
+        "value" : "Êtes vous sur de vouloir supprimer"
+    },
+    {
+        "key" : "_REMOVAL_TEXT_BODY_B_",
+        "value" : "?"
+    },
+    {
+        "key" : "_REMOVAL_BUTTON_SUBMIT_",
+        "value" : "Oui"
+    },
+    {
+        "key" : "_REMOVAL_BUTTON_CANCEL_",
+        "value" : "Non"
+    }
+]
