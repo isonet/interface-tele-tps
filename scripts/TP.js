@@ -161,6 +161,8 @@ TP.prototype.toJson = function() {
     var d = angular.copy(this.meta);
     d.descriptor = 'MesTeleTps_LearningExperimentDescription';
     d.version = "1.0";
+    d.experiment.starting_date = moment(d.experiment.starting_date).format('YYYYMMDDHHmm');
+    d.experiment.ending_date = moment(d.experiment.ending_date).format('YYYYMMDDHHmm');
     d.resources = angular.copy(this.resources);
     for(var res in d.resources) {
         var r = d.resources[res];

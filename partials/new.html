@@ -29,11 +29,35 @@
                                     </div>
                                     <label class="col-lg-2 control-label">{{'_NEW_FORM_STARTDATE_' | i18n}}</label>
                                     <div class="col-lg-10">
-                                        <input ng-model="meta.experiment.starting_date" class="form-control" placeholder="YYYYMMDDHHmm">
+                                        <div class="dropdown">
+                                            <a ng-click="$root.localeChangeFinished = true" class="dropdown-toggle" id="startdate" role="button" data-toggle="dropdown" data-target="#" href>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" value="{{meta.experiment.starting_date | date:'yyyy-MM-dd HH:mm'}}">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </a>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <datetimepicker ng-if="$root.localeChangeFinished" data-ng-model="meta.experiment.starting_date" data-datetimepicker-config="{ dropdownSelector: '#startdate' }" />
+                                            </ul>
+                                        </div>
                                     </div>
                                     <label class="col-lg-2 control-label">{{'_NEW_FORM_ENDDATE_' | i18n}}</label>
                                     <div class="col-lg-10">
-                                        <input ng-model="meta.experiment.ending_date" class="form-control" placeholder="YYYYMMDDHHmm">
+                                        <div class="dropdown">
+                                            <a ng-click="$root.localeChangeFinished = true" class="dropdown-toggle" id="enddate" role="button" data-toggle="dropdown" data-target="#" href>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" value="{{meta.experiment.ending_date | date:'yyyy-MM-dd HH:mm'}}">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </a>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <datetimepicker ng-if="$root.localeChangeFinished" data-ng-model="meta.experiment.ending_date" data-datetimepicker-config="{ dropdownSelector: '#enddate' }" />
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

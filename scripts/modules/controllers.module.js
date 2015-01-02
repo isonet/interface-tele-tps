@@ -213,15 +213,17 @@
 
     }]);
 
-    app.controller('ChangeLanguageController', ['$scope', 'localization', '$filter', function($scope, localisation, $filter) {
+    app.controller('ChangeLanguageController', ['$scope', 'localization', '$rootScope', function($scope, localisation, $rootScope) {
 
         $scope.availableLanguages = [
-            { name: '_HEADER_TEXT_LANGUAGE_ENGLISH_',  code: 'en' },
+            { name: '_HEADER_TEXT_LANGUAGE_ENGLISH_', code: 'en' },
             { name: '_HEADER_TEXT_LANGUAGE_FRENCH_', code: 'fr' },
             { name: '_HEADER_TEXT_LANGUAGE_GERMAN_', code: 'de' }
         ];
 
         $scope.selectLanguage = function(code) {
+            $rootScope.localeChangeFinished = false;
+            moment.locale(code);
             localisation.changeLanguage(code);
         };
 

@@ -10,7 +10,8 @@
         'tpManager.controllers',
         'tpManager.directives',
         'tpManager.filters',
-        'ngStorage'
+        'ngStorage',
+        'ui.bootstrap.datetimepicker'
         //'tpManager.services'
     ]);
 
@@ -18,6 +19,9 @@
      * Function which is run on the first start of angular
      */
     tpApp.run(['$rootScope', function($rootScope){
+
+        // Define the default locale
+        moment().locale('fr');
 
         /**
          * Declaration of a global resizing function
