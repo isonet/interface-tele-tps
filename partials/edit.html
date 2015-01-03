@@ -14,8 +14,8 @@
                     <canvas style="display:none"></canvas>
 
                     <!-- Panneau à droite contenant les différents éléments et les paramètres -->
-                    <div class="well well-material-lightgreen" id="tpCreatorSideBar" ng-style="{'height': $root.size.sidebarHeight + 'px'}; {'margin-top': $root.size.sidebarTopMargin + 'px'}">
-                        <ul class="nav nav-tabs btn-material-lightgreen" style="margin-bottom: 15px;">
+                    <div class="well well-material-lightgrey" id="tpCreatorSideBar" ng-style="{'height': $root.size.sidebarHeight + 'px'}; {'margin-top': $root.size.sidebarTopMargin + 'px'}">
+                        <ul class="nav nav-tabs btn-material-lightgrey" style="margin-bottom: 15px;">
                             <li class="active" id="components-panel">
                                 <a href="javascript:void(0)" data-target="#components" data-toggle="tab">{{'_EDIT_TEXT_COMPONENTS_' | i18n}}</a>
                             </li>
@@ -33,7 +33,7 @@
                                                  ng-click="$root.ni.add(no.index);" ng-src="{{no.image}}">
                                         </div>
                                         <div class="row-content">
-                                            <h4 class="list-group-item-heading">{{no.name}}</h4>
+                                            <h4 class="list-group-item-heading" style="margin-top: 10px;">{{no.name}}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -60,9 +60,11 @@
                                         <legend>{{'_EDIT_TEXT_SETTINGS_NETWORKCONFIGURATION' | i18n}}</legend>
                                         <div class="form-group" bs-has-error>
                                             <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_INTERFACE' | i18n}}</label>
-                                            <div class="col-lg-8">
+                                            <div class="col-lg-7">
                                                 <select ng-model="iface" ng-options="iface.endpoint for iface in node.network_interfaces" class="form-control"></select>
                                             </div>
+                                            <!-- TODO code removeInterface() -->
+                                            <a ng-click="removeInterface()" id="btn-delete-interface" class="col-lg-1 btn btn-flat btn-default icon-material-delete"></a>
                                         </div>
                                         <div class="form-group" ng-show="iface" ng-hide="iface.dhcp == undefined">
                                             <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_DHCP' | i18n}}</label>
@@ -92,7 +94,7 @@
                                                 <button ng-click="submit()" class="btn btn-sm btn-primary">{{'_EDIT_BUTTON_SETTINGS_SUBMIT_' | i18n}}</button>
                                             </div>
                                         </div>
-                                        <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#removal-dialog" class="btn btn-default btn-fab icon-material-delete" style="z-index: 50;"></a>
+                                        <a class="btn btn-warning btn-flat" ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#removal-dialog" id="btn-delete-component" style="z-index: 50;"><i class="icon-material-delete"></i> {{'_REMOVAL_TEXT_TITLE_' | i18n}}</a>
 
                                     </fieldset>
                                 </form>

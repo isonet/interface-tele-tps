@@ -75,11 +75,33 @@ a
     width: 100%;
 }
 
+#tpCreatorSideBar a:not(#btn-delete-component), #tpCreatorSideBar input, #tpCreatorSideBar select, #tpCreatorSideBar option
+{
+    color: #000000 !important;
+}
+
 #sidebarTabContents .tab-pane
 {
     height: 200px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+#btn-delete-interface
+{
+    text-align: center;
+    float: right !important;
+    padding: 5px 0 !important;
+    margin-right: 10px;
+    margin-top: -25px;
+}
+
+#btn-delete-component
+{
+    position: relative;
+    float: right;
+    bottom: 5px;
+    color: #ffffff !important;
 }
 
 .list-end
@@ -110,11 +132,6 @@ svg text
     user-select: none;
 }
 
-#settings option
-{
-    color: #000000;
-}
-
 .custom-scrollbar
 {
     padding-right: 5px;
@@ -122,7 +139,7 @@ svg text
 
 .custom-scrollbar::-webkit-scrollbar-track
 {
-    background-color: #8bc34a;
+    background-color: #e7e7e7;
 }
 
 .custom-scrollbar::-webkit-scrollbar
@@ -133,13 +150,13 @@ svg text
 
 .custom-scrollbar::-webkit-scrollbar-thumb
 {
-    background-color: #6b982e;
+    background-color: #c3c3c3;
     border-radius: 2px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover
 {
-    background-color: #63912f;
+    background-color: #b9b9b9;
     border-radius: 2px;
 }
 
@@ -164,7 +181,7 @@ svg text
 
 input, select
 {
-    background-color: rgba(255,255,255,0.2) !important;
+    background-color: rgba(255,255,255,0.5) !important;
     border: 1px solid rgba(0,0,0,0.2) !important;
     border-radius: 2px !important;
     margin: 1px 0 1px 0 !important;
