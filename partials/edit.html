@@ -88,13 +88,14 @@
                                         </div>
                                     </fieldset>
                                     <fieldset>
-                                        <div class="form-group" ng-hide="settings.$pristine">
-                                            <div class="col-lg-12">
-                                                <button ng-click="resetForm()" class="btn btn-sm btn-default">{{'_EDIT_BUTTON_SETTINGS_CANCEL' | i18n}}</button>
-                                                <button ng-click="submit()" class="btn btn-sm btn-primary">{{'_EDIT_BUTTON_SETTINGS_SUBMIT_' | i18n}}</button>
-                                            </div>
+                                        <div class="btn-group btn-group-justified btn-flat">
+                                            <a ng-click="submit()" class="btn btn-primary btn-sm disabled" style="color: #ffffff !important;">{{'_EDIT_BUTTON_SETTINGS_SUBMIT_' | i18n}}</a>
+                                            <a ng-click="resetForm()" class="btn btn-default btn-sm disabled">{{'_EDIT_BUTTON_SETTINGS_CANCEL' | i18n}}</a>
                                         </div>
-                                        <a class="btn btn-warning btn-flat btn-sm" ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#removal-dialog" id="btn-delete-component" style="z-index: 50;"><i class="icon-material-delete"></i> {{'_REMOVAL_TEXT_TITLE_' | i18n}}</a>
+
+                                        <div class="btn-group btn-group-justified btn-flat">
+                                            <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#removal-dialog" class="btn btn-warning btn-sm" id="btn-delete-component"><i class="icon-material-delete"></i> {{'_REMOVAL_TEXT_TITLE_' | i18n}}</a>
+                                        </div>
 
                                     </fieldset>
                                 </form>
