@@ -56,7 +56,7 @@
                                             </div>
                                         </div>
                                     </fieldset>
-                                    <fieldset ng-show="node.type == 'machine'">
+                                    <fieldset ng-show="node.network_interfaces.length > 0">
                                         <legend>{{'_EDIT_TEXT_SETTINGS_NETCONFIGURATION' | i18n}}</legend>
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_INTERFACE' | i18n}}</label>
