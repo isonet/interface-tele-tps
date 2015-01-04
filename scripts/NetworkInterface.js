@@ -89,6 +89,16 @@ NetworkInterface.prototype.getCurrentNode = function() {
 };
 
 /**
+ * Deletes the interface of the current element and the given endpoint
+ * @param {string} endpoint -
+ */
+NetworkInterface.prototype.deleteInterface = function(endpoint) {
+    this.currentElement.deleteInterfaceByEndpoint(endpoint);
+    this.tp.getResourceById(endpoint).deleteInterfaceByEndpoint(this.currentElement.id);
+    this.update();
+};
+
+/**
  * Converts the svg to a canvas and starts the download of a png file
  */
 NetworkInterface.prototype.downloadImage = function() {

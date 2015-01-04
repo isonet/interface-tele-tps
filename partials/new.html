@@ -6,26 +6,26 @@
                 <div class="panel-heading">{{'_NEW_TEXT_TITLE_' | i18n}}</div>
                 <div class="panel-body">
 
-                    <form class="form-horizontal col-lg-8 col-lg-offset-2">
+                    <form class="form-horizontal col-lg-8 col-lg-offset-2" name="mainForm">
                         <fieldset>
                             <legend>{{'_NEW_FORM_TITLE_' | i18n}}</legend>
                             <div class="form-group">
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label">{{'_NEW_FORM_NAME_' | i18n}}</label>
                                     <div class="col-lg-10">
-                                        <input ng-model="meta.experiment.name" class="form-control">
+                                        <input ng-model="meta.experiment.name" class="form-control" required>
                                     </div>
                                     <label class="col-lg-2 control-label">{{'_NEW_FORM_DESCRIPTION_' | i18n}}</label>
                                     <div class="col-lg-10">
-                                        <input ng-model="meta.experiment.description" class="form-control">
+                                        <input ng-model="meta.experiment.description" class="form-control" required>
                                     </div>
                                     <label class="col-lg-2 control-label">{{'_NEW_FORM_OBJECTIVE_' | i18n}}</label>
                                     <div class="col-lg-10">
-                                        <input ng-model="meta.experiment.objectives" class="form-control">
+                                        <input ng-model="meta.experiment.objectives" class="form-control" required>
                                     </div>
                                     <label class="col-lg-2 control-label">{{'_NEW_FORM_AUTHOR_' | i18n}}</label>
                                     <div class="col-lg-10">
-                                        <input ng-model="meta.author" class="form-control">
+                                        <input ng-model="meta.author" class="form-control" required>
                                     </div>
                                     <label class="col-lg-2 control-label">{{'_NEW_FORM_STARTDATE_' | i18n}}</label>
                                     <div class="col-lg-10">

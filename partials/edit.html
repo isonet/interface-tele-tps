@@ -63,8 +63,7 @@
                                             <div class="col-lg-7">
                                                 <select ng-model="iface" ng-options="iface.endpoint for iface in node.network_interfaces" class="form-control"></select>
                                             </div>
-                                            <!-- TODO code removeInterface() -->
-                                            <a ng-click="removeInterface()" id="btn-delete-interface" class="col-lg-1 btn btn-flat btn-default icon-material-delete"></a>
+                                            <a ng-click="$root.ni.deleteInterface(iface.endpoint);" id="btn-delete-interface" class="col-lg-1 btn btn-flat btn-default icon-material-delete"></a>
                                         </div>
                                         <div class="form-group" ng-show="iface" ng-hide="iface.dhcp == undefined">
                                             <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_DHCP' | i18n}}</label>
@@ -89,12 +88,12 @@
                                     </fieldset>
                                     <fieldset>
                                         <div class="btn-group btn-group-justified btn-flat">
-                                            <a ng-click="submit()" class="btn btn-primary btn-sm disabled" style="color: #ffffff !important;">{{'_EDIT_BUTTON_SETTINGS_SUBMIT_' | i18n}}</a>
-                                            <a ng-click="resetForm()" class="btn btn-default btn-sm disabled">{{'_EDIT_BUTTON_SETTINGS_CANCEL' | i18n}}</a>
+                                            <a ng-click="submit()" class="btn btn-primary btn-sm" style="color: #ffffff !important;">{{'_EDIT_BUTTON_SETTINGS_SUBMIT_' | i18n}}</a>
+                                            <a ng-click="resetForm()" class="btn btn-default btn-sm">{{'_EDIT_BUTTON_SETTINGS_CANCEL' | i18n}}</a>
                                         </div>
 
                                         <div class="btn-group btn-group-justified btn-flat">
-                                            <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#removal-dialog" class="btn btn-warning btn-sm" id="btn-delete-component"><i class="icon-material-delete"></i> {{'_REMOVAL_TEXT_TITLE_' | i18n}}</a>
+                                            <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#removal-dialog" class="btn btn-warning btn-sm" id="btn-delete-component"><i class="icon-material-delete"></i>&nbsp;{{'_REMOVAL_TEXT_TITLE_' | i18n}}</a>
                                         </div>
 
                                     </fieldset>

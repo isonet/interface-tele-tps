@@ -59,6 +59,7 @@ function removeFromArray(arr, from, to) {
 }
 
 Resource.prototype.deleteInterfaceByEndpoint = function(endpoint) {
+    console.log('test');
     for(var i = 0; i < this.network_interfaces.length; i++) {
         if (this.network_interfaces[i].endpoint === endpoint) {
             removeFromArray(this.network_interfaces, i);

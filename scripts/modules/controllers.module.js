@@ -196,12 +196,13 @@
             $rootScope.meta = undefined;
         }
 
-
-
         $scope.submit = function() {
-            /** @type {MetaData} **/
-            $rootScope.meta = $scope.meta;
-            $location.path('/edit');
+
+            if($scope.mainForm.$valid) {
+                /** @type {MetaData} **/
+                $rootScope.meta = $scope.meta;
+                $location.path('/edit');
+            }
         };
 
         $scope.resetForm = function() {
