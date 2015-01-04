@@ -28,7 +28,7 @@
         "value" : "Logiciels"
     },
     {
-        "key" : "_EDIT_TEXT_SETTINGS_NETWORKCONFIGURATION",
+        "key" : "_EDIT_TEXT_SETTINGS_NETCONFIGURATION",
         "value" : "Configuration Réseau"
     },
     {
@@ -42,6 +42,10 @@
     {
         "key" : "_EDIT_TEXT_SETTINGS_IP",
         "value" : "IP"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_NETWORK",
+        "value" : "Réseau"
     },
     {
         "key" : "_EDIT_TEXT_SETTINGS_SUBNETMASK",
