@@ -60,6 +60,10 @@
         "value" : "Annuler"
     },
     {
+        "key" : "_EDIT_BUTTON_SETTINGS_REMOVE_",
+        "value" : "Supprimer"
+    },
+    {
         "key" : "_EDIT_BUTTON_DOWNLOAD_CONFIG",
         "value" : "Télécharger config"
     },

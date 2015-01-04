@@ -60,6 +60,10 @@
         "value" : "Abbrechen"
     },
     {
+        "key" : "_EDIT_BUTTON_SETTINGS_REMOVE_",
+        "value" : "Entfernen"
+    },
+    {
         "key" : "_EDIT_BUTTON_DOWNLOAD_CONFIG",
         "value" : "Download config"
     },
