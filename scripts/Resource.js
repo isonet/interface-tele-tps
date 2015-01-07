@@ -1,6 +1,12 @@
 'use strict';
 
 /**
+ @typedef {Object} Link
+ @property {Resource} source - The source Resource
+ @property {Resource} target - The target Resource
+ */
+
+/**
  *
  * @property {string} type - Main type of the resource
  * @property {string} function - Subtype of the resource
@@ -45,8 +51,9 @@ function Resource(type, id, softwareCompliant, func, index, cpu, ram_size, free_
     this.network_interfaces = [];
     if(iface !== undefined && iface.hasOwnProperty('length')) {
         for(var i = 0; i < iface.length; i++) {
+            /** @type {IPv4Configuration} **/
             var e = iface[i].ipv4_configuration;
-            this.network_interfaces.push(new Interface(iface[i].endpoint, e.dhcp, e.ip, e.network, e.netmask, e.gateway));
+            this.network_interfaces.push(new Interface(iface[i].endpointIndex, e.dhcp, e.ip, e.network, e.netmask, e.gateway));
         }
     }
 }
@@ -58,6 +65,10 @@ function removeFromArray(arr, from, to) {
     return arr.push.apply(arr, rest);
 }
 
+/**
+ * Delete an interface by using the index of a resource
+ * @param {number} index - Index of a Resource
+ */
 Resource.prototype.deleteInterfaceByEndpointIndex = function(index) {
     for(var i = 0; i < this.network_interfaces.length; i++) {
         if (this.network_interfaces[i].endpointIndex === index) {
@@ -66,14 +77,26 @@ Resource.prototype.deleteInterfaceByEndpointIndex = function(index) {
     }
 };
 
+/**
+ * Get the id (name) of the Resource
+ * @returns {string}
+ */
 Resource.prototype.getId = function() {
     return this.id;
 };
 
+/**
+ * Get the type of the Resource
+ * @returns {string}
+ */
 Resource.prototype.getType = function() {
     return this.type;
 };
 
+/**
+ * Get the index of the Resource
+ * @returns {number}
+ */
 Resource.prototype.getNetworkObjectIndex = function() {
     return this.networkObjectIndex;
 };
@@ -90,21 +113,26 @@ Resource.prototype.setPosition = function(x, y) {
 };
 
 /**
- *
- * @param {Interface} iface -
+ * Add a new Interface to the Resource
+ * @param {Interface} iface - Interface to add
  */
 Resource.prototype.addInterface = function(iface) {
-    // TODO check if interface (endpoint) already exists
     if(iface === undefined) {
         throw { name: 'ArgumentError', message: 'Iface is required!' };
     }
     this.network_interfaces.push(iface);
 };
 
-Resource.prototype.getConnectedNodes = function(sup, index) {
+/**
+ *
+ * @param {TP} sup - Since javascript has no super, we have to pass the current context (this)
+ * @returns {Link[]}
+ */
+Resource.prototype.getConnectedNodes = function(sup) {
     var links = [];
     if(this.type !== 'switch') {
         for(var j = 0; j < this.network_interfaces.length; j++) {
+            /** @type {Link} **/
             var newLink = {
                 'source': this,
                 'target': sup.getResourceByIndex(this.network_interfaces[j].endpointIndex)

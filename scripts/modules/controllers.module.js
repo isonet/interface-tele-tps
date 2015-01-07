@@ -4,6 +4,7 @@
 (function () {
     'use strict';
 
+    // Define this module as controllers
     var app = angular.module('tpManager.controllers', []);
 
     /**
@@ -239,6 +240,9 @@
             localisation.changeLanguage(code);
         };
 
+        /**
+         * Select a default language
+         */
         $scope.selectLanguage('fr');
 
     }]);

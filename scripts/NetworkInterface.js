@@ -90,7 +90,7 @@ NetworkInterface.prototype.getCurrentNode = function() {
 
 /**
  * Deletes the interface of the current element and the given endpoint
- * @param {number} endpoint -
+ * @param {number} index - Index of the endpoint to delete
  */
 NetworkInterface.prototype.deleteInterface = function(index) {
     this.currentElement.deleteInterfaceByEndpointIndex(index);
@@ -150,8 +150,6 @@ NetworkInterface.prototype.downloadConfig = function() {
     var blob = new Blob([this.tp.toJson()], {type: 'text/json;charset=utf-8'});
     saveAs(blob, this.tp.getName() + '.json');
 };
-
-// TODO WRITE CLASS AROUND CONFIG FILE AND ONLY USE THE INDEX TO ADD A NEW ELEMENT
 
 /**
  * Creates a new object

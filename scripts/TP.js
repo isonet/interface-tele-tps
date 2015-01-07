@@ -39,7 +39,7 @@ function TP(newMetaData) {
 }
 
 /**
- *
+ * Get the meta data from the current project
  * @returns {MetaData}
  */
 TP.prototype.getMeta = function() {
@@ -47,7 +47,7 @@ TP.prototype.getMeta = function() {
 };
 
 /**
- *
+ * Get the name of the current project
  * @returns {string}
  */
 TP.prototype.getName = function() {
@@ -55,25 +55,13 @@ TP.prototype.getName = function() {
 };
 
 /**
- *
+ * Get all the nodes of the current project
  * @returns {Resource[]}
  */
 TP.prototype.getNodes = function() {
     return this.resources;
 };
 
-/**
- *
- * @param {string} id
- * @returns {Resource}
- */
-TP.prototype.getResourceById = function(id) {
-    for(var r in this.resources) {
-        if (this.resources[r].id === id) {
-            return this.resources[r];
-        }
-    }
-};
 
 /**
  * Function to remove an element from an array
@@ -90,7 +78,8 @@ function removeFromArray(arr, from, to) {
 }
 
 /**
- *
+ * Delete a node by a given id (name)
+ * CAREFUL! Ids are supposed to be unique, but it's currently not enforced.
  * @param {string} id
  */
 TP.prototype.deleteNodeById = function(id) {
@@ -102,7 +91,7 @@ TP.prototype.deleteNodeById = function(id) {
 };
 
 /**
- *
+ * Reset very node's position and make them dynamic again
  */
 TP.prototype.resetFixed = function() {
     for(var i = 0; i < this.resources.length; i++) {
@@ -113,13 +102,14 @@ TP.prototype.resetFixed = function() {
 };
 
 /**
- *
- * @returns {Array}
+ * Get all the links of every node
+ * @returns {Link[]}
  */
 TP.prototype.getLinks = function() {
+    /** @type {Link[]} **/
     var links = [];
     for(var i = 0; i < this.resources.length; i++){
-        var l = this.resources[i].getConnectedNodes(this, i);
+        var l = this.resources[i].getConnectedNodes(this);
         if(l.length > 0) {
             links = links.concat(l);
         }
@@ -128,7 +118,7 @@ TP.prototype.getLinks = function() {
 };
 
 /**
- *
+ * Get how many resources there are (1-based)
  * @returns {Number}
  */
 TP.prototype.getResourceSize = function() {
@@ -136,7 +126,7 @@ TP.prototype.getResourceSize = function() {
 };
 
 /**
- *
+ * Add a new Resource
  * @param {Resource} res
  */
 TP.prototype.addResource = function(res) {
@@ -144,7 +134,7 @@ TP.prototype.addResource = function(res) {
 };
 
 /**
- *
+ * Get a Resource by it's index
  * @param {number} index
  * @returns {Resource}
  */
@@ -153,7 +143,7 @@ TP.prototype.getResourceByIndex = function (index) {
 };
 
 /**
- *
+ * Converts the current project to JSON respecting all the constraints
  * @returns {string}
  */
 TP.prototype.toJson = function() {

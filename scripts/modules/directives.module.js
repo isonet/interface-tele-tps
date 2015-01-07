@@ -3,6 +3,9 @@
     'use strict';
     var app = angular.module('tpManager.directives', []);
 
+    /**
+     * Defines which DOM Elements should be watched
+     */
     app.directive('responsive', function() {
         return {
             replace: true,
@@ -15,6 +18,9 @@
         }
     });
 
+    /**
+     * Formats a date type to the current locale
+     */
     app.directive('dateformatter', function () {
         return {
             require: 'ngModel',

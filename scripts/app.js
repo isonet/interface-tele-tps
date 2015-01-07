@@ -12,7 +12,6 @@
         'tpManager.filters',
         'ngStorage',
         'ui.bootstrap.datetimepicker'
-        //'tpManager.services'
     ]);
 
     /**
