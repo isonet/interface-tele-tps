@@ -186,6 +186,21 @@ input
     padding: 0 3px 0 3px !important;
 }
 
+::-webkit-input-placeholder {
+    color:    #aaa !important;
+}
+:-moz-placeholder {
+    color:    #aaa !important;
+    opacity:  1;
+}
+::-moz-placeholder {
+    color:    #aaa !important;
+    opacity:  1;
+}
+:-ms-input-placeholder {
+    color:    #aaa !important;
+}
+
 select
 {
     box-sizing: content-box !important;

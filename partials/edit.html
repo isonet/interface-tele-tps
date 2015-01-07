@@ -74,19 +74,19 @@
                                         <div class="form-group" ng-show="iface.dhcp  == false" ng-hide="iface.dhcp !== false">
                                             <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_IP' | i18n}}</label>
                                             <div class="col-lg-8">
-                                                <input ng-model="iface.ip" class="form-control">
+                                                <input ng-model="iface.ip" class="form-control" placeholder="192.168.1.10">
                                             </div>
                                             <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_NETWORK' | i18n}}</label>
                                             <div class="col-lg-8">
-                                                <input ng-model="iface.network" class="form-control">
+                                                <input ng-model="iface.network" class="form-control" placeholder="192.168.1.0">
                                             </div>
                                             <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_SUBNETMASK' | i18n}}</label>
                                             <div class="col-lg-8">
-                                                <input ng-model="iface.netmask" class="form-control">
+                                                <input ng-model="iface.netmask" class="form-control" placeholder="255.255.255.0">
                                             </div>
                                             <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_GATEWAY' | i18n}}</label>
                                             <div class="col-lg-8">
-                                                <input ng-model="iface.gateway" class="form-control">
+                                                <input ng-model="iface.gateway" class="form-control" placeholder="192.168.1.254">
                                             </div>
                                         </div>
                                     </fieldset>
