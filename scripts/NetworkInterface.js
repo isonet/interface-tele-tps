@@ -96,6 +96,7 @@ NetworkInterface.prototype.deleteInterface = function(endpoint) {
     this.currentElement.deleteInterfaceByEndpoint(endpoint);
     this.tp.getResourceById(endpoint).deleteInterfaceByEndpoint(this.currentElement.id);
     this.update();
+    angular.element($('#settingsForm')).scope().reset();
 };
 
 /**
