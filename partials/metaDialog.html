@@ -6,7 +6,7 @@
                 <h4 class="modal-title">{{'_META_TEXT_TITLE_' | i18n}}</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="metaForm" novalidate name="meta">
+                <form class="form-horizontal" id="metaForm" novalidate name="metaForm">
                     <fieldset>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">{{'_META_FORM_NAME_' | i18n}}</label>
@@ -30,7 +30,7 @@
                                 <div class="dropdown">
                                     <a ng-click="$root.localeChangeFinished = true" class="dropdown-toggle" id="startdate" role="button" data-toggle="dropdown" data-target="#" href>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" value="{{meta.experiment.starting_date | date:'yyyy-MM-dd HH:mm'}}" readonly="readonly" style="cursor:pointer">
+                                            <input dateformatter ng-model="meta.experiment.starting_date" type="text" class="form-control" readonly="readonly" style="cursor:pointer" required="">
                                                     <span class="input-group-addon">
                                                         <i class="glyphicon glyphicon-calendar"></i>
                                                     </span>
@@ -46,7 +46,7 @@
                                 <div class="dropdown">
                                     <a ng-click="$root.localeChangeFinished = true" class="dropdown-toggle" id="enddate" role="button" data-toggle="dropdown" data-target="#" href>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" value="{{meta.experiment.ending_date | date:'yyyy-MM-dd HH:mm'}}" readonly="readonly" style="cursor:pointer">
+                                            <input dateformatter type="text" class="form-control" ng-model="meta.experiment.ending_date" readonly="readonly" style="cursor:pointer" required="">
                                                     <span class="input-group-addon">
                                                         <i class="glyphicon glyphicon-calendar"></i>
                                                     </span>
@@ -62,7 +62,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button ng-click="submit()" class="btn btn-flat btn-success" data-dismiss="modal">{{'_META_BUTTON_SUBMIT_' | i18n}}</button>
+                <button ng-click="submit()" class="btn btn-flat btn-success" data-dismiss="{{ metaForm.$valid && 'modal' || '' }}">{{'_META_BUTTON_SUBMIT_' | i18n}}</button>
                 <button ng-click="resetForm()" class="btn btn-flat btn-primary" data-dismiss="modal">{{'_META_BUTTON_CANCEL_' | i18n}}</button>
             </div>
         </div>

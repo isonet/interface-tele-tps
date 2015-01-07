@@ -143,15 +143,17 @@
 
         $scope.submit = function() {
 
-            for(var k in $scope.meta) $scope.backup[k] = $scope.meta[k];
+            if($scope.metaForm.$valid) {
+                for(var k in $scope.meta) $scope.backup[k] = $scope.meta[k];
 
-            $scope.resetForm();
-            var snack = {
-                content: 'Modifications enregistrées',
-                style: 'snackbar',
-                timeout: 3000
-            };
-            $.snackbar(snack);
+                $scope.resetForm();
+                var snack = {
+                    content: 'Modifications enregistrées',
+                    style: 'snackbar',
+                    timeout: 3000
+                };
+                $.snackbar(snack);
+            }
         };
 
 
