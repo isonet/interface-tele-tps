@@ -90,11 +90,11 @@ NetworkInterface.prototype.getCurrentNode = function() {
 
 /**
  * Deletes the interface of the current element and the given endpoint
- * @param {string} endpoint -
+ * @param {number} endpoint -
  */
-NetworkInterface.prototype.deleteInterface = function(endpoint) {
-    this.currentElement.deleteInterfaceByEndpoint(endpoint);
-    this.tp.getResourceById(endpoint).deleteInterfaceByEndpoint(this.currentElement.id);
+NetworkInterface.prototype.deleteInterface = function(index) {
+    this.currentElement.deleteInterfaceByEndpointIndex(index);
+    this.tp.getResourceByIndex(index).deleteInterfaceByEndpointIndex(this.currentElement.index);
     this.update();
     angular.element($('#settingsForm')).scope().reset();
 };
@@ -365,10 +365,10 @@ NetworkInterface.prototype.update = function() {
 
                             if (startpoint.getId() !== endpoint.getId()) {
                                 if (startpoint.getType() !== 'switch') {
-                                    startpoint.addInterface(new Interface(endpoint.getId(), true));
+                                    startpoint.addInterface(new Interface(endpoint.getNetworkObjectIndex(), true));
                                 }
                                 if (endpoint.getType() !== 'switch') {
-                                    endpoint.addInterface(new Interface(startpoint.getId(), true));
+                                    endpoint.addInterface(new Interface(startpoint.getNetworkObjectIndex(), true));
                                 }
                                 // Update the sidebar
                                 angular.element(tpCreatorCanvasScope).scope().reset();

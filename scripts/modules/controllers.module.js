@@ -50,6 +50,15 @@
             $.snackbar(snack);
         };
 
+        /**
+         * Updates the removal dialog when the name of a node changes
+         */
+        $scope.$watch('backup.id', function() {
+            if(!angular.isUndefined($scope.backup)) {
+                $rootScope.updateRemovalDialogController($scope.backup.id);
+            }
+        });
+
         $scope.reset = function() {
             $scope.backup = $rootScope.ni.getCurrentNode();
             $scope.node = angular.copy($scope.backup);

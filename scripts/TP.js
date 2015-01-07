@@ -180,6 +180,12 @@ TP.prototype.toJson = function() {
         if(r.function !== 'terminal') {
             delete r.extra_modules;
         }
+        for(var i = 0; i < r.network_interfaces.length; i++) {
+            /** @type {number} **/
+            var index = r.network_interfaces[i].endpointIndex;
+            delete r.network_interfaces[i].endpointIndex;
+            r.network_interfaces[i].endpoint = this.getResourceByIndex(index).getId();
+        }
     }
     return JSON.stringify(d, null, 2);
 };

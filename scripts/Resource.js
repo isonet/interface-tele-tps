@@ -58,9 +58,9 @@ function removeFromArray(arr, from, to) {
     return arr.push.apply(arr, rest);
 }
 
-Resource.prototype.deleteInterfaceByEndpoint = function(endpoint) {
+Resource.prototype.deleteInterfaceByEndpointIndex = function(index) {
     for(var i = 0; i < this.network_interfaces.length; i++) {
-        if (this.network_interfaces[i].endpoint === endpoint) {
+        if (this.network_interfaces[i].endpointIndex === index) {
             removeFromArray(this.network_interfaces, i);
         }
     }
@@ -107,12 +107,12 @@ Resource.prototype.getConnectedNodes = function(sup, index) {
         for(var j = 0; j < this.network_interfaces.length; j++) {
             var newLink = {
                 'source': this,
-                'target': sup.getResourceById(this.network_interfaces[j].endpoint)
+                'target': sup.getResourceByIndex(this.network_interfaces[j].endpointIndex)
             };
             if(newLink.target !== undefined) {
                 links.push(newLink);
             } else {
-                this.deleteInterfaceByEndpoint(this.network_interfaces[j].endpoint);
+                this.deleteInterfaceByEndpointIndex(this.network_interfaces[j].endpointIndex);
             }
         }
     }
