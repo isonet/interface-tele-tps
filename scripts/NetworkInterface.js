@@ -92,11 +92,11 @@ NetworkInterface.prototype.getCurrentNode = function() {
 
 /**
  * Deletes the interface of the current element and the given endpoint
- * @param {number} index - Index of the endpoint to delete
+ * @param {Resource} endpoint - Endpoint to delete
  */
-NetworkInterface.prototype.deleteInterface = function(index) {
-    this.currentElement.deleteInterfaceByEndpointIndex(index);
-    this.tp.getResourceByIndex(index).deleteInterfaceByEndpointIndex(this.currentElement.index);
+NetworkInterface.prototype.deleteConnection = function(endpoint) {
+    this.currentElement.deleteInterfaceByEndpoint(endpoint);
+    endpoint.deleteInterfaceByEndpoint(this.currentElement);
     this.update();
     angular.element($('#settingsForm')).scope().reset();
 };
@@ -264,7 +264,7 @@ NetworkInterface.prototype.update = function() {
             return th.networkObjectList[d.getNetworkObjectIndex()].image;
         })
         .on('mousedown', function(d) {
-            th.currentElement = th.tp.getResourceByIndex(d.index);
+            th.currentElement = d;
             th.g.selectAll('image').style('filter', '');
             d3.select(this).style('filter', 'url(#dropshadow)');
             th.g.selectAll('image').sort(function (a, b) {
@@ -273,7 +273,7 @@ NetworkInterface.prototype.update = function() {
             });
         })
         .on('click', function(d) {
-            th.currentElement = th.tp.getResourceByIndex(d.index);
+            th.currentElement = d;
             th.svg.on('mouseup', mouseup);
         })
         .on('mouseenter', function(d) {
@@ -365,12 +365,12 @@ NetworkInterface.prototype.update = function() {
                             /** @type {Resource} **/
                             var endpoint = th.hoverElement;
 
-                            if (startpoint.index !== endpoint.index) {
+                            if (!startpoint.equals(endpoint)) {
                                 if (startpoint.getType() !== 'switch') {
-                                    startpoint.addInterface(new Interface(endpoint.index, true));
+                                    startpoint.addInterface(new Interface(endpoint, true));
                                 }
                                 if (endpoint.getType() !== 'switch') {
-                                    endpoint.addInterface(new Interface(startpoint.index, true));
+                                    endpoint.addInterface(new Interface(startpoint, true));
                                 }
                                 // Update the sidebar
                                 angular.element(tpCreatorCanvasScope).scope().reset();

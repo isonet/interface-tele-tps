@@ -109,7 +109,7 @@ TP.prototype.getLinks = function() {
     /** @type {Link[]} **/
     var links = [];
     for(var i = 0; i < this.resources.length; i++){
-        var l = this.resources[i].getConnectedNodes(this);
+        var l = this.resources[i].getConnectedNodes();
         if(l.length > 0) {
             links = links.concat(l);
         }
@@ -131,15 +131,6 @@ TP.prototype.getResourceSize = function() {
  */
 TP.prototype.addResource = function(res) {
     this.resources.push(res);
-};
-
-/**
- * Get a Resource by it's index
- * @param {number} index
- * @returns {Resource}
- */
-TP.prototype.getResourceByIndex = function (index) {
-    return this.resources[index];
 };
 
 /**
@@ -171,10 +162,10 @@ TP.prototype.toJson = function() {
             delete r.extra_modules;
         }
         for(var i = 0; i < r.network_interfaces.length; i++) {
-            /** @type {number} **/
-            var index = r.network_interfaces[i].endpointIndex;
-            delete r.network_interfaces[i].endpointIndex;
-            r.network_interfaces[i].endpoint = this.getResourceByIndex(index).getId();
+            /** @type {Resource} **/
+            var endpoint = r.network_interfaces[i].endpoint;
+            delete r.network_interfaces[i].endpoint;
+            r.network_interfaces[i].endpoint = endpoint.getId();
         }
     }
     return JSON.stringify(d, null, 2);

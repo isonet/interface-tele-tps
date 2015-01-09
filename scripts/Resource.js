@@ -26,11 +26,10 @@
  * @param {number} [cpu] - Number of CPUs
  * @param {string} [ram_size] - Virtual memory size
  * @param {string} [free_space_size] - Free hard drive space
- * @param {Interface[]} [iface] - List of network interfaces
  *
  * @constructor
  */
-function Resource(type, id, softwareCompliant, func, networkObjectListIndex, cpu, ram_size, free_space_size, iface) {
+function Resource(type, id, softwareCompliant, func, networkObjectListIndex, cpu, ram_size, free_space_size) {
     /** @type {string} **/
     this.type = type;
     /** @type {string} **/
@@ -49,13 +48,6 @@ function Resource(type, id, softwareCompliant, func, networkObjectListIndex, cpu
     this.free_space_size = free_space_size;
     /** @type {Interface[]} **/
     this.network_interfaces = [];
-    if(iface !== undefined && iface.hasOwnProperty('length')) {
-        for(var i = 0; i < iface.length; i++) {
-            /** @type {IPv4Configuration} **/
-            var e = iface[i].ipv4_configuration;
-            this.network_interfaces.push(new Interface(iface[i].endpointIndex, e.dhcp, e.ip, e.network, e.netmask, e.gateway));
-        }
-    }
 }
 
 // Array Remove - By John Resig (MIT Licensed)
@@ -67,14 +59,23 @@ function removeFromArray(arr, from, to) {
 
 /**
  * Delete an interface by using the index of a resource
- * @param {number} index - Index of a Resource
+ * @param {Resource} endpoint - Index of a Resource
  */
-Resource.prototype.deleteInterfaceByEndpointIndex = function(index) {
+Resource.prototype.deleteInterfaceByEndpoint = function(endpoint) {
     for(var i = 0; i < this.network_interfaces.length; i++) {
-        if (this.network_interfaces[i].endpointIndex === index) {
+        if (this.network_interfaces[i].endpoint.equals(endpoint)) {
             removeFromArray(this.network_interfaces, i);
         }
     }
+};
+
+/**
+ *
+ * @param {Resource} res -
+ * @returns {boolean}
+ */
+Resource.prototype.equals = function(res) {
+    return (this.index === res.index);
 };
 
 /**
@@ -125,22 +126,21 @@ Resource.prototype.addInterface = function(iface) {
 
 /**
  *
- * @param {TP} sup - Since javascript has no super, we have to pass the current context (this)
  * @returns {Link[]}
  */
-Resource.prototype.getConnectedNodes = function(sup) {
+Resource.prototype.getConnectedNodes = function() {
     var links = [];
     if(this.type !== 'switch') {
         for(var j = 0; j < this.network_interfaces.length; j++) {
             /** @type {Link} **/
             var newLink = {
                 'source': this,
-                'target': sup.getResourceByIndex(this.network_interfaces[j].endpointIndex)
+                'target': this.network_interfaces[j].endpoint
             };
             if(newLink.target !== undefined) {
                 links.push(newLink);
             } else {
-                this.deleteInterfaceByEndpointIndex(this.network_interfaces[j].endpointIndex);
+                this.deleteInterfaceByEndpoint(this.network_interfaces[j].endpoint);
             }
         }
     }

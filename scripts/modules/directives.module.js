@@ -24,7 +24,7 @@
     app.directive('dateformatter', function () {
         return {
             require: 'ngModel',
-            link: function(elem, $scope, attrs, ngModel){
+            link: function(elem, $scope, attrs, ngModel) {
                 ngModel.$formatters.push(function(val) {
                     if(!angular.isUndefined(val)) {
                         return moment(val).format('LLL');
