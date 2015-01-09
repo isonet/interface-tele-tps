@@ -15,7 +15,9 @@
  */
 function NetworkInterface(newMeta) {
 
+    /** @type {Resource} **/
     this.currentElement = undefined;
+    /** @type {Resource} **/
     this.hoverElement = undefined;
 
     var container = $('#mainCanvas');
@@ -153,7 +155,7 @@ NetworkInterface.prototype.downloadConfig = function() {
 
 /**
  * Creates a new object
- * @param {number} i - index
+ * @param {number} i - networkObjectList index
  * @param {number} [x] - X Position
  * @param {number} [y] - Y Position
  */
@@ -358,15 +360,17 @@ NetworkInterface.prototype.update = function() {
                     if (th.hoverElement !== null && th.hoverElement !== undefined) {
                         line.attr('class', 'line');
                         try {
+                            /** @type {Resource} **/
                             var startpoint = startElement;
+                            /** @type {Resource} **/
                             var endpoint = th.hoverElement;
 
-                            if (startpoint.getId() !== endpoint.getId()) {
+                            if (startpoint.index !== endpoint.index) {
                                 if (startpoint.getType() !== 'switch') {
-                                    startpoint.addInterface(new Interface(endpoint.getNetworkObjectIndex(), true));
+                                    startpoint.addInterface(new Interface(endpoint.index, true));
                                 }
                                 if (endpoint.getType() !== 'switch') {
-                                    endpoint.addInterface(new Interface(startpoint.getNetworkObjectIndex(), true));
+                                    endpoint.addInterface(new Interface(startpoint.index, true));
                                 }
                                 // Update the sidebar
                                 angular.element(tpCreatorCanvasScope).scope().reset();

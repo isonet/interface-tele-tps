@@ -22,7 +22,7 @@
  * @param {string} id - Unique resource identifier
  * @param {boolean} softwareCompliant - If true, modules from extra_modules can be installed
  * @param {string} [func] - Subtype of the resource (function)
- * @param {number} [index] -
+ * @param {number} [networkObjectListIndex] - networkObjectList Index
  * @param {number} [cpu] - Number of CPUs
  * @param {string} [ram_size] - Virtual memory size
  * @param {string} [free_space_size] - Free hard drive space
@@ -30,7 +30,7 @@
  *
  * @constructor
  */
-function Resource(type, id, softwareCompliant, func, index, cpu, ram_size, free_space_size, iface) {
+function Resource(type, id, softwareCompliant, func, networkObjectListIndex, cpu, ram_size, free_space_size, iface) {
     /** @type {string} **/
     this.type = type;
     /** @type {string} **/
@@ -38,7 +38,7 @@ function Resource(type, id, softwareCompliant, func, index, cpu, ram_size, free_
     /** @type {string} **/
     this.id = id;
     /** @type {number} **/
-    this.networkObjectIndex = index;
+    this.networkObjectIndex = networkObjectListIndex;
     /** @type {boolean} **/
     this.softwareCompliant = softwareCompliant;
     /** @type {number} **/
