@@ -36,3 +36,12 @@ function Interface(endpoint, dhcp, ip, network, netmask, gateway) {
     /** @type {string} **/
     this.gateway = gateway;
 }
+
+/**
+ * Check if two interfaces are the same by comparing their endpoint
+ * @param {Interface} iface
+ * @returns {boolean}
+ */
+Interface.prototype.equals = function(iface) {
+    return (this.endpoint.equals(iface.endpoint));
+};

@@ -121,7 +121,16 @@ Resource.prototype.addInterface = function(iface) {
     if(iface === undefined) {
         throw { name: 'ArgumentError', message: 'Iface is required!' };
     }
-    this.network_interfaces.push(iface);
+    /** @type {boolean} **/
+    var exists = false;
+    for(var j = 0; j < this.network_interfaces.length; j++) {
+        if(this.network_interfaces[j].equals(iface)) {
+            exists = true;
+        }
+    }
+    if(!exists) {
+        this.network_interfaces.push(iface);
+    }
 };
 
 /**
