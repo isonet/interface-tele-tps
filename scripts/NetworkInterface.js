@@ -96,7 +96,9 @@ NetworkInterface.prototype.getCurrentNode = function() {
  */
 NetworkInterface.prototype.deleteConnection = function(endpoint) {
     this.currentElement.deleteInterfaceByEndpoint(endpoint);
-    endpoint.deleteInterfaceByEndpoint(this.currentElement);
+    // Not possible because endpoint is a copy
+    // endpoint.deleteInterfaceByEndpoint(this.currentElement);
+    this.tp.getEndpoint(endpoint).deleteInterfaceByEndpoint(this.currentElement);
     this.update();
     angular.element($('#settingsForm')).scope().reset();
 };

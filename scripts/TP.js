@@ -90,6 +90,7 @@ TP.prototype.deleteNodeById = function(id) {
     }
 };
 
+// TODO USE EQUALS
 /**
  * Reset very node's position and make them dynamic again
  */
@@ -115,6 +116,19 @@ TP.prototype.getLinks = function() {
         }
     }
     return links;
+};
+
+/**
+ * Get an resource when the original object has been modified by angular
+ * @param {Resource} endpoint - modified endpoint or copy
+ * @returns {Resource}
+ */
+TP.prototype.getEndpoint = function(endpoint) {
+    for(var i = 0; i < this.resources.length; i++) {
+        if (this.resources[i].equals(endpoint)) {
+            return this.resources[i];
+        }
+    }
 };
 
 /**
