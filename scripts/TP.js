@@ -78,19 +78,16 @@ function removeFromArray(arr, from, to) {
 }
 
 /**
- * Delete a node by a given id (name)
- * CAREFUL! Ids are supposed to be unique, but it's currently not enforced.
- * @param {string} id
+ * Delete a Resource
+ * @param {Resource} res -
  */
-TP.prototype.deleteNodeById = function(id) {
+TP.prototype.deleteResource = function(res) {
     for(var i = 0; i < this.resources.length; i++) {
-        if (this.resources[i].id === id) {
-            removeFromArray(this.resources, i);
-        }
+        this.resources[i].deleteInterfaceByEndpoint(this.getEndpoint(res));
     }
+    removeFromArray(this.resources, res.index);
 };
 
-// TODO USE EQUALS
 /**
  * Reset very node's position and make them dynamic again
  */

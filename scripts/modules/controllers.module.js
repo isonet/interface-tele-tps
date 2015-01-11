@@ -56,14 +56,14 @@
          */
         $scope.$watch('backup.id', function() {
             if(!angular.isUndefined($scope.backup)) {
-                $rootScope.updateRemovalDialogController($scope.backup.id);
+                $rootScope.updateRemovalDialogController($scope.backup);
             }
         });
 
         $scope.reset = function() {
             $scope.backup = $rootScope.ni.getCurrentNode();
             $scope.node = angular.copy($scope.backup);
-            $rootScope.updateRemovalDialogController($scope.node.getId());
+            $rootScope.updateRemovalDialogController($scope.node);
             /** @type {Interface} **/
             $scope.iface = $scope.node.network_interfaces[0];
         };
@@ -179,15 +179,19 @@
      */
     app.controller('RemovalDialogController', ['$scope', '$rootScope', function($scope, $rootScope) {
 
-        /** @type {string} **/
-        $scope.id = '';
+        /** @type {Resource} **/
+        $scope.res;
 
-        $rootScope.updateRemovalDialogController = function(id) {
-            $scope.id = id;
+        /**
+         *
+         * @param {Resource} res -
+         */
+        $rootScope.updateRemovalDialogController = function(res) {
+            $scope.res = res;
         };
 
         $scope.deleteNode = function() {
-            $rootScope.ni.tp.deleteNodeById($scope.id);
+            $rootScope.ni.tp.deleteResource($scope.res);
             $rootScope.ni.update();
         }
     }]);
