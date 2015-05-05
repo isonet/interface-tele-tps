@@ -120,7 +120,7 @@
             $('#tpCreatorSideBar').stop().animate({ marginRight: position + 'px' }, 300);
             if(state != $scope.sidebarIsDisplayed) {
                 // Change the image of the button
-                $('#tpCreatorCanvas').find('.btn-fab').toggleClass('icon-material-add icon-material-close');
+                $('#tpCreatorCanvas').find('.btn-fab').toggleClass('fa-plus-circle fa-times-circle');
                 $scope.sidebarIsDisplayed = !$scope.sidebarIsDisplayed;
             }
             if(tab == $scope.TAB.SETTINGS) {

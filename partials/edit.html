@@ -1,10 +1,10 @@
 <div class="col-lg-12" id="tpCreatorCanvas" ng-controller="SettingsController">
     <div class="bs-component">
         <div class="list-group">
-            <div class="panel panel-default">
+            <div class="panel panel-primary panel-default">
                 <div class="panel-heading" style="z-index: 10">
-                    {{'_EDIT_TEXT_TITLE_' | i18n}} | {{$root.meta.experiment.name}} <span ng-click="$root.loadMetaDialogController()" class="icon-material-create" style="cursor:pointer;" data-toggle="modal" data-target="#meta-dialog"></span>
-                    <a ng-click="toggleSidebar(!sidebarIsDisplayed, TAB.NEW)" class="btn btn-fab btn-material-orange btn-raised icon-material-add" style="z-index: 50;"></a>
+                    {{'_EDIT_TEXT_TITLE_' | i18n}} | {{$root.meta.experiment.name}} <span ng-click="$root.loadMetaDialogController()" class="fa fa-pencil" style="cursor:pointer;" data-toggle="modal" data-target="#meta-dialog"></span>
+                    <a ng-click="toggleSidebar(!sidebarIsDisplayed, TAB.NEW)" class="btn btn-fab btn-raised fa fa-plus-circle" style="z-index: 50;color: #fff;font-size: 30px;top: 0px;"></a>
                 </div>
 
                 <div class="panel-body" id="conceptorCanvas" ng-style="{'height': $root.size.canvasHeight + 'px'}">
@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="form-group" ng-show="node.softwareCompliant">
                                             <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_SOFTWARE' | i18n}}</label>
-                                            <div class="col-lg-8">
+                                            <div class="col-lg-7">
                                                 <select multiple ng-model="node.extra_modules" ng-options="software for software in softwareList" class="form-control"></select>
                                             </div>
                                         </div>
@@ -63,7 +63,7 @@
                                             <div class="col-lg-7">
                                                 <select ng-model="iface" ng-options="iface.endpoint.getId() for iface in node.network_interfaces" class="form-control"></select>
                                             </div>
-                                            <a ng-click="$root.ni.deleteConnection(iface.endpoint)" id="btn-delete-interface" class="col-lg-1 btn btn-flat btn-default icon-material-delete"></a>
+                                            <a ng-click="$root.ni.deleteConnection(iface.endpoint)" id="btn-delete-interface" class="col-lg-1 btn btn-flat btn-default fa fa-trash-o"></a>
                                         </div>
                                         <div class="form-group" ng-show="iface" ng-hide="iface.dhcp == undefined">
                                             <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_DHCP' | i18n}}</label>
@@ -97,7 +97,7 @@
                                         </div>
 
                                         <div class="btn-group btn-group-justified btn-flat">
-                                            <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#removal-dialog" class="btn btn-warning btn-sm" id="btn-delete-component"><i class="icon-material-delete"></i>&nbsp;{{'_EDIT_BUTTON_SETTINGS_REMOVE_' | i18n}}</a>
+                                            <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#removal-dialog" class="btn btn-warning btn-sm" id="btn-delete-component"><i class="fa fa-trash-o"></i>&nbsp;{{'_EDIT_BUTTON_SETTINGS_REMOVE_' | i18n}}</a>
                                         </div>
 
                                     </fieldset>
@@ -107,9 +107,11 @@
                     </div>
                 </div>
                 <div class="panel-footer clearfix">
-                    <a href="javascript:void(0)" ng-click="$root.ni.downloadConfig()" class="btn btn-flat btn-primary btn-xs pull-right" style="z-index: 50;">{{'_EDIT_BUTTON_DOWNLOAD_CONFIG' | i18n}}</a>
-                    <a href="javascript:void(0)" ng-click="$root.ni.downloadImage()" class="btn btn-flat btn-primary btn-xs pull-right" style="z-index: 50;">{{'_EDIT_BUTTON_DOWNLOAD_IMAGE' | i18n}}</a>
-                    <a href="javascript:void(0)" ng-click="$root.ni.downloadSvg()" class="btn btn-flat btn-primary btn-xs pull-right" style="z-index: 50;">{{'_EDIT_BUTTON_DOWNLOAD_SVG' | i18n}}</a>
+                    <div class="btn-group pull-right" role="group">
+                      <button type="button" ng-click="$root.ni.downloadConfig()" class="btn btn-default btn-xs" style="z-index: 50;">{{'_EDIT_BUTTON_DOWNLOAD_CONFIG' | i18n}}</button>
+                      <button type="button" ng-click="$root.ni.downloadImage()" class="btn btn-default btn-xs" style="z-index: 50;">{{'_EDIT_BUTTON_DOWNLOAD_IMAGE' | i18n}}</button>
+                      <button type="button" ng-click="$root.ni.downloadSvg()" class="btn btn-default btn-xs" style="z-index: 50;">{{'_EDIT_BUTTON_DOWNLOAD_SVG' | i18n}}</button>
+                    </div>
                 </div>
             </div>
 
