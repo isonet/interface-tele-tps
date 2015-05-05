@@ -1,6 +1,8 @@
 .idea/
 .DS_Store
 
+out/
+
 # Created by https://www.gitignore.io
 
 ### Node ###
