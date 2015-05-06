@@ -5,7 +5,7 @@
     },
     {
         "key" : "_EDIT_TEXT_TITLE_",
-        "value" : "TP Designer"
+        "value" : "Remote Experiment Designer"
     },
     {
         "key" : "_EDIT_TEXT_COMPONENTS_",
@@ -81,7 +81,7 @@
     },
     {
         "key" : "_HEADER_TEXT_NEW_",
-        "value" : "New TP"
+        "value" : "New Remote Experiment"
     },
     {
         "key" : "_HEADER_TEXT_LANGUAGE_ENGLISH_",
@@ -97,11 +97,11 @@
     },
     {
         "key" : "_NEW_TEXT_TITLE_",
-        "value" : "Create a new TP"
+        "value" : "Create a new remote experiment"
     },
     {
         "key" : "_NEW_FORM_TITLE_",
-        "value" : "New TP"
+        "value" : "New Remote Experiment"
     },
     {
         "key" : "_NEW_FORM_NAME_",
