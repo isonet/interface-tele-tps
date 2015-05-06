@@ -44,56 +44,56 @@
                                     <fieldset>
                                         <legend>{{'_EDIT_TEXT_SETTINGS_CONFIGURATION' | i18n}}</legend>
                                         <div class="form-group">
-                                            <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_ID' | i18n}}</label>
-                                            <div class="col-lg-8">
+                                            <label class="col-xs-4 control-label">{{'_EDIT_TEXT_SETTINGS_ID' | i18n}}</label>
+                                            <div class="col-xs-8">
                                                 <input ng-model="node.id" class="form-control">
                                             </div>
                                         </div>
                                         <div class="form-group" ng-show="node.softwareCompliant">
-                                            <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_SOFTWARE' | i18n}}</label>
-                                            <div class="col-lg-8">
+                                            <label class="col-xs-4 control-label">{{'_EDIT_TEXT_SETTINGS_SOFTWARE' | i18n}}</label>
+                                            <div class="col-xs-8">
                                                 <select multiple ng-model="node.extra_modules" ng-options="software for software in softwareList" class="form-control"></select>
                                             </div>
                                         </div>
                                     </fieldset>
                                     <fieldset ng-show="node.network_interfaces.length > 0">
                                         <legend>{{'_EDIT_TEXT_SETTINGS_NETCONFIGURATION' | i18n}}</legend>
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_INTERFACE' | i18n}}</label>
-                                            <div class="col-lg-7">
+                                        <div class="form-group row">
+                                            <label class="col-xs-4 control-label">{{'_EDIT_TEXT_SETTINGS_INTERFACE' | i18n}}</label>
+                                            <div class="col-xs-7">
                                                 <select ng-model="iface" ng-options="iface.endpoint.getId() for iface in node.network_interfaces" class="form-control"></select>
                                             </div>
-                                            <a ng-click="$root.ni.deleteConnection(iface.endpoint)" id="btn-delete-interface" class="col-lg-1 btn btn-flat btn-default fa fa-trash-o"></a>
+                                            <a ng-click="$root.ni.deleteConnection(iface.endpoint)" id="btn-delete-interface" class="col-xs-1 btn btn-flat btn-default fa fa-trash-o"></a>
                                         </div>
                                         <div class="form-group" ng-show="iface" ng-hide="iface.dhcp == undefined">
-                                            <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_DHCP' | i18n}}</label>
-                                            <div class="col-lg-8" style="line-height: 27px;">
+                                            <label class="col-xs-4 control-label">{{'_EDIT_TEXT_SETTINGS_DHCP' | i18n}}</label>
+                                            <div class="col-xs-8" style="line-height: 27px;">
                                                 <input ng-model="iface.dhcp" type="checkbox">
                                             </div>
                                         </div>
                                         <div class="form-group" ng-show="iface.dhcp  == false" ng-hide="iface.dhcp !== false">
-                                            <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_IP' | i18n}}</label>
-                                            <div class="col-lg-8">
+                                            <label class="col-xs-4 control-label">{{'_EDIT_TEXT_SETTINGS_IP' | i18n}}</label>
+                                            <div class="col-xs-8">
                                                 <input ng-model="iface.ip" class="form-control" placeholder="192.168.1.10">
                                             </div>
-                                            <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_NETWORK' | i18n}}</label>
-                                            <div class="col-lg-8">
+                                            <label class="col-xs-4 control-label">{{'_EDIT_TEXT_SETTINGS_NETWORK' | i18n}}</label>
+                                            <div class="col-xs-8">
                                                 <input ng-model="iface.network" class="form-control" placeholder="192.168.1.0">
                                             </div>
-                                            <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_SUBNETMASK' | i18n}}</label>
-                                            <div class="col-lg-8">
+                                            <label class="col-xs-4 control-label">{{'_EDIT_TEXT_SETTINGS_SUBNETMASK' | i18n}}</label>
+                                            <div class="col-xs-8">
                                                 <input ng-model="iface.netmask" class="form-control" placeholder="255.255.255.0">
                                             </div>
-                                            <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_GATEWAY' | i18n}}</label>
-                                            <div class="col-lg-8">
+                                            <label class="col-xs-4 control-label">{{'_EDIT_TEXT_SETTINGS_GATEWAY' | i18n}}</label>
+                                            <div class="col-xs-8">
                                                 <input ng-model="iface.gateway" class="form-control" placeholder="192.168.1.254">
                                             </div>
                                         </div>
 
                                     </fieldset>
                                     <fieldset>
-                                        <label class="col-lg-4 control-label"></label>
-                                        <div class="col-lg-8 tpCreatorSideBar-buttons">
+                                        <label class="col-xs-4 control-label"></label>
+                                        <div class="col-xs-8 tpCreatorSideBar-buttons">
                                             <div class="btn-group btn-group-justified btn-flat">
                                                 <a ng-click="submit()" class="btn btn-primary btn-xs" style="color: #ffffff !important;">{{'_EDIT_BUTTON_SETTINGS_SUBMIT_' | i18n}}</a>
                                                 <a ng-click="resetForm()" class="btn btn-default btn-xs">{{'_EDIT_BUTTON_SETTINGS_CANCEL' | i18n}}</a>
@@ -112,8 +112,8 @@
                 </div>
                 <div class="panel-footer clearfix">
                     <div class="btn-group pull-right" role="group">
-                      <button type="button" ng-click="$root.ni.downloadConfig()" class="btn btn-default btn-xs" style="z-index: 50;">{{'_EDIT_BUTTON_DOWNLOAD_CONFIG' | i18n}}</button>
-                      <button type="button" ng-click="$root.ni.deploy()" class="btn btn-default btn-xs" style="z-index: 50;">{{'_EDIT_BUTTON_DEPLOY' | i18n}}</button>
+                      <button type="button" ng-click="$root.ni.downloadConfig()" class="btn btn-primary btn-xs" style="z-index: 50;">{{'_EDIT_BUTTON_DOWNLOAD_CONFIG' | i18n}}</button>
+                      <button type="button" ng-click="$root.ni.deploy()" class="btn btn-success btn-xs" style="z-index: 50;">{{'_EDIT_BUTTON_DEPLOY' | i18n}}</button>
                     </div>
                 </div>
             </div>
