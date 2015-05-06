@@ -1,0 +1,41 @@
+{
+  "name": "interface-tele-tps",
+  "version": "0.8.0",
+  "homepage": "https://github.com/isonet/interface-tele-tps",
+  "description": "Interface de conception pour la plateforme Télé-TPs",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "interface-tele-tps"
+  ],
+  "authors": [
+    "Paul Biester",
+    "Manon Camboulives",
+    "Maximilien Boitel de Dienval",
+    "Guillaume De Matos"
+  ],
+  "license": "CeCILL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "~4.3.0",
+    "bootstrap": "3.3.4",
+    "jquery": "1.11.1",
+    "angularjs": "1.2.28",
+    "snackbarjs": "1.0.0",
+    "angular-resource": "1.2.28",
+    "angular-route": "1.2.28",
+    "d3": "3.4.13",
+    "angular-bootstrap-datetimepicker": "0.3.8",
+    "ngstorageGsklee": "https://github.com/gsklee/ngStorage.git#0.3.0",
+    "Blob": "https://github.com/eligrey/Blob.js.git",
+    "canvas-toBlob": "https://github.com/eligrey/canvas-toBlob.js.git",
+    "FileSaver": "https://github.com/eligrey/FileSaver.js.git"
+  }
+}
