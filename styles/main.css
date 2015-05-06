@@ -81,7 +81,12 @@ a
 
 #tpCreatorSideBar select
 {
-    padding-right: 0;
+    padding: 0;
+}
+
+#tpCreatorSideBar .tpCreatorSideBar-buttons
+{
+    padding: 0 0 0 10px;
 }
 
 #sidebarTabContents .tab-pane

@@ -25,7 +25,7 @@
     },
     {
         "key" : "_EDIT_TEXT_SETTINGS_SOFTWARE",
-        "value" : "Software"
+        "value" : "Software catalog"
     },
     {
         "key" : "_EDIT_TEXT_SETTINGS_NETCONFIGURATION",
@@ -68,16 +68,12 @@
         "value" : "Remove"
     },
     {
-        "key" : "_EDIT_BUTTON_DOWNLOAD_CONFIG",
-        "value" : "Download config"
+        "key" : "_EDIT_BUTTON_DOWNLOAD_CONFIG_",
+        "value" : "Check config"
     },
     {
-        "key" : "_EDIT_BUTTON_DOWNLOAD_IMAGE",
-        "value" : "Download image"
-    },
-    {
-        "key" : "_EDIT_BUTTON_DOWNLOAD_SVG",
-        "value" : "Download svg"
+        "key" : "_EDIT_BUTTON_DEPLOY_",
+        "value" : "Deploy Experiment"
     },
     {
         "key" : "_HEADER_TEXT_LANGUAGE_",

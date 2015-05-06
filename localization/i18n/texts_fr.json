@@ -25,7 +25,7 @@
     },
     {
         "key" : "_EDIT_TEXT_SETTINGS_SOFTWARE",
-        "value" : "Logiciels"
+        "value" : "Catalogue logiciel"
     },
     {
         "key" : "_EDIT_TEXT_SETTINGS_NETCONFIGURATION",
@@ -68,16 +68,12 @@
         "value" : "Supprimer"
     },
     {
-        "key" : "_EDIT_BUTTON_DOWNLOAD_CONFIG",
-        "value" : "Télécharger config"
+        "key" : "_EDIT_BUTTON_DOWNLOAD_CONFIG_",
+        "value" : "Vérifier config"
     },
     {
-        "key" : "_EDIT_BUTTON_DOWNLOAD_IMAGE",
-        "value" : "Télécharger image"
-    },
-    {
-        "key" : "_EDIT_BUTTON_DOWNLOAD_SVG",
-        "value" : "Télécharger svg"
+        "key" : "_EDIT_BUTTON_DEPLOY_",
+        "value" : "Déployer l'expérience"
     },
     {
         "key" : "_HEADER_TEXT_LANGUAGE_",

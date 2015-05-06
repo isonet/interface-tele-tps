@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="form-group" ng-show="node.softwareCompliant">
                                             <label class="col-lg-4 control-label">{{'_EDIT_TEXT_SETTINGS_SOFTWARE' | i18n}}</label>
-                                            <div class="col-lg-7">
+                                            <div class="col-lg-8">
                                                 <select multiple ng-model="node.extra_modules" ng-options="software for software in softwareList" class="form-control"></select>
                                             </div>
                                         </div>
@@ -89,16 +89,20 @@
                                                 <input ng-model="iface.gateway" class="form-control" placeholder="192.168.1.254">
                                             </div>
                                         </div>
+
                                     </fieldset>
                                     <fieldset>
-                                        <div class="btn-group btn-group-justified btn-flat">
-                                            <a ng-click="submit()" class="btn btn-primary btn-sm" style="color: #ffffff !important;">{{'_EDIT_BUTTON_SETTINGS_SUBMIT_' | i18n}}</a>
-                                            <a ng-click="resetForm()" class="btn btn-default btn-sm">{{'_EDIT_BUTTON_SETTINGS_CANCEL' | i18n}}</a>
+                                        <label class="col-lg-4 control-label"></label>
+                                        <div class="col-lg-8 tpCreatorSideBar-buttons">
+                                            <div class="btn-group btn-group-justified btn-flat">
+                                                <a ng-click="submit()" class="btn btn-primary btn-xs" style="color: #ffffff !important;">{{'_EDIT_BUTTON_SETTINGS_SUBMIT_' | i18n}}</a>
+                                                <a ng-click="resetForm()" class="btn btn-default btn-xs">{{'_EDIT_BUTTON_SETTINGS_CANCEL' | i18n}}</a>
+                                            </div>
+                                            <div class="btn-group btn-group-justified btn-flat">
+                                                <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#removal-dialog" class="btn btn-warning btn-xs" id="btn-delete-component"><i class="fa fa-trash-o"></i>&nbsp;{{'_EDIT_BUTTON_SETTINGS_REMOVE_' | i18n}}</a>
+                                            </div>
                                         </div>
 
-                                        <div class="btn-group btn-group-justified btn-flat">
-                                            <a ng-click="toggleSidebar(!sidebarIsDisplayed, '')" data-toggle="modal" data-target="#removal-dialog" class="btn btn-warning btn-sm" id="btn-delete-component"><i class="fa fa-trash-o"></i>&nbsp;{{'_EDIT_BUTTON_SETTINGS_REMOVE_' | i18n}}</a>
-                                        </div>
 
                                     </fieldset>
                                 </form>
@@ -109,8 +113,7 @@
                 <div class="panel-footer clearfix">
                     <div class="btn-group pull-right" role="group">
                       <button type="button" ng-click="$root.ni.downloadConfig()" class="btn btn-default btn-xs" style="z-index: 50;">{{'_EDIT_BUTTON_DOWNLOAD_CONFIG' | i18n}}</button>
-                      <button type="button" ng-click="$root.ni.downloadImage()" class="btn btn-default btn-xs" style="z-index: 50;">{{'_EDIT_BUTTON_DOWNLOAD_IMAGE' | i18n}}</button>
-                      <button type="button" ng-click="$root.ni.downloadSvg()" class="btn btn-default btn-xs" style="z-index: 50;">{{'_EDIT_BUTTON_DOWNLOAD_SVG' | i18n}}</button>
+                      <button type="button" ng-click="$root.ni.deploy()" class="btn btn-default btn-xs" style="z-index: 50;">{{'_EDIT_BUTTON_DEPLOY' | i18n}}</button>
                     </div>
                 </div>
             </div>
