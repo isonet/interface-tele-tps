@@ -1,0 +1,194 @@
+[
+    {
+        "key" : "__LICENCE_CONTENT__",
+        "value" : "Reserved. Never use this key"
+    },
+    {
+        "key" : "_EDIT_TEXT_TITLE_",
+        "value" : "Remote Experiment Designer"
+    },
+    {
+        "key" : "_EDIT_TEXT_COMPONENTS_",
+        "value" : "Components"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_",
+        "value" : "Settings"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_CONFIGURATION",
+        "value" : "Settings"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_ID",
+        "value" : "ID"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_SOFTWARE",
+        "value" : "Software catalog"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_NETCONFIGURATION",
+        "value" : "Network Settings"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_INTERFACE",
+        "value" : "Interface"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_DHCP",
+        "value" : "DHCP"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_IP",
+        "value" : "IP"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_NETWORK",
+        "value" : "Network"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_SUBNETMASK",
+        "value" : "Mask"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_GATEWAY",
+        "value" : "Gateway"
+    },
+    {
+        "key" : "_EDIT_BUTTON_SETTINGS_SUBMIT_",
+        "value" : "Save"
+    },
+    {
+        "key" : "_EDIT_BUTTON_SETTINGS_CANCEL_",
+        "value" : "Cancel"
+    },
+    {
+        "key" : "_EDIT_BUTTON_SETTINGS_REMOVE_",
+        "value" : "Remove"
+    },
+    {
+        "key" : "_EDIT_BUTTON_DOWNLOAD_CONFIG_",
+        "value" : "Check Experiment Configuration"
+    },
+    {
+        "key" : "_EDIT_BUTTON_DEPLOY_",
+        "value" : "Deploy Experiment"
+    },
+    {
+        "key" : "_HEADER_TEXT_LANGUAGE_",
+        "value" : "Language"
+    },
+    {
+        "key" : "_HEADER_TEXT_NEW_",
+        "value" : "New Remote Experiment"
+    },
+    {
+        "key" : "_HEADER_TEXT_LANGUAGE_ENGLISH_",
+        "value" : "English"
+    },
+    {
+        "key" : "_HEADER_TEXT_LANGUAGE_FRENCH_",
+        "value" : "French"
+    },
+    {
+        "key" : "_HEADER_TEXT_LANGUAGE_GERMAN_",
+        "value" : "German"
+    },
+    {
+        "key" : "_NEW_TEXT_TITLE_",
+        "value" : "Create a new remote experiment"
+    },
+    {
+        "key" : "_NEW_FORM_TITLE_",
+        "value" : "New Remote Experiment"
+    },
+    {
+        "key" : "_NEW_FORM_NAME_",
+        "value" : "Name"
+    },
+    {
+        "key" : "_NEW_FORM_DESCRIPTION_",
+        "value" : "Description"
+    },
+    {
+        "key" : "_NEW_FORM_OBJECTIVE_",
+        "value" : "Objective"
+    },
+    {
+        "key" : "_NEW_FORM_AUTHOR_",
+        "value" : "Author"
+    },
+    {
+        "key" : "_NEW_FORM_STARTDATE_",
+        "value" : "Start date"
+    },
+    {
+        "key" : "_NEW_FORM_ENDDATE_",
+        "value" : "End date"
+    },
+    {
+        "key" : "_NEW_BUTTON_SUBMIT_",
+        "value" : "Submit"
+    },
+    {
+        "key" : "_NEW_BUTTON_CANCEL_",
+        "value" : "Cancel"
+    },
+    {
+        "key" : "_META_TEXT_TITLE_",
+        "value" : "Settings"
+    },
+    {
+        "key" : "_META_FORM_NAME_",
+        "value" : "Name"
+    },
+    {
+        "key" : "_META_FORM_DESCRIPTION_",
+        "value" : "Description"
+    },
+    {
+        "key" : "_META_FORM_OBJECTIVE_",
+        "value" : "Objective"
+    },
+    {
+        "key" : "_META_FORM_AUTHOR_",
+        "value" : "Author"
+    },
+    {
+        "key" : "_META_FORM_STARTDATE_",
+        "value" : "Start date"
+    },
+    {
+        "key" : "_META_FORM_ENDDATE_",
+        "value" : "End date"
+    },
+    {
+        "key" : "_META_BUTTON_SUBMIT_",
+        "value" : "Save"
+    },
+    {
+        "key" : "_META_BUTTON_CANCEL_",
+        "value" : "Cancel"
+    },
+    {
+        "key" : "_REMOVAL_TEXT_TITLE_",
+        "value" : "Delete"
+    },
+    {
+        "key" : "_REMOVAL_TEXT_BODY_A_",
+        "value" : "Are you sure you want to delete"
+    },
+    {
+        "key" : "_REMOVAL_TEXT_BODY_B_",
+        "value" : "?"
+    },
+    {
+        "key" : "_REMOVAL_BUTTON_SUBMIT_",
+        "value" : "Yes"
+    },
+    {
+        "key" : "_REMOVAL_BUTTON_CANCEL_",
+        "value" : "No"
+    }
+]
