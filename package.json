@@ -1,19 +1,30 @@
 {
   "name": "interface-tele-tps",
-  "version" : "0.0.1",
-  "devDependencies" : {
+  "version": "0.0.1",
+  "devDependencies": {
+    "expect.js": "latest",
+    "express": "latest",
+    "grunt": "^0.4.5",
+    "grunt-bowercopy": "^1.2.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-cssmin": "^0.12.2",
+    "grunt-contrib-htmlmin": "^0.4.0",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-json-minify": "^0.4.0",
+    "grunt-processhtml": "^0.3.7",
+    "grunt-usemin": "^3.0.0",
+    "mocha": "latest",
     "protractor": "latest",
-    "requirejs" : "latest",
-    "mocha" : "latest",
-    "expect.js" : "latest",
-    "express" : "latest"
+    "requirejs": "latest"
   },
-  "scripts" : {
-    "test" : "protractor protractor.config.js",
-    "install" : "./node_modules/protractor/bin/webdriver-manager update --chrome false"
+  "scripts": {
+    "test": "protractor protractor.config.js",
+    "install": "./node_modules/protractor/bin/webdriver-manager update --chrome false"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "git://github.com/Schlipak/interface-tele-tps.git"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Schlipak/interface-tele-tps.git"
   }
 }
