@@ -1,0 +1,194 @@
+[
+    {
+        "key" : "__LICENCE_CONTENT__",
+        "value" : "Reserved. Never use this key"
+    },
+    {
+        "key" : "_EDIT_TEXT_TITLE_",
+        "value" : "TP Designer"
+    },
+    {
+        "key" : "_EDIT_TEXT_COMPONENTS_",
+        "value" : "Komponenten"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_",
+        "value" : "Einstellungen"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_CONFIGURATION",
+        "value" : "Einstellungen"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_ID",
+        "value" : "ID"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_SOFTWARE",
+        "value" : "Software Katalog"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_NETCONFIGURATION",
+        "value" : "Netzwerk Einstellungen"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_INTERFACE",
+        "value" : "Interface"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_DHCP",
+        "value" : "DHCP"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_IP",
+        "value" : "IP"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_NETWORK",
+        "value" : "Netzwerk"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_SUBNETMASK",
+        "value" : "Maske"
+    },
+    {
+        "key" : "_EDIT_TEXT_SETTINGS_GATEWAY",
+        "value" : "Gateway"
+    },
+    {
+        "key" : "_EDIT_BUTTON_SETTINGS_SUBMIT_",
+        "value" : "Speichern"
+    },
+    {
+        "key" : "_EDIT_BUTTON_SETTINGS_CANCEL_",
+        "value" : "Abbrechen"
+    },
+    {
+        "key" : "_EDIT_BUTTON_SETTINGS_REMOVE_",
+        "value" : "Entfernen"
+    },
+    {
+        "key" : "_EDIT_BUTTON_DOWNLOAD_CONFIG_",
+        "value" : "Experiment Konfiguration überprüfen"
+    },
+    {
+        "key" : "_EDIT_BUTTON_DEPLOY_",
+        "value" : "Experiment bereitstellen"
+    },
+    {
+        "key" : "_HEADER_TEXT_LANGUAGE_",
+        "value" : "Sprache"
+    },
+    {
+        "key" : "_HEADER_TEXT_NEW_",
+        "value" : "Neue TP"
+    },
+    {
+        "key" : "_HEADER_TEXT_LANGUAGE_ENGLISH_",
+        "value" : "Englisch"
+    },
+    {
+        "key" : "_HEADER_TEXT_LANGUAGE_FRENCH_",
+        "value" : "Französisch"
+    },
+    {
+        "key" : "_HEADER_TEXT_LANGUAGE_GERMAN_",
+        "value" : "Deutsch"
+    },
+    {
+        "key" : "_NEW_TEXT_TITLE_",
+        "value" : "Neue TP erstellen"
+    },
+    {
+        "key" : "_NEW_FORM_TITLE_",
+        "value" : "Neue TP erstellen"
+    },
+    {
+        "key" : "_NEW_FORM_NAME_",
+        "value" : "Name"
+    },
+    {
+        "key" : "_NEW_FORM_DESCRIPTION_",
+        "value" : "Beschreibung"
+    },
+    {
+        "key" : "_NEW_FORM_OBJECTIVE_",
+        "value" : "Ziel"
+    },
+    {
+        "key" : "_NEW_FORM_AUTHOR_",
+        "value" : "Autor"
+    },
+    {
+        "key" : "_NEW_FORM_STARTDATE_",
+        "value" : "Anfangsdatum"
+    },
+    {
+        "key" : "_NEW_FORM_ENDDATE_",
+        "value" : "Enddatum"
+    },
+    {
+        "key" : "_NEW_BUTTON_SUBMIT_",
+        "value" : "Speichern"
+    },
+    {
+        "key" : "_NEW_BUTTON_CANCEL_",
+        "value" : "Abbrechen"
+    },
+    {
+        "key" : "_META_TEXT_TITLE_",
+        "value" : "Einstellungen"
+    },
+    {
+        "key" : "_META_FORM_NAME_",
+        "value" : "Name"
+    },
+    {
+        "key" : "_META_FORM_DESCRIPTION_",
+        "value" : "Beschreibung"
+    },
+    {
+        "key" : "_META_FORM_OBJECTIVE_",
+        "value" : "Ziel"
+    },
+    {
+        "key" : "_META_FORM_AUTHOR_",
+        "value" : "Autor"
+    },
+    {
+        "key" : "_META_FORM_STARTDATE_",
+        "value" : "Anfangsdatum"
+    },
+    {
+        "key" : "_META_FORM_ENDDATE_",
+        "value" : "Enddatum"
+    },
+    {
+        "key" : "_META_BUTTON_SUBMIT_",
+        "value" : "Speichern"
+    },
+    {
+        "key" : "_META_BUTTON_CANCEL_",
+        "value" : "Abbrechen"
+    },
+    {
+        "key" : "_REMOVAL_TEXT_TITLE_",
+        "value" : "Entfernen"
+    },
+    {
+        "key" : "_REMOVAL_TEXT_BODY_A_",
+        "value" : "Möchten Sie wirklich"
+    },
+    {
+        "key" : "_REMOVAL_TEXT_BODY_B_",
+        "value" : "entfernen ?"
+    },
+    {
+        "key" : "_REMOVAL_BUTTON_SUBMIT_",
+        "value" : "Ja"
+    },
+    {
+        "key" : "_REMOVAL_BUTTON_CANCEL_",
+        "value" : "Nein"
+    }
+]

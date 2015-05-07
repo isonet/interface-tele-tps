@@ -1,0 +1,1 @@
+"use strict";function Interface(endpoint,dhcp,ip,network,netmask,gateway){this.endpoint=endpoint,this.dhcp=dhcp,this.ip=ip,this.network=network,this.netmask=netmask,this.gateway=gateway}Interface.prototype.equals=function(iface){return this.endpoint.equals(iface.endpoint)};

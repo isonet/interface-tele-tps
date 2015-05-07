@@ -1,0 +1,1 @@
+!function(){"use strict";var app=angular.module("tpManager.filters",[]);app.filter("resource-location",function(){return function(locationKey,itemKey){return"i18n"===locationKey&&"texts"===itemKey?"localization/i18n/texts_:locale.json":null}})}();
