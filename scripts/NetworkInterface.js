@@ -294,7 +294,7 @@ NetworkInterface.prototype.update = function() {
         })
         .call(node_drag);
 
-    // Add one laber per node
+    // Add one label per node
     var labels = elem.append('text')
         .attr('dy', '40')
         .attr('fill', 'black')
@@ -368,10 +368,17 @@ NetworkInterface.prototype.update = function() {
                             var endpoint = th.hoverElement;
 
                             if (!startpoint.equals(endpoint)) {
-                                if (startpoint.getType() !== 'switch') {
+                                var switchCount = 0;
+                                if(startpoint.getType() == 'switch') {
+                                    switchCount++;
+                                }
+                                if(endpoint.getType() == 'switch') {
+                                    switchCount++;
+                                }
+                                if (switchCount == 1 && startpoint.getType() !== 'switch') {
                                     startpoint.addInterface(new Interface(endpoint, true));
                                 }
-                                if (endpoint.getType() !== 'switch') {
+                                if (switchCount == 1 && endpoint.getType() !== 'switch') {
                                     endpoint.addInterface(new Interface(startpoint, true));
                                 }
                                 // Update the sidebar
