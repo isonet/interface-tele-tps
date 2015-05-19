@@ -4,6 +4,8 @@
      * Initializing Angular
      */
     var tpApp = angular.module('tpManager', [
+        'ngAnimate',
+        'toastr',
         'ngRoute',
         'ngResource',
         'teleTPsLocalization',
@@ -43,18 +45,26 @@
     /**
      * Decides which template to load depending on the address
      */
-    tpApp.config(['$routeProvider',
-        function($routeProvider) {
-            $routeProvider.
-                when('/edit', {
-                    templateUrl: 'partials/edit.html'
-                }).
-                when('/new', {
-                    templateUrl: 'partials/new.html'
-                }).
-                otherwise({
-                    redirectTo: '/new'
-                });
+    tpApp.config(['$routeProvider', 'toastrConfig', function($routeProvider, toastrConfig) {
+        angular.extend(toastrConfig, {
+            allowHtml: true,
+            closeButton: false,
+            extendedTimeOut: 1000,
+            positionClass: 'toast-bottom-left',
+            tapToDismiss: true,
+            timeOut: 5000
+        });
+
+        $routeProvider.
+            when('/edit', {
+                templateUrl: 'partials/edit.html'
+            }).
+            when('/new', {
+                templateUrl: 'partials/new.html'
+            }).
+            otherwise({
+                redirectTo: '/new'
+            });
         }]);
 
 }());

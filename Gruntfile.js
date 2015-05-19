@@ -18,8 +18,8 @@ module.exports = function(grunt) {
                     'dist/lib/ngStorage.js': 'bower_components/ngstorageGsklee/ngStorage.js',
                     'dist/lib/moment-with-locales.js': 'bower_components/moment/min/moment-with-locales.js',
                     'dist/lib/datetimepicker.js': 'bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js',
-                    'dist/lib/snackbar.js': 'bower_components/snackbarjs/src/snackbar.js',
-
+                    'dist/lib/angular-toastr.js': 'bower_components/angular-toastr/dist/angular-toastr.js',
+                    'dist/lib/angular-animate.js': 'bower_components/angular-animate/angular-animate.js',
                     'dist/scripts/modules/controllers.module.js': 'scripts/modules/controllers.module.js',
                     'dist/scripts/modules/directives.module.js': 'scripts/modules/directives.module.js',
                     'dist/scripts/modules/filters.module.js': 'scripts/modules/filters.module.js',
@@ -39,7 +39,7 @@ module.exports = function(grunt) {
                     'bower_components/bootstrap/dist/css/bootstrap.css',
                     'bower_components/bootstrap/dist/css/bootstrap-theme.css',
                     'bower_components/font-awesome/css/font-awesome.css',
-                    'bower_components/snackbarjs/dist/snackbar.css',
+                    'bower_components/angular-toastr/dist/angular-toastr.css',
                     'bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css'
                 ],
                 dest: 'tmp/combined.css'

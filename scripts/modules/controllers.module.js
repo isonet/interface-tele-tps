@@ -10,7 +10,7 @@
     /**
      * Controller for the editing page
      */
-    app.controller('SettingsController', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
+    app.controller('SettingsController', ['$scope', '$rootScope', '$location', 'toastr', function($scope, $rootScope, $location, toastr) {
 
         if($rootScope.meta === undefined) {
             $location.path('/new');
@@ -42,13 +42,7 @@
             oldId = $scope.node;
             for(var k in $scope.node) $scope.backup[k] = $scope.node[k];
 
-            $scope.resetForm();
-            var snack = {
-                content: 'Modifications enregistrées',
-                style: 'snackbar',
-                timeout: 3000
-            };
-            $.snackbar(snack);
+            toastr.success('Modifications enregistrées');
         };
 
         /**
@@ -138,7 +132,7 @@
     /**
      * Controller for the meta dialog (TP name, description, etc)
      */
-    app.controller('MetaDialogController', ['$scope', '$rootScope', function($scope, $rootScope) {
+    app.controller('MetaDialogController', ['$scope', '$rootScope', 'toastr', function($scope, $rootScope, toastr) {
 
         $scope.backup = undefined;
 
@@ -148,12 +142,7 @@
                 for(var k in $scope.meta) $scope.backup[k] = $scope.meta[k];
 
                 $scope.resetForm();
-                var snack = {
-                    content: 'Modifications enregistrées',
-                    style: 'snackbar',
-                    timeout: 3000
-                };
-                $.snackbar(snack);
+                toastr.success('Modifications enregistrées');
             }
         };
 
